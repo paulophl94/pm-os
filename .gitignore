@@ -1,0 +1,37 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
+*.swo
+
+# Environment and secrets
+.env
+.env.*
+*.key
+*.pem
+credentials.*
+secrets.*
+
+# Node (if webapp is added later)
+node_modules/
+dist/
+build/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Personal data (don't commit your actual work)
+# Uncomment these if you want to keep generated docs private:
+# documents/*.md
+# !documents/_EXAMPLE-PRD.md
+# to_do's/briefings/*.md
+# to_do's/reviews/*.md
+# to_do's/weekly-reviews/*.md
+# context/people/*.md
+# !context/people/_TEMPLATE.md

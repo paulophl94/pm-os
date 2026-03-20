@@ -1,0 +1,139 @@
+---
+description: User Journey Map Generator - Map the end-to-end user experience
+alwaysApply: false
+---
+# User Journey Template Instructions
+
+Before writing the User Journey, ask a clarifying question:
+
+> **"What specific feature or flow do you want to map the user journey for?"** (do not provide ideas)
+
+ONLY THEN, continue with the rest of this document.
+
+Be sure to use @product-context.mdc data for initial context.
+
+Write the User Journey as a PM with a specialty in UI/UX.
+
+---
+
+## 1. Phases of the Journey
+
+Define the Phases of the journey from the user's perspective.
+
+Guidelines:
+- Use 3-5 phases (never more than 7)
+- Each phase: no more than 8 words
+- Think about the user's mental state at each stage
+
+Example phases:
+1. Awareness - "Discovers the problem needs solving"
+2. Consideration - "Explores potential solutions"
+3. Onboarding - "Signs up and gets started"
+4. Core Usage - "Completes primary task"
+5. Expansion - "Discovers additional value"
+
+---
+
+## 2. Actions
+
+For each Phase, describe the user's Actions:
+- What does the user DO at this stage?
+- Be concrete and specific
+- 1-2 short sentences, up to 20 words total per phase
+
+---
+
+## 3. Needs and Pains
+
+For each Phase, describe Needs and Pains from the user's perspective:
+- Write in first person ("I need...", "I'm frustrated by...")
+- 1-2 short sentences, up to 20 words total per phase
+
+---
+
+## 4. Touchpoints
+
+For each Phase, list Touchpoints where the user interacts with the product:
+- How do they use the application, device, webpage, or service?
+- Each touchpoint: no more than 12 words
+- Examples: Landing page, Mobile app, Email notification, In-app modal
+
+---
+
+## 5. Opportunities
+
+For each Phase, identify Opportunities for improvement:
+- List 3 opportunities as single bullets
+- Each: no more than 12 words
+- Think about: friction reduction, delight moments, competitive differentiation
+
+---
+
+## 6. Journey Map Summary
+
+Present the complete journey in this format:
+
+### Phase 1: [Phase Name]
+
+**Actions:**
+[What the user does]
+
+**Needs & Pains:**
+> "[First-person quote expressing their needs/frustrations]"
+
+**Touchpoints:**
+- [Touchpoint 1]
+- [Touchpoint 2]
+
+**Opportunities:**
+1. [Opportunity 1]
+2. [Opportunity 2]
+3. [Opportunity 3]
+
+**Emotional State:** 😊 Positive / 😐 Neutral / 😟 Negative
+
+---
+
+*[Repeat for each phase]*
+
+---
+
+## 7. Feedback & Recommendations
+
+Provide PM-perspective criticism on these 4 categories:
+
+### Usability
+*Focus on Design and UI/UX*
+
+[Up to 2 sentences about usability concerns or opportunities]
+
+### Feasibility
+*Focus on Engineering and Data*
+
+[Up to 2 sentences about technical feasibility]
+
+### Desirability
+*Focus on Market need*
+
+[Up to 2 sentences about whether users actually want this]
+
+### Business Value
+*Focus on Revenue and Growth*
+
+[Up to 2 sentences about business impact]
+
+---
+
+## 8. Priority Actions
+
+Based on the journey map, recommend the top 3 actions to take:
+
+| Priority | Action | Phase | Expected Impact |
+|----------|--------|-------|-----------------|
+| 1 | [Action] | [Phase] | [Impact] |
+| 2 | [Action] | [Phase] | [Impact] |
+| 3 | [Action] | [Phase] | [Impact] |
+
+---
+
+**Save as:** `documents/USER-JOURNEY-[feature-name]-[YYYY-MM-DD].md`

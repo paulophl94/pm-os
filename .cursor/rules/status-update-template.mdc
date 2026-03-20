@@ -1,0 +1,173 @@
+---
+description: Status Update Generator - Executive communication for stakeholders
+alwaysApply: false
+---
+
+# Status Update Generator
+
+Generate executive updates for stakeholder communication. Concise and actionable format for weekly, biweekly, or async communication.
+
+---
+
+## When to Use
+
+- Weekly/biweekly status for stakeholders
+- Sprint update for broader team
+- Progress communication for leadership
+- Current state documentation of initiatives
+
+---
+
+## Process
+
+### 1. Collect Information
+
+Ask the user:
+
+1. **Period:** What period does this update cover? (week, biweekly, sprint)
+2. **Audience:** Who will read it? (squad, stakeholders, leadership)
+3. **Initiatives:** Which initiatives to include? (or use domain roadmap)
+4. **Highlights:** Anything special to highlight? (win, critical blocker, decision)
+
+### 2. Generate Document
+
+Use the template below, adapting for the audience.
+
+### 3. Save
+
+Save in `/documents/` as: `STATUS-[period]-[YYYY-MM-DD].md`
+
+---
+
+## Template
+
+```markdown
+# Status Update: [Period]
+
+**Team:** [Team Name]
+**Period:** [Start Date] - [End Date]
+**Author:** [Name]
+
+---
+
+## TL;DR
+
+[2-3 sentences with the most important points: main advance, main blocker,
+next milestone]
+
+---
+
+## Overall Health
+
+| Dimension | Status | Trend |
+|----------|--------|-------|
+| Deliveries | On Track / At Risk / Off Track | up / down / stable |
+| Quality | On Track / At Risk / Off Track | up / down / stable |
+| Metrics | On Track / At Risk / Off Track | up / down / stable |
+
+---
+
+## Progress by Initiative
+
+### [Initiative 1] - [Status]
+
+**Progress:** [X]% -> [Y]%
+
+**Completed this period:**
+- [Delivery 1]
+- [Delivery 2]
+
+**Next steps:**
+- [Next 1] - [owner] - [date]
+- [Next 2] - [owner] - [date]
+
+---
+
+## Blockers & Risks
+
+| Item | Impact | Action Needed | Owner |
+|------|--------|---------------|-------|
+| [Blocker 1] | [Impact] | [Action] | [Name] |
+| [Risk 1] | [Impact] | [Mitigation] | [Name] |
+
+---
+
+## Key Metrics
+
+| Metric | Current | Target | Period Change |
+|--------|---------|--------|---------------|
+| [Metric 1] | [Value] | [Target] | +X% / -X% |
+| [Metric 2] | [Value] | [Target] | +X% / -X% |
+
+---
+
+## Decisions Made
+
+1. **[Decision 1]:** [Brief context] -> Decided [action]
+2. **[Decision 2]:** [Brief context] -> Decided [action]
+
+---
+
+## Pending Decisions
+
+1. **[Decision needed]:** [Context] - Needs input from [stakeholder]
+
+---
+
+## Next Period
+
+**Main focus:** [Priority #1]
+
+**Planned deliveries:**
+1. [Delivery 1]
+2. [Delivery 2]
+3. [Delivery 3]
+
+---
+
+## Help Needed
+
+- [ ] [Request 1] - from [who] - by [when]
+- [ ] [Request 2] - from [who] - by [when]
+```
+
+---
+
+## Audience Variations
+
+### For Squad (Detailed)
+- Include technical details
+- Engineering metrics (velocity, bugs)
+- Specific tasks
+
+### For Stakeholders (Executive)
+- Focus on business metrics
+- Highlight OKR impact
+- Fewer technical details
+
+### For Leadership (Ultra-concise)
+- Only TL;DR + Overall Health + Blockers
+- Maximum 1 page
+- Focus on decisions needed
+
+---
+
+## Writing Guidelines
+
+- **Factual:** Numbers over opinions
+- **Actionable:** Each item should have owner and next step
+- **Honest:** Don't hide problems, present with action plan
+- **Concise:** Stakeholders have limited time
+
+---
+
+## Quality Checklist
+
+Before sending, verify:
+
+- [ ] TL;DR captures the 3 most important points
+- [ ] Health status is realistic (not all green)
+- [ ] Blockers have action and owner defined
+- [ ] Metrics are up to date
+- [ ] Next steps are specific and have dates
+- [ ] Help needed is clear and actionable

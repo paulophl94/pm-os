@@ -1,0 +1,158 @@
+---
+description: KPI to Revenue Connector - Link product metrics to business outcomes
+alwaysApply: false
+---
+# KPI to Revenue Connector Instructions
+
+Before writing the KPI-Revenue analysis, ask a clarifying question:
+
+> **"What specific feature or product do you want to connect KPIs to revenue for?"** (do not provide ideas)
+
+ONLY THEN, continue with the rest of this document.
+
+Be sure to use @product-context.mdc data for initial context.
+
+This tool helps you:
+1. Define Product Goals
+2. Identify relevant KPIs
+3. Connect KPIs to Revenue Goals
+4. Define a North Star Metric
+
+---
+
+## Step 1: Product Goals
+
+Generate 5 specific, measurable Product Goals that align with the product's mission.
+
+**Definition:** A Product Goal expresses customer pain points, needs, and desires. It involves a change in behavior or type of users that will help achieve a Business Goal.
+
+**Requirements:**
+- Each goal should be SMART (Specific, Measurable, Achievable, Relevant, Time-based)
+- Focus on the product and USERS, not the business
+- Should address the company's solution for customers
+
+**Format:**
+1. [Goal 1 - e.g., "Increase new user activation rate from 45% to 60% within 90 days"]
+2. [Goal 2]
+3. [Goal 3]
+4. [Goal 4]
+5. [Goal 5]
+
+**Ask the user:**
+> "Which of these 5 Product Goals would you like to focus on?"
+
+Wait for their response before continuing.
+
+---
+
+## Step 2: KPIs
+
+Given the selected Product Goal, create 5 relevant KPIs.
+
+**Common Software Product KPIs:**
+
+*Acquisition:*
+- Website visitors, Sign-up rate, CAC, Lead conversion rate
+
+*Activation:*
+- Time to first value, Onboarding completion, First action completion
+
+*Retention:*
+- DAU/WAU/MAU, Retention rate (D1, D7, D30), Churn rate
+
+*Revenue:*
+- MRR, ARPU, LTV, Conversion rate (free to paid)
+
+*Referral:*
+- NPS, Referral rate, Viral coefficient
+
+**Format:**
+For the Product Goal "[selected goal]":
+
+1. **[KPI 1]:** [Definition and why it matters]
+2. **[KPI 2]:** [Definition and why it matters]
+3. **[KPI 3]:** [Definition and why it matters]
+4. **[KPI 4]:** [Definition and why it matters]
+5. **[KPI 5]:** [Definition and why it matters]
+
+---
+
+## Step 3: KPI to Revenue Relationships
+
+Connect each KPI to a Revenue Goal.
+
+**Revenue Goal Categories:**
+- **Acquisition Revenue:** New customer revenue
+- **Expansion Revenue:** Upsell/cross-sell from existing customers
+- **Retention Revenue:** Prevented churn revenue
+- **Efficiency Revenue:** Cost savings that improve margins
+- **Referral Revenue:** Revenue from word-of-mouth
+
+**Format:**
+
+| KPI | Revenue Goal | Connection Explanation |
+|-----|--------------|----------------------|
+| [KPI 1] | [Revenue Goal] | [How this KPI drives this revenue] |
+| [KPI 2] | [Revenue Goal] | [Explanation] |
+| [KPI 3] | [Revenue Goal] | [Explanation] |
+| [KPI 4] | [Revenue Goal] | [Explanation] |
+| [KPI 5] | [Revenue Goal] | [Explanation] |
+
+---
+
+## Step 4: Revenue Impact Estimation
+
+For each KPI, estimate the revenue impact:
+
+| KPI | Current | Target | Revenue Impact |
+|-----|---------|--------|----------------|
+| [KPI 1] | [Value] | [Goal] | [$ impact] |
+| [KPI 2] | [Value] | [Goal] | [$ impact] |
+| [KPI 3] | [Value] | [Goal] | [$ impact] |
+
+**Total Projected Revenue Impact:** $[X]
+
+**Assumptions:**
+- [Assumption 1]
+- [Assumption 2]
+- [Assumption 3]
+
+---
+
+## Step 5: North Star Metric
+
+Define a single North Star Metric that captures the core value delivered to customers.
+
+**Requirements:**
+1. Directly tied to customer value
+2. Measurable
+3. Actionable
+4. Predictive of long-term success
+
+**Format (up to 60 words):**
+
+> For [target customer] with [problem], we propose [solution]. Our primary goal is [Product Goal]. We will know we're successful when [main KPI metric reaches target].
+
+**Example:**
+> For remote teams with scattered work and unclear priorities, we propose TaskFlow's async-first workspace. Our primary goal is to increase activation rate to 60%. We will know we're successful when 60% of new users complete their first project within 7 days.
+
+---
+
+## Summary
+
+**One Metric That Matters Most:** [Metric Name]
+
+**Why this metric:**
+- [Reason 1: How it reflects customer value]
+- [Reason 2: How it predicts business success]
+- [Reason 3: How it's actionable for the team]
+
+**Dashboard Recommendation:**
+Include these supporting metrics alongside the North Star:
+1. [Supporting metric 1]
+2. [Supporting metric 2]
+3. [Supporting metric 3]
+
+---
+
+**Save as:** `documents/KPI-REVENUE-[feature-name]-[YYYY-MM-DD].md`

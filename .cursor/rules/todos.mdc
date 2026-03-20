@@ -1,0 +1,198 @@
+---
+description: Personal To-Do Manager - Track and manage daily tasks
+globs: ["to_do's/**"]
+---
+# Personal To-Do Manager
+
+Gerencia suas tarefas pessoais diárias na pasta @to_do's/.
+
+**Nota:** Para tracking de **iniciativas de produto** (fases, documentos gerados), use @pm-progress.json via @.cursor/rules/progress-tracker.mdc. Este módulo é para **tarefas pessoais do dia-a-dia**.
+
+---
+
+## Arquivos
+
+| Arquivo | Propósito |
+|---------|-----------|
+| `tasks.md` | Tarefas do dia com checkboxes |
+| `backlog.md` | Tarefas futuras / P3 |
+| `progress-log.md` | Histórico dos morning briefings |
+
+---
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| "Mostrar meus to-do's" | Mostra conteúdo de tasks.md |
+| "Adicionar to-do: [descrição]" | Adiciona checkbox em tasks.md |
+| "Completar to-do [título]" | Marca como [x] e move para Concluídas |
+| "To-do's de hoje" | Lista P1 e P2 de tasks.md |
+| "Morning briefing" | Atualiza tasks.md E progress-log.md |
+
+## Natural Language Triggers
+
+Reconhecer variantes naturais para ações de task (PT/EN, Wispr Flow):
+
+| Intent | Trigger Phrases | Action |
+|--------|----------------|--------|
+| Add task | "lembrar de X", "preciso fazer X", "adicionar task X", "to-do: X" | Adicionar em tasks.md, inferir prioridade |
+| Complete task | "terminei X", "pronto com X", "feito", "done with X", "completar X" | Marcar [x], mover para Concluídas |
+| Show tasks | "o que tenho", "meus to-do's", "pendências", "what's pending" | Listar P1 e P2 de tasks.md |
+
+Regras:
+- Inferir prioridade pelo contexto: se menciona blocker/urgente → P1; se follow-up → P2
+- Se ambíguo, perguntar: "P1 (urgente) ou P2 (importante)?"
+- Aceitar qualquer formulação natural — não exigir formato exato
+
+---
+
+## Ao Adicionar Tarefa
+
+Adicionar na seção correta de `tasks.md`:
+
+```markdown
+## Hoje - P1 (Alta Prioridade)
+- [ ] Nova tarefa urgente
+
+## Hoje - P2 (Média Prioridade)
+- [ ] Nova tarefa importante
+```
+
+---
+
+## Ao Completar Tarefa
+
+1. Mudar `- [ ]` para `- [x]`
+2. Mover para seção "Concluídas Hoje"
+3. Manter registro do que foi feito
+
+---
+
+## Ao Executar Morning Briefing
+
+O skill `morning-briefing` deve:
+
+1. **Atualizar tasks.md:**
+   - Limpar tarefas do dia anterior
+   - Adicionar novos action items das reuniões
+   - Organizar por prioridade
+
+2. **Atualizar progress-log.md:**
+   - Adicionar nova entrada com data
+   - Registrar highlights, decisões, blockers
+   - Listar action items críticos
+   - Manter histórico para contexto futuro
+
+---
+
+## Formato do Progress Log
+
+Cada morning briefing adiciona uma entrada:
+
+```markdown
+## YYYY-MM-DD (Dia da Semana)
+
+### Highlights
+- Pontos principais do dia/semana
+
+### Decisões Importantes
+- Decisões tomadas em reuniões
+
+### Blockers Ativos
+- Impedimentos atuais
+
+### Reuniões Chave
+| Reunião | Participantes | Tema Principal |
+|---------|---------------|----------------|
+
+### Action Items Críticos
+- [ ] Item mais importante
+
+### Notas
+- Contexto adicional
+
+---
+```
+
+---
+
+## Prioridades
+
+| Priority | Quando usar |
+|----------|-------------|
+| **P1** | Urgente, impacta entregas, bloqueadores |
+| **P2** | Importante mas não urgente, follow-ups |
+| **P3** | Nice to have, vai para backlog.md |
+
+---
+
+## Templates de Resposta
+
+### Ao mostrar to-do's
+
+```markdown
+## Tarefas de Hoje - [Data]
+
+### P1 - Fazer Primeiro
+- [ ] Tarefa 1
+- [ ] Tarefa 2
+
+### P2 - Fazer Hoje
+- [ ] Tarefa 3
+
+**Total:** X pendentes
+```
+
+### Ao adicionar tarefa
+
+```markdown
+✅ Adicionado em tasks.md:
+
+- [ ] [Descrição] (P2)
+
+Seção: Hoje - P2
+```
+
+---
+
+## Best Practices
+
+1. **Máximo 3 P1 por dia (2 se muitas reuniões)** - Foco é essencial
+2. **Seja específico** - "Revisar PRD de Skip" > "Revisar documento"
+3. **Mova ao completar** - Histórico ajuda a ver progresso
+4. **Revise progress-log** - Contexto acumulado é valioso
+5. **Limpe semanalmente** - Mova concluídas antigas para arquivo
+
+---
+
+## Learnings Capture
+
+Arquivo: `to_do's/learnings/YYYY-MM-DD.md`
+
+### Template
+
+Cada learning segue o formato:
+
+```markdown
+## [HH:MM] - [Título curto]
+
+- **O que aconteceu:** [situação específica]
+- **Por que importa:** [impacto no workflow/processo]
+- **Ação sugerida:** [melhoria concreta com file paths se aplicável]
+- **Status:** pending | applied | dismissed
+```
+
+### Quando capturar (automaticamente durante daily review)
+
+Escanear a conversa do dia por:
+1. Correções feitas (preferências expressas pelo usuário)
+2. Gaps de documentação descobertos
+3. Ineficiências de workflow identificadas
+4. Decisões que mudaram durante a sessão
+
+### Revisão
+
+- Daily review: listar learnings capturados no dia
+- Weekly review: agrupar por tema, identificar patterns recorrentes
+- Quarterly: codificar patterns em novas rules ou skills

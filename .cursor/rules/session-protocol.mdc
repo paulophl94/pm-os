@@ -1,0 +1,45 @@
+---
+description: Session Protocol - Silent session-start checks and MCP graceful degradation
+alwaysApply: true
+---
+# Session Protocol
+
+Silent protocol executed on the first interaction of each conversation.
+
+## Session Start (silent)
+
+On the first response of each conversation, silently check:
+
+1. **Task staleness** — Read `to_do's/tasks.md`, identify P1 tasks pending >5 days -> flag
+2. **Commitment staleness** — Read `to_do's/commitments.md`, identify commitments >3 days without update -> flag
+3. **Today's briefing** — Check if `to_do's/briefings/YYYY-MM-DD.md` exists for today; if not, suggest morning briefing
+
+**Rules:**
+- Never block the user's request — respond first, append alerts at the end
+- Maximum 3 alerts per session (avoid noise)
+- If no alerts, don't mention — silence is the default behavior
+- Don't execute if the first request is already "morning briefing" or "daily review" (skills already cover staleness)
+
+**Alert format:**
+
+```
+---
+**Quick attention:**
+- Task "X" pending for 7 days (P1)
+- Commitment "Y" without update for 4 days
+- Today's briefing not done yet — run morning briefing?
+```
+
+## Tool Availability (Graceful Degradation)
+
+When an MCP fails or is unavailable, never block the workflow. Briefly inform and offer alternative.
+
+| MCP | Fallback |
+|-----|----------|
+| Meeting transcription (Fireflies, etc.) | Ask for transcript pasted manually or as file |
+| Project tracker (Jira, Linear, etc.) | Generate ticket content in markdown for manual creation |
+| Chat (Slack, etc.) | Generate formatted message for copy-paste |
+| Docs/Sheets | Work with local markdown equivalent |
+| Design tool (Figma, etc.) | Describe components textually |
+
+**Rule:** Inform the fallback in one line. Don't apologize or explain technical error details.

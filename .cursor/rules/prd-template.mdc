@@ -1,0 +1,172 @@
+---
+description: Product Requirements Document (PRD) Generator
+alwaysApply: false
+---
+# PRD Template Instructions
+
+Before writing the Product Requirements Document, ask clarifying questions:
+
+1. **"What is the specific feature or product you want to document?"** (do not provide ideas)
+2. **"What is the target timeframe for this feature?"** (e.g., Q1 2026, 2 sprints, 6 weeks)
+
+ONLY THEN, continue with the rest of this document.
+
+Be sure to use @product-context.mdc data for initial context.
+
+Then, create a Product Requirements Document following this comprehensive structure:
+
+---
+
+## 1. Market Problem
+
+Describe the Market Problem being solved, or difficulty in this market, that requires change.
+Do not mention specific solutions. Write as a single paragraph of up to 160 words.
+
+Then, describe the **Market Opportunity** for this problem:
+- What is the market size for this problem and field?
+- Reference existing market reports or similar data if available.
+- Keep to a single paragraph under 160 words.
+
+## 2. Why Solve This?
+
+Given the Mission Statement, Market Problem, and Opportunity:
+- Provide 2 logical reasons why this problem is worth solving (2 short sentences only)
+- Ensure reasons match the Mission Statement and Market context
+- Add 1 sentence explaining why this will increase Business Value
+
+## 3. Competition Summary
+
+List 5 potential competitors for what we are developing:
+- Each bullet: no more than 10 words
+- Include direct and indirect competitors
+
+## 4. Target Customers
+
+The Customer is the person who pays (not necessarily the User).
+
+1. Describe the general Customers in a single sentence
+2. Answer these questions as a list:
+   - Why would customers want to buy a solution for this problem?
+   - Why would customers prefer our product over competition?
+   - What influences their buying decision (price, culture, trends, peers, income)?
+   - What is their goal in obtaining a solution?
+
+## 5. Success Criteria
+
+Summarize how we know if we've solved the problem:
+- No more than 3 lines, 120 words total
+- Describe only the Metrics, not the problem
+- Example: "Reduce costs by 15% and increase market share by 10%. Reduce task completion time by 40%."
+
+## 6. Feature List
+
+List the top 5 features and functionalities:
+- Each feature: single sentence, no more than 15 words
+- Prioritize by importance
+
+## 7. Product Requirements
+
+### Development Requirements
+3 short sentences describing the development environment, tools, and API sets.
+
+### Compatibility Requirements
+3 short sentences describing conformance demands: OS platforms, GUI interfaces, supported standards.
+
+### Performance Requirements
+3 short sentences listing speed, usability, capacity, or scalability requirements.
+
+Each requirement: up to 15 words. Total: up to 300 words.
+Write in a tone that implies what *could* be done, not what *should* be done.
+
+## 8. Technological Overview
+
+### Solution Technology Overview
+Up to 4 short sentences describing technologies, innovations, or methods the solution will use.
+
+### Solution Dependencies
+Up to 4 sentences listing potential dependencies: other products, services, or technologies.
+
+### Solution Risks
+Up to 4 sentences listing potential risks: technical, market, or operational.
+
+## 9. Milestones
+
+Given the timeframe, features, and problem-solution set, list major milestones.
+Consider phases: planning, design, development, testing, launch.
+
+Format each as:
+> **Milestone X: [Name]** - [Description] - [Estimated duration]
+
+No more than 8 milestones.
+
+Then add: "**Greatest Risk:** [One sentence about the biggest milestone risk]"
+
+## 10. OKRs
+
+Provide OKRs:
+- 2 L1 Objectives
+- For each L1, provide 2 L2 Key Results (4 KRs total)
+- Each line ≤ 25 words
+- Ensure OKRs are measurable and achievable (SMART criteria)
+- Align with features and problem-solution set
+
+## 11. Release Details
+
+Consider Operational Requirements for releasing: Distribution, Support, Regulation, Safety, Training, 3rd Party Services, Logistics, Security.
+
+Choose 3 relevant categories and write for each:
+- Category name as heading
+- 3 requirements as bullets (up to 15 words each)
+
+## 12. Press Release
+
+Using the "Working Backwards" method, write a Product Release statement:
+- Matter-of-fact tone, minimal buzzwords
+- Use the product name from context
+
+Format:
+```
+**TITLE:** [Product/Feature Name]
+**SUBTITLE:** [Solution summary in one sentence]
+
+*New York, NY - [Timeframe]*
+
+[What the problem is, 3-4 sentences]
+
+[What our solution provides and how it solves the problem, 3-4 sentences]
+
+> "[Quote from leader 'Joe Johnson' about why we built this]"
+
+[How customers would use the solution, 2-3 sentences]
+
+> "[Quote from customer 'Wanda Woods' about how this solved her problem]"
+```
+
+## 13. Potential Complaints
+
+List 8 common complaints you'd expect to hear:
+- Focus on the solution and differentiator
+- Each complaint: single sentence, no more than 15 words
+
+## 14. Product Team Feedback
+
+Provide Constructive Criticism on anticipated issues for these 4 risk categories:
+- **Value Risk:** Will customers buy it or users choose to use it?
+- **Usability Risk:** Can users figure out how to use it?
+- **Feasibility Risk:** Can engineering build it with available time, skills, and technology?
+- **Business Viability Risk:** Does this work for various aspects of our business?
+
+Each category: up to 80 words. Total: less than 400 words.
+
+## 15. Risks, Safety and Security
+
+Provide 3 bullets each for:
+1. **Major Risks** for this product
+2. **Main Security Concerns**
+3. **Main Safety Concerns**
+
+Each bullet: no more than 20 words.
+
+---
+
+**Save as:** `documents/PRD-[feature-name]-[YYYY-MM-DD].md`

@@ -1,0 +1,146 @@
+---
+description: PM Workflows - Automated workflows for document generation
+globs: ["documents/**/*.md"]
+---
+# PM Workflows
+
+Automated workflows for product document generation. Follow these protocols when the user requests documents.
+
+---
+
+## Workflow 1: Research to One-Pager
+
+**Trigger:** "Generate One-Pager for [feature]" or "Create One-Pager about [topic]"
+
+### Protocol
+
+1. **Context Ingestion**
+   - Check if @documents/RESEARCH-INPUT-[topic]*.md exists
+   - Identify the relevant domain
+   - Read domain vision and roadmap files if available
+   - Read any glossary or invariants files
+
+2. **Problem Diagnosis**
+   - Identify the core user problem
+   - Map evidence (research, data, feedback)
+   - Validate alignment with product strategy
+
+3. **Trade-off Analysis**
+   - Generate 3 solution options:
+     - **Conservative:** Minimal MVP, lower risk
+     - **Balanced:** Optimized scope, best ROI
+     - **Ambitious:** Full vision, larger investment
+   - For each: Pros, Cons, T-Shirt Size, Timeline
+
+4. **Document Generation**
+   - Use template @.cursor/rules/one-pager-template.mdc
+   - Save in: `documents/ONE-PAGER-[feature-slug]-[YYYY-MM-DD].md`
+
+5. **Update Progress Tracking**
+   - Register in @pm-progress.json
+
+---
+
+## Workflow 2: One-Pager to Requirements Spec
+
+**Trigger:** "Generate Spec for [feature]" or "Create Requirements for [feature]"
+
+### Protocol
+
+1. **Pre-requisite Check**
+   - Confirm approved One-Pager exists
+   - If not, suggest creating One-Pager first
+
+2. **Interactive Stress Test**
+   - Ask 5-7 edge case questions:
+     - "What happens if the user deletes X during Y?"
+     - "How does this work with [complex scenario]?"
+     - "What's the behavior if the API is offline?"
+     - "How does this impact different user segments?"
+     - "What rollback scenarios are needed?"
+
+3. **Touchpoint Mapping**
+   - For each touchpoint, define: current behavior, new behavior, edge cases, validations
+
+4. **Document Generation**
+   - Include User Stories with Acceptance Criteria (Gherkin)
+   - Save in: `documents/SPEC-[feature-slug]-[YYYY-MM-DD].md`
+
+---
+
+## Workflow 3: Feature Documentation (Reverse Engineering)
+
+**Trigger:** "Document existing feature [name]"
+
+### Protocol
+
+1. Confirm feature name and scope
+2. Collect information from available sources
+3. Generate structured documentation (Overview, Current Behavior, Configuration, Business Rules, Edge Cases, Integrations, Limitations)
+4. Save in: `documents/DOC-[feature-slug]-[YYYY-MM-DD].md`
+
+---
+
+## Workflow 4: Quick PRD Generation
+
+**Trigger:** "Create PRD for [feature]"
+
+### Protocol
+
+1. **Template Selection** — Ask complexity if not specified (Simple/Complex/Full)
+2. **Quick Context** — Read product-context.mdc, identify domain, load vision
+3. **Socratic Questioning (3 essential questions):**
+   - "What specific user problem does this solve?"
+   - "How will we measure success?"
+   - "What is NOT in scope?"
+4. **Generation** — Apply selected template, save in: `documents/PRD-[feature-slug]-[YYYY-MM-DD].md`
+
+---
+
+## Workflow 5: Multi-Perspective Review
+
+**Trigger:** "Review document" or "Review the [document]"
+
+### Protocol
+
+1. Locate document to review
+2. Apply reviews in sequence:
+   - **User Researcher** — Focus: Real problem? Will users adopt?
+   - **Engineer** — Focus: Technical feasibility? Complexity?
+   - **Executive** — Focus: Strategic alignment? ROI?
+   - **Customer** (optional) — Focus: User-facing features, value proposition
+   - **Customer Success** (optional) — Focus: Support impact, onboarding, communication
+3. Consolidate feedback into a table: Reviewer | Feedback | Severity | Action
+4. Suggest next steps
+
+---
+
+## Workflow Commands Reference
+
+| Command | Workflow | Output |
+|---------|----------|--------|
+| "Generate One-Pager for X" | Workflow 1 | ONE-PAGER-x-date.md |
+| "Generate Spec for X" | Workflow 2 | SPEC-x-date.md |
+| "Document feature X" | Workflow 3 | DOC-x-date.md |
+| "Create PRD for X" | Workflow 4 | PRD-x-date.md |
+| "Review document" | Workflow 5 | Consolidated feedback |
+
+---
+
+## Post-Document Generation Protocol
+
+After generating ANY document in `documents/`, automatically execute this checklist:
+
+### 1. Progress Tracking (required)
+Update @pm-progress.json via @.cursor/rules/progress-tracker.mdc
+
+### 2. Person Pages (if applicable)
+If the document mentions people by name, check/create person pages in `context/people/`
+
+### 3. Commitments (if applicable)
+If the document contains action items with owners, add to `to_do's/commitments.md`
+
+### 4. Next Step (via pm-coach Protocol 1)
+Suggest next step per the capability map
+
+**Rules:** Steps 1-3 are automatic (execute without asking). Step 4 follows pm-coach protocol.

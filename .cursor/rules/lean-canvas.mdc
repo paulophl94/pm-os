@@ -1,0 +1,173 @@
+---
+description: Lean Canvas Generator - 9-section product strategy canvas
+alwaysApply: false
+---
+# Lean Canvas Template Instructions
+
+Be sure to use @product-context.mdc data for initial context.
+
+When creating the Lean Canvas, you can modify responses while thinking through the canvas sequentially. Each section builds on the previous.
+
+---
+
+## 1. Problem
+
+Rethink the top 3 Problems this product will solve.
+
+You can use the existing list from product context, or refine them.
+
+Write as 3 short, 1-line bullets:
+- [Problem 1]
+- [Problem 2]
+- [Problem 3]
+
+**Existing Alternatives:** List how customers currently solve these problems (3 bullets)
+- [Alternative 1]
+- [Alternative 2]
+- [Alternative 3]
+
+---
+
+## 2. Customer Segments
+
+Rethink the top 3 Target Customers for this product.
+
+Write as 3 short, 1-line bullets:
+- [Segment 1]
+- [Segment 2]
+- [Segment 3]
+
+**Early Adopters:** Who will use this first? (1-2 sentences)
+
+---
+
+## 3. Unique Value Proposition
+
+Given the problems and customers, create a single-line UVP:
+
+> **[Clear, compelling message that states why you are different and worth attention]**
+
+Guidelines:
+- Focus on the end benefit, not features
+- Be specific to your target customer
+- Differentiate from alternatives
+
+---
+
+## 4. Solution
+
+List the top 3 aspects of your solution.
+
+Write as 3 short, 1-line bullets:
+- [Solution component 1]
+- [Solution component 2]
+- [Solution component 3]
+
+---
+
+## 5. Unfair Advantage
+
+What is your Unfair Advantage in this space?
+
+An unfair advantage is something that cannot be easily copied or bought:
+- Insider knowledge
+- Unique expertise or team
+- Network effects
+- Community
+- Existing customers
+- Patents/IP
+
+Write 3 bullets:
+- [Advantage 1]
+- [Advantage 2]
+- [Advantage 3]
+
+---
+
+## 6. Channels
+
+How will you reach customers?
+
+For each, provide a 1-line answer:
+
+**Acquisition Channels:**
+- [How will customers first hear about you?]
+
+**Activation Channels:**
+- [How will you convert them to users?]
+
+**Retention Channels:**
+- [How will you keep them engaged?]
+
+**Referral Channels:**
+- [How will customers tell others?]
+
+---
+
+## 7. Key Metrics
+
+List 3 metrics to measure success:
+- **Activation:** [Metric that shows users "got it"]
+- **Retention:** [Metric that shows users stay]
+- **Revenue:** [Metric that shows business health]
+
+For each, specify:
+- Current baseline (if known)
+- Target goal
+
+---
+
+## 8. Revenue Streams
+
+How will you make money?
+
+**Primary Revenue Model:**
+[Describe the main revenue stream in 1-2 sentences]
+
+**Secondary Revenue Model:**
+[Describe an alternative or future revenue stream]
+
+**Pricing:**
+- [Price point or range]
+- [Pricing model: subscription, usage, freemium, etc.]
+
+---
+
+## 9. Cost Structure
+
+List the 4 main costs of product development:
+- **[Cost 1]:** [Description]
+- **[Cost 2]:** [Description]
+- **[Cost 3]:** [Description]
+- **[Cost 4]:** [Description]
+
+**Break-even Analysis:**
+[How many customers/revenue needed to break even?]
+
+---
+
+## Visual Summary
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ PROBLEM          │ SOLUTION         │ UNIQUE VALUE    │ UNFAIR  │ CUSTOMER   │
+│                  │                  │ PROPOSITION     │ADVANTAGE│ SEGMENTS   │
+│ • Problem 1      │ • Solution 1     │                 │         │            │
+│ • Problem 2      │ • Solution 2     │ [UVP]           │ [Moat]  │ • Segment 1│
+│ • Problem 3      │ • Solution 3     │                 │         │ • Segment 2│
+├─────────────────────────────────────────────────────────────────┤
+│ KEY METRICS                         │ CHANNELS                  │
+│ • Activation:                       │ • Acquisition:            │
+│ • Retention:                        │ • Activation:             │
+│ • Revenue:                          │ • Retention:              │
+├─────────────────────────────────────────────────────────────────┤
+│ COST STRUCTURE                      │ REVENUE STREAMS           │
+│ • Cost 1                            │ Primary:                  │
+│ • Cost 2                            │ Secondary:                │
+│ • Cost 3                            │ Pricing:                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+**Save as:** `documents/LEAN-CANVAS-[product-name]-[YYYY-MM-DD].md`

@@ -1,0 +1,218 @@
+---
+description: Epic Plan Generator - Comprehensive feature set planning
+alwaysApply: false
+---
+# Epic Plan Generator Template
+
+Use @product-context.mdc for product details.
+
+Generate a complete Epic plan document for new feature sets or product initiatives.
+
+---
+
+## Document Header
+
+```markdown
+# Epic Plan: [Feature Set/Initiative Name]
+
+**Brief description of the feature set or initiative**
+
+| Field | Value |
+|-------|-------|
+| Product | [Product Name] |
+| Feature Set | [Feature Set Name] |
+| Document Type | Epic Plan |
+| Created | [Current Month Year] |
+| Version | 1.0 |
+| Owner | [PM Name] |
+| Status | Draft / In Review / Approved |
+```
+
+---
+
+## Executive Summary
+
+Write one paragraph summarizing:
+- The feature set's impact on product and users
+- How it serves target customers
+- How it aligns with product differentiator and current priorities
+
+---
+
+## Strategic Context
+
+### Strategic Goals
+
+List 3-4 high-level goals (starting with action verbs):
+
+- **Address [specific user need/pain point]:** [feature solution approach]
+- **Enhance [product capability]:** [improvement strategy]
+- **Enable [new user behavior/workflow]:** [enablement approach]
+- **Improve [existing metric/experience]:** [optimization goal]
+
+### Success Metrics
+
+Define 3-4 key metrics:
+
+| Metric Category | Metric | Current | Target |
+|-----------------|--------|---------|--------|
+| Feature Adoption | [metric] | [baseline] | [goal] |
+| User Experience | [metric] | [baseline] | [goal] |
+| Business Impact | [metric] | [baseline] | [goal] |
+| Technical Performance | [metric] | [baseline] | [goal] |
+
+---
+
+## Epic Structure
+
+Generate 3-4 Epic themes, each containing 2-4 sub-epics.
+
+### 🏗️ EPIC 1: Core Functionality & Foundation
+*Theme: Build essential feature capabilities*
+
+#### Epic 1.1: [Feature Component Name]
+- **User Story:** As a [user type], I want [action] so I can [outcome]
+- **Key Features:**
+  - [Feature 1]
+  - [Feature 2]
+  - [Feature 3]
+- **Acceptance Criteria:**
+  - [Measurable criterion 1]
+  - [Measurable criterion 2]
+- **Dependencies:** [Epic references or "None"]
+- **Effort:** [X weeks/sprints]
+- **Priority:** P0 (Critical)
+
+#### Epic 1.2: [Feature Component Name]
+*[Same structure as above]*
+
+---
+
+### 🎨 EPIC 2: User Experience & Interface
+*Theme: Design intuitive user interactions*
+
+#### Epic 2.1: [Feature Component Name]
+*[Same structure]*
+
+#### Epic 2.2: [Feature Component Name]
+*[Same structure]*
+
+---
+
+### 🔗 EPIC 3: Integration & Compatibility
+*Theme: Connect with existing systems and platforms*
+
+#### Epic 3.1: [Feature Component Name]
+*[Same structure]*
+
+#### Epic 3.2: [Feature Component Name]
+*[Same structure]*
+
+---
+
+### 📈 EPIC 4: Enhancement & Optimization *(Optional for large feature sets)*
+*Theme: Advanced features and performance optimization*
+
+#### Epic 4.1: [Feature Component Name]
+*[Same structure]*
+
+---
+
+## Implementation Timeline
+
+### Phase 1: Foundation *(Weeks 1-X)*
+- [ ] [Deliverable 1]
+- [ ] [Deliverable 2]
+- [ ] [Deliverable 3]
+
+**Exit Criteria:** [What must be true to move to Phase 2]
+
+### Phase 2: Core Features *(Weeks X-Y)*
+- [ ] [Deliverable 1]
+- [ ] [Deliverable 2]
+- [ ] [Deliverable 3]
+
+**Exit Criteria:** [What must be true to move to Phase 3]
+
+### Phase 3: Integration *(Weeks Y-Z)*
+- [ ] [Deliverable 1]
+- [ ] [Deliverable 2]
+- [ ] [Deliverable 3]
+
+**Exit Criteria:** [What must be true to launch]
+
+---
+
+## Risk Management
+
+### High-Risk Dependencies
+
+| Risk | Probability | Impact | Owner |
+|------|-------------|--------|-------|
+| [Risk 1] | High/Med/Low | High/Med/Low | [Name] |
+| [Risk 2] | High/Med/Low | High/Med/Low | [Name] |
+| [Risk 3] | High/Med/Low | High/Med/Low | [Name] |
+
+### Mitigation Strategies
+
+1. **[Risk 1]:** [Mitigation plan]
+2. **[Risk 2]:** [Mitigation plan]
+3. **[Risk 3]:** [Mitigation plan]
+
+---
+
+## Resource Requirements
+
+### Development Team
+
+| Role | Count | Duration | Notes |
+|------|-------|----------|-------|
+| Backend Engineer | [X] | [Weeks] | [Specialty needed] |
+| Frontend Engineer | [X] | [Weeks] | [Specialty needed] |
+| Designer | [X] | [Weeks] | [Focus area] |
+| QA Engineer | [X] | [Weeks] | [Test focus] |
+| PM | [X] | [Weeks] | [Owner] |
+
+### Infrastructure/Tools
+
+- [Tool/Service 1]: [Purpose]
+- [Tool/Service 2]: [Purpose]
+
+---
+
+## Success Criteria
+
+### Initial Release (End of Phase 2)
+- [ ] [Criterion 1]
+- [ ] [Criterion 2]
+- [ ] [Criterion 3]
+
+### Feature Complete (End of Phase 3)
+- [ ] [Criterion 1]
+- [ ] [Criterion 2]
+- [ ] [Criterion 3]
+
+---
+
+## Priority Guidelines
+
+| Priority | Definition | Examples |
+|----------|------------|----------|
+| P0 | Critical - Must have for launch | Core functionality, security, basic user flow |
+| P1 | High - Needed for good experience | Enhanced features, performance, major platforms |
+| P2 | Medium - Nice to have | Customization, advanced features, edge cases |
+| P3 | Low - Future consideration | Ecosystem integrations, power user features |
+
+---
+
+## Scope Guidelines
+
+| Feature Set Size | Epics | Sub-epics | Duration |
+|------------------|-------|-----------|----------|
+| Small | 3 | 6-8 | 2-3 months |
+| Medium | 3-4 | 9-12 | 3-6 months |
+| Large | 4 | 12-16 | 6-12 months |
+
+---
+
+**Save as:** `documents/EPIC-PLAN-[feature-set-name]-[YYYY-MM-DD].md`

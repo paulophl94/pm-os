@@ -1,0 +1,149 @@
+---
+description: RICE Prioritization Analysis - Score and prioritize features
+alwaysApply: false
+---
+# RICE Prioritization Template
+
+You will prioritize a list of features as an experienced Product Manager using the RICE method.
+
+RICE calculates a Score based on 4 metrics:
+- **R**each - How many users will this impact?
+- **I**mpact - How much will it impact each user?
+- **C**onfidence - How confident are we in our estimates?
+- **E**ffort - How much work is required?
+
+**Formula:** Score = (Reach × Impact × Confidence) / Effort
+
+---
+
+## Step 1: Initial Features
+
+If the user hasn't provided a list of features, first ask:
+
+> **"What features would you like to prioritize? Please list up to 10 features."**
+
+This template can help prioritize *up to 10* feature ideas at a time.
+
+If they provided more than 10, inform them you'll take the first 10 only.
+
+Be sure to use @product-context.mdc data for initial context.
+
+---
+
+## Step 2: Business Goal
+
+Ask a clarifying question:
+
+> **"What is the Business Goal these features should support?"**
+
+Provide 3 ideas based on the Product Context. These should be SMART goals:
+- Specific
+- Measurable
+- Achievable
+- Relevant
+- Time-based
+
+Example:
+1. Increase activation rate from 45% to 60% by end of Q2
+2. Reduce churn by 20% within 6 months
+3. Increase NPS from 35 to 50 by year-end
+
+---
+
+## Step 3: RICE Estimation
+
+Perform RICE scoring for each feature using these scales:
+
+### Reach (1-10)
+- 10: All users (100%)
+- 7-9: Most users (50-99%)
+- 4-6: Some users (20-49%)
+- 1-3: Few users (<20%)
+
+### Impact (1-5)
+- 5: Massive impact (game-changer)
+- 4: High impact
+- 3: Medium impact
+- 2: Low impact
+- 1: Minimal impact
+
+### Confidence (0.0-1.0)
+- 1.0: High confidence (validated with data)
+- 0.8: Medium-high (good evidence)
+- 0.5: Medium (some evidence)
+- 0.3: Low (assumptions only)
+
+### Effort (person-hours or story points)
+- Estimate in person-hours or use T-shirt sizing converted to hours:
+  - XS: 8 hours
+  - S: 20 hours
+  - M: 40 hours
+  - L: 80 hours
+  - XL: 160 hours
+
+---
+
+## Step 4: Output Format
+
+Present the analysis in this JSON format:
+
+```json
+{
+  "business_goal": "[Selected business goal]",
+  "features": [
+    {
+      "name": "Feature 1",
+      "reach": 10,
+      "impact": 3.5,
+      "confidence": 0.8,
+      "effort": 20
+    },
+    {
+      "name": "Feature 2",
+      "reach": 5,
+      "impact": 4.0,
+      "confidence": 0.7,
+      "effort": 10
+    }
+  ]
+}
+```
+
+---
+
+## Step 5: RICE Explanation
+
+Explain your reasoning for each score in up to 250 words total.
+
+For each feature, briefly justify:
+- Why this Reach estimate?
+- Why this Impact score?
+- Why this Confidence level?
+- Why this Effort estimate?
+
+---
+
+## Step 6: RICE Results Table
+
+Calculate the RICE score and present as a table:
+
+| Rank | Feature | Reach | Impact | Confidence | Effort | Score |
+|------|---------|-------|--------|------------|--------|-------|
+| 1 | [Feature] | [R] | [I] | [C] | [E] | [Score] |
+| 2 | [Feature] | [R] | [I] | [C] | [E] | [Score] |
+| ... | ... | ... | ... | ... | ... | ... |
+
+**Formula reminder:** Score = (R × I × C) / E
+
+---
+
+## Step 7: Recommendation
+
+In 2-3 sentences, explain:
+1. Which feature should be prioritized first and why
+2. Any features that should be deprioritized or cut
+3. Any caveats or assumptions to validate
+
+---
+
+**Save as:** `documents/RICE-ANALYSIS-[date]-[YYYY-MM-DD].md`

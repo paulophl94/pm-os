@@ -1,0 +1,135 @@
+---
+description: User Stories and Acceptance Criteria Generator
+alwaysApply: false
+---
+# User Story and Acceptance Criteria Template
+
+Before writing User Stories, ask a clarifying question:
+
+> **"What is the specific feature you want user stories for?"** (do not provide ideas)
+
+ONLY THEN, continue with the rest of this document.
+
+Be sure to use @product-context.mdc data for initial context.
+
+---
+
+## User Story Format
+
+Use the standard format:
+
+> **As a** [type of user], **I want to** [perform some task] **so that I can** [achieve some goal].
+
+Guidelines:
+- Use Active Voice
+- The Story should be achievable in a single sprint
+- Focus on user value, not implementation details
+
+---
+
+## Acceptance Criteria
+
+Follow the User Story with Acceptance Criteria using the **Gherkin Framework**.
+
+For each scenario, use this structure:
+```
+**Scenario:** [Scenario Name]
+- **GIVEN** [precondition/context]
+- **WHEN** [action taken]
+- **THEN** [expected outcome]
+- **AND** [additional outcome if needed]
+```
+
+### Create 9 Acceptance Criteria Total:
+
+#### Positive Scenarios (3)
+The most common, expected user flows:
+1. **Positive Scenario 1:** Happy path - everything works as expected
+2. **Positive Scenario 2:** Alternate success path
+3. **Positive Scenario 3:** Edge case that still succeeds
+
+#### Negative Scenarios (3)
+Edge cases where the solution must handle unexpected input:
+1. **Negative Scenario 1:** Invalid input handling
+2. **Negative Scenario 2:** Permission/authorization failure
+3. **Negative Scenario 3:** Resource not found or unavailable
+
+#### Outlier Scenarios (3)
+Unexpected but possible situations that should be tested:
+1. **Outlier Scenario 1:** Concurrent access or race condition
+2. **Outlier Scenario 2:** System at capacity/limits
+3. **Outlier Scenario 3:** External dependency failure
+
+---
+
+## Example Output
+
+### User Story
+
+> **As a** team lead, **I want to** assign tasks to team members **so that I can** distribute work evenly and track who's responsible.
+
+### Acceptance Criteria
+
+**POSITIVE SCENARIOS**
+
+**Scenario 1: Successfully assign task to team member**
+- **GIVEN** I am a team lead with an unassigned task
+- **WHEN** I select a team member and click "Assign"
+- **THEN** the task shows the assignee's name and avatar
+- **AND** the assignee receives a notification
+
+**Scenario 2: Reassign task to different team member**
+- **GIVEN** I have a task already assigned to Member A
+- **WHEN** I change the assignment to Member B
+- **THEN** Member B becomes the new assignee
+- **AND** both members receive notifications
+
+**Scenario 3: Assign task with due date**
+- **GIVEN** I am assigning a task
+- **WHEN** I set both an assignee and a due date
+- **THEN** the task displays both the assignee and due date
+- **AND** the assignee sees it in their "Upcoming" view
+
+**NEGATIVE SCENARIOS**
+
+**Scenario 4: Attempt to assign to deactivated user**
+- **GIVEN** a team member has been deactivated
+- **WHEN** I try to assign a task to them
+- **THEN** I see an error "This user is no longer active"
+- **AND** the task remains unassigned
+
+**Scenario 5: Non-lead attempts to assign**
+- **GIVEN** I am a regular team member (not a lead)
+- **WHEN** I try to assign a task to someone else
+- **THEN** the assign button is disabled
+- **AND** I see a tooltip "Only team leads can assign tasks"
+
+**Scenario 6: Assign to non-existent user**
+- **GIVEN** I manually enter an email not in the system
+- **WHEN** I try to assign
+- **THEN** I see "User not found. Invite them first?"
+- **AND** I'm offered an option to send an invite
+
+**OUTLIER SCENARIOS**
+
+**Scenario 7: Two leads assign same task simultaneously**
+- **GIVEN** two team leads view the same unassigned task
+- **WHEN** both click "Assign" at the same time
+- **THEN** the first assignment wins
+- **AND** the second lead sees "Task was just assigned to [name]"
+
+**Scenario 8: Assign when at team member limit**
+- **GIVEN** a team member has 50 active tasks (the limit)
+- **WHEN** I try to assign another task to them
+- **THEN** I see a warning "This person has reached their task limit"
+- **AND** I can choose to proceed or select someone else
+
+**Scenario 9: Assignment during system maintenance**
+- **GIVEN** the notification service is temporarily unavailable
+- **WHEN** I assign a task
+- **THEN** the assignment succeeds
+- **AND** I see "Notification will be sent when service resumes"
+
+---
+
+**Save as:** `documents/USER-STORIES-[feature-name]-[YYYY-MM-DD].md`

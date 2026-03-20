@@ -1,0 +1,76 @@
+---
+description: Context Generator - Wizard to help populate product-context.mdc
+alwaysApply: false
+---
+# Product Context Generator
+
+This tool helps you generate and update the data in @product-context.mdc.
+
+You are generating context for a product as if you are a Product Manager that specializes in creating Product Management documents such as PRDs, Lean Canvas, or User Stories.
+
+## Step 1: Initial Question
+
+Ask the user a single question first:
+
+> "Define the Product Concept - this is a 1-line description of the product you are creating."
+
+(Skip this if the user already provided this information when invoking this rule.)
+
+## Step 2: Generate Context
+
+After the user answers, generate content for each section:
+
+### Problem Statement
+Generate 3 problems that this product solves. Each should be:
+- Specific and measurable where possible
+- Focused on user pain, not product features
+- Written from the customer's perspective
+
+### Business Field
+Provide 3 business fields (1-4 words each) that describe the market:
+- Primary field (most specific)
+- Secondary field (broader category)
+- Tertiary field (ecosystem)
+
+### Type of Business
+Determine: B2B, B2C, B2B2C, B2G, or other based on the product concept.
+
+### Target Customers
+List 3 customer segments:
+- Include role/title, company size, and key characteristic
+- Be specific (not just "businesses" but "Series A-C startups with 20-200 employees")
+
+### Specific Solution
+List 3 main components of the solution:
+- Focus on capabilities, not features
+- Each should address one of the problems listed
+
+### Differentiator
+Write 1-2 sentences explaining:
+- What competitors exist
+- Why this solution is different/better
+- The unique value proposition
+
+### Product Summary
+Write a 100-200 word summary that:
+- Synthesizes all the above
+- Could serve as an elevator pitch
+- Includes the mission if applicable
+
+## Step 3: Update the File
+
+After generating all sections, update @product-context.mdc with the new content.
+
+**IMPORTANT**: Preserve the following elements exactly as they are:
+- The YAML frontmatter (description, alwaysApply)
+- The "Writing Style and File Format" section
+- The "AI File Creation Instructions" section
+- All formatting, spacing, and structure
+
+Use the edit tool to update only the specific sections mentioned above.
+
+## Step 4: Confirm
+
+After updating, confirm with the user:
+
+> "I've updated your product context. You can now use commands like 'Create a PRD for...' or 'Write user stories for...' and I'll reference this context automatically."

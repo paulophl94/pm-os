@@ -1,0 +1,116 @@
+---
+description: Product Positioning and Elevator Pitch Generator
+alwaysApply: false
+---
+# Product Positioning Instructions
+
+Before writing the Product Positioning, ask a clarifying question:
+
+> **"What specific product or feature do you want to create an elevator pitch for?"** (do not provide ideas)
+
+ONLY THEN, continue with the rest of this document.
+
+Be sure to use @product-context.mdc data for initial context.
+
+You will write 2 Elevator Pitches using the templates below.
+
+**Guidelines:**
+- Write only the pitch, no extra text before or after
+- Avoid buzzwords and jargon
+- No exclamations like "Say hello to..." or "Say goodbye to..."
+- Keep it matter-of-fact and compelling
+
+---
+
+## 1. Crossing the Chasm Elevator Pitch
+
+Use the template from Geoffrey Moore's *Crossing the Chasm*:
+
+```
+For [target customer]
+who [statement of need or opportunity],
+[product name] is a [product category]
+that [key benefit/reason to buy].
+Unlike [primary competitive alternative],
+our product [primary differentiation].
+```
+
+**Guidelines:**
+- Keep it under 100 words
+- Be specific about the target customer
+- Focus on the one key benefit
+- Make the differentiation concrete and measurable
+
+**Example:**
+
+> For remote engineering teams who struggle with scattered tasks and unclear priorities, TaskFlow is a project management platform that provides context-rich task management and async collaboration. Unlike Asana which is complex and expensive, or Trello which is too simple, our product balances simplicity with power at 50% lower cost.
+
+---
+
+## 2. Jobs To Be Done Elevator Pitch
+
+Use the JTBD framework:
+
+```
+When [customers] encounter a [triggering event],
+they need to [job to be done] to achieve [desired outcome].
+They would typically use [existing alternatives],
+but because of [switching trigger], these no longer work
+because of [problems with alternatives].
+If these problems are left unaddressed, [what's at stake].
+So, we built a solution that helps [customers]
+achieve [unique value proposition].
+```
+
+**Guidelines:**
+- Keep it under 120 words
+- Focus on SPECIFIC details of the product
+- Make the trigger event concrete
+- Quantify what's at stake if possible
+
+**Example:**
+
+> When distributed teams start a new project, they need to align on priorities and track progress to ship on time. They typically use Slack threads, Google Docs, and email, but as the team grows past 10 people, these no longer work because context gets lost across channels and nobody knows what's actually urgent. If left unaddressed, projects slip by 2-3 weeks on average and team frustration leads to turnover. So, we built TaskFlow to help remote teams achieve shared visibility and async alignment—reducing project delays by 40% and cutting "where is this?" messages by 80%.
+
+---
+
+## 3. One-Liner (Bonus)
+
+Create a single sentence that captures the essence:
+
+**Format:** [Product] helps [customer] [achieve outcome] by [unique mechanism].
+
+**Example:**
+> TaskFlow helps remote teams ship projects faster by replacing scattered tools with one async-first workspace.
+
+---
+
+## 4. Positioning Statement
+
+For internal alignment, create a formal positioning statement:
+
+```
+**For** [target segment]
+**Who** [has this problem/need]
+**Our product is** [category description]
+**That provides** [key benefits]
+**Unlike** [competitive alternatives]
+**We** [key differentiator]
+```
+
+---
+
+## Validation Checklist
+
+Before finalizing, verify your positioning:
+
+- [ ] Target customer is specific (not "everyone")
+- [ ] Problem is validated with research
+- [ ] Category is recognizable to buyers
+- [ ] Key benefit is compelling and unique
+- [ ] Competitive alternative is the real alternative (may not be a direct competitor)
+- [ ] Differentiation is sustainable and hard to copy
+
+---
+
+**Save as:** `documents/POSITIONING-[product-name]-[YYYY-MM-DD].md`

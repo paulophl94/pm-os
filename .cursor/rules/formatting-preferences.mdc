@@ -1,0 +1,19 @@
+---
+description: Formatting preferences for all responses
+alwaysApply: true
+---
+
+# Formatting Preferences
+
+- **Never use blockquotes** (`>`) in responses. Use normal text, lists, or sections with headers.
+
+## Mermaid Diagrams
+
+When generating or including Mermaid diagrams in documents:
+
+- Always use neutral theme: `%%{init: {'theme': 'neutral'}}%%` on the first line
+- Never use explicit colors/styling (`style`, `classDef`, `:::`) — breaks in dark mode
+- Use camelCase or underscores in node IDs (never spaces)
+- Escape special characters in labels with double quotes: `A["Process (main)"]`
+- Avoid reserved keywords as node IDs (`end`, `subgraph`, `graph`)
+- For subgraphs, use explicit IDs: `subgraph authFlow [Authentication Flow]`

@@ -1,0 +1,169 @@
+---
+description: Risk Analysis Generator - Identify and mitigate product risks
+alwaysApply: false
+---
+# Risk Analysis Template
+
+Before writing the Risk Analysis, ask a clarifying question:
+
+> **"What specific feature or product do you want to analyze risks for?"** (do not provide ideas)
+
+ONLY THEN, continue with the rest of this document.
+
+Be sure to use @product-context.mdc data for initial context.
+
+You are performing Risk Analysis as a Senior Product Manager.
+
+---
+
+## Step 1: Identify Risk Categories
+
+Given the Product Context and Feature to be developed, identify the 3 main risk categories.
+
+Choose from categories like:
+- Technology
+- User Interface / UX
+- Manufacturing
+- Logistics
+- Compliance / Regulatory
+- Legal
+- Strategic
+- Market
+- Operational
+- Security
+- Financial
+
+**Do NOT list "Product Market Fit" here** - it will be added as a required 4th category.
+
+List the three main risk categories:
+1. [Category 1]
+2. [Category 2]
+3. [Category 3]
+4. Product Market Fit (required)
+
+---
+
+## Step 2: Risk Assessment Matrix
+
+For each of the 4 categories, provide a risk assessment table:
+
+| Category | Risk | Probability | Impact | Risk Score |
+|----------|------|-------------|--------|------------|
+| [Category] | [Risk description] | High/Med/Low | High/Med/Low | [H/M/L] |
+
+**Risk Score Calculation:**
+- High Probability + High Impact = **Critical**
+- High + Medium OR Medium + High = **High**
+- Medium + Medium = **Medium**
+- Any Low = **Low**
+
+---
+
+## Step 3: Risks and Mitigations
+
+For each of the 4 categories, provide exactly 3 risks with their mitigation strategies.
+
+### Category 1: [Name]
+
+| Risk | Mitigation |
+|------|------------|
+| [Risk 1 - specific and measurable] | [Mitigation strategy - actionable] |
+| [Risk 2] | [Mitigation 2] |
+| [Risk 3] | [Mitigation 3] |
+
+### Category 2: [Name]
+
+| Risk | Mitigation |
+|------|------------|
+| [Risk 1] | [Mitigation 1] |
+| [Risk 2] | [Mitigation 2] |
+| [Risk 3] | [Mitigation 3] |
+
+### Category 3: [Name]
+
+| Risk | Mitigation |
+|------|------------|
+| [Risk 1] | [Mitigation 1] |
+| [Risk 2] | [Mitigation 2] |
+| [Risk 3] | [Mitigation 3] |
+
+### Category 4: Product Market Fit
+
+| Risk | Mitigation |
+|------|------------|
+| [Risk 1] | [Mitigation 1] |
+| [Risk 2] | [Mitigation 2] |
+| [Risk 3] | [Mitigation 3] |
+
+---
+
+## Step 4: Risk Prioritization
+
+Rank the top 5 risks across all categories by overall priority:
+
+| Rank | Risk | Category | Score | Owner | Due Date |
+|------|------|----------|-------|-------|----------|
+| 1 | [Risk] | [Category] | Critical | [Name] | [Date] |
+| 2 | [Risk] | [Category] | High | [Name] | [Date] |
+| 3 | [Risk] | [Category] | High | [Name] | [Date] |
+| 4 | [Risk] | [Category] | Medium | [Name] | [Date] |
+| 5 | [Risk] | [Category] | Medium | [Name] | [Date] |
+
+---
+
+## Step 5: Contingency Plans
+
+For the top 3 critical/high risks, provide detailed contingency plans:
+
+### Risk 1: [Name]
+
+**Trigger:** [What would indicate this risk is materializing?]
+
+**Contingency Plan:**
+1. [Immediate action]
+2. [Short-term response]
+3. [Long-term adjustment]
+
+**Decision Point:** [When/how do we decide to execute contingency?]
+
+---
+
+### Risk 2: [Name]
+
+*[Same structure]*
+
+---
+
+### Risk 3: [Name]
+
+*[Same structure]*
+
+---
+
+## Step 6: Monitoring Plan
+
+How will we track these risks?
+
+| Risk | Monitoring Metric | Frequency | Threshold | Action |
+|------|-------------------|-----------|-----------|--------|
+| [Risk 1] | [Metric] | Weekly/Daily | [Value] | [Alert/Review] |
+| [Risk 2] | [Metric] | [Freq] | [Value] | [Action] |
+| [Risk 3] | [Metric] | [Freq] | [Value] | [Action] |
+
+---
+
+## Summary
+
+**Total Risks Identified:** [X]
+**Critical Risks:** [X]
+**High Risks:** [X]
+**Medium Risks:** [X]
+**Low Risks:** [X]
+
+**Overall Risk Assessment:** [High/Medium/Low] - [1-2 sentence justification]
+
+**Recommendation:** [Proceed with mitigations / Delay until resolved / Requires executive decision]
+
+---
+
+**Save as:** `documents/RISK-ANALYSIS-[feature-name]-[YYYY-MM-DD].md`

@@ -1,0 +1,141 @@
+---
+description: Product Roadmap Generator - Quarterly strategic planning
+alwaysApply: false
+---
+# Roadmap Template Instructions
+
+Be sure to use @product-context.mdc data for initial context.
+
+Use markdown formatting with short bullets for each item.
+
+---
+
+## Strategic Context
+
+Before listing initiatives, establish the strategic foundation:
+
+### Vision Statement
+[Where is the product heading in 12-18 months?]
+
+### Strategic Goals
+List 3-4 high-level objectives that drive the roadmap:
+- **[Goal 1]:** [Brief description]
+- **[Goal 2]:** [Brief description]
+- **[Goal 3]:** [Brief description]
+
+### Success Metrics
+How will we measure progress?
+- [Metric 1]: Current → Target
+- [Metric 2]: Current → Target
+- [Metric 3]: Current → Target
+
+---
+
+## Time Horizons
+
+### Q1 - [Theme Name]
+*Theme description: What's the focus this quarter?*
+
+**Major Initiatives:**
+- **[Initiative 1]:** [Brief description, ~10 words]
+- **[Initiative 2]:** [Brief description]
+- **[Initiative 3]:** [Brief description]
+
+**Key Milestones:**
+- [ ] [Milestone 1]
+- [ ] [Milestone 2]
+
+**Dependencies:**
+- [Any cross-team or external dependencies]
+
+---
+
+### Q2 - [Theme Name]
+*Theme description*
+
+**Major Initiatives:**
+- **[Initiative 1]:** [Brief description]
+- **[Initiative 2]:** [Brief description]
+- **[Initiative 3]:** [Brief description]
+
+**Key Milestones:**
+- [ ] [Milestone 1]
+- [ ] [Milestone 2]
+
+**Dependencies:**
+- [Dependencies]
+
+---
+
+### Q3 - [Theme Name]
+*Theme description*
+
+**Major Initiatives:**
+- **[Initiative 1]:** [Brief description]
+- **[Initiative 2]:** [Brief description]
+- **[Initiative 3]:** [Brief description]
+
+**Key Milestones:**
+- [ ] [Milestone 1]
+- [ ] [Milestone 2]
+
+**Dependencies:**
+- [Dependencies]
+
+---
+
+### Q4 - [Theme Name]
+*Theme description*
+
+**Major Initiatives:**
+- **[Initiative 1]:** [Brief description]
+- **[Initiative 2]:** [Brief description]
+- **[Initiative 3]:** [Brief description]
+
+**Key Milestones:**
+- [ ] [Milestone 1]
+- [ ] [Milestone 2]
+
+**Dependencies:**
+- [Dependencies]
+
+---
+
+## Risks and Contingencies
+
+### Top Risks
+1. **[Risk 1]:** [Description] → Mitigation: [Plan]
+2. **[Risk 2]:** [Description] → Mitigation: [Plan]
+3. **[Risk 3]:** [Description] → Mitigation: [Plan]
+
+### Contingency Plans
+- If [scenario], then [alternative approach]
+- If [scenario], then [alternative approach]
+
+---
+
+## Resource Requirements
+
+### Team Allocation
+| Quarter | Engineering | Design | PM |
+|---------|-------------|--------|-----|
+| Q1 | [X engineers] | [X designers] | [X] |
+| Q2 | [X engineers] | [X designers] | [X] |
+| Q3 | [X engineers] | [X designers] | [X] |
+| Q4 | [X engineers] | [X designers] | [X] |
+
+### Key Hires Needed
+- [Role 1]: [When needed, why]
+- [Role 2]: [When needed, why]
+
+---
+
+## Review Cadence
+
+- **Weekly:** [What gets reviewed]
+- **Monthly:** [What gets reviewed]
+- **Quarterly:** Full roadmap refresh and reprioritization
+
+---
+
+**Save as:** `documents/ROADMAP-[year]-[YYYY-MM-DD].md`

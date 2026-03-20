@@ -1,0 +1,168 @@
+---
+description: One-Pager Generator - Documento estratégico conciso para validação inicial
+alwaysApply: false
+---
+
+# One-Pager Generator
+
+Gera um documento estratégico conciso (1-2 páginas) para validação inicial com stakeholders. Mais leve que um PRD completo, ideal para obter buy-in antes de investir em especificação detalhada.
+
+---
+
+## Quando Usar
+
+- Validar uma ideia/feature com stakeholders antes de detalhar
+- Apresentar proposta em reunião de priorização
+- Alinhar expectativas iniciais com engenharia
+- Documentar decisão de investir (ou não) em uma iniciativa
+
+---
+
+## Processo de Geração
+
+### 1. Coletar Informações
+
+Antes de gerar, pergunte:
+
+1. **Feature/Iniciativa:** Qual é o nome e uma descrição em 1 linha?
+2. **Problema:** Qual problema estamos resolvendo? Para quem?
+3. **Evidências:** Que dados/feedback suportam isso? (métricas, pesquisa, tickets)
+4. **Urgência:** Por que agora? O que muda se não fizermos?
+
+### 2. Gerar Documento
+
+Crie o documento seguindo o template abaixo.
+
+### 3. Salvar
+
+Salve em `/documents/` com nome: `ONE-PAGER-[feature]-[YYYY-MM-DD].md`
+
+---
+
+## Template do One-Pager
+
+```markdown
+# One-Pager: [Nome da Feature/Iniciativa]
+
+**Autor:** [Nome]
+**Data:** [YYYY-MM-DD]
+**Status:** Draft | Em Review | Aprovado | Rejeitado
+
+---
+
+## TL;DR
+
+[2-3 frases que resumem: O que é, para quem, por que importa]
+
+---
+
+## Problema
+
+### O que está acontecendo?
+[Descrição clara do problema. Use dados concretos.]
+
+### Quem é afetado?
+[Segmento de usuários + volume estimado]
+
+### Qual o impacto?
+[Consequência do problema: churn, receita perdida, NPS, tickets de suporte]
+
+---
+
+## Proposta de Solução
+
+### O que vamos fazer?
+[Descrição em alto nível da solução - 3-5 bullet points]
+
+### O que NÃO vamos fazer (nesta versão)?
+[Scope out explícito - o que fica para depois]
+
+---
+
+## Por Que Agora?
+
+[Justificativa de timing: oportunidade de mercado, dependência de outro projeto, 
+feedback recorrente, janela competitiva, etc.]
+
+---
+
+## Impacto Esperado
+
+| Métrica | Atual | Esperado | Como Medir |
+|---------|-------|----------|------------|
+| [Métrica 1] | [Valor] | [Meta] | [Método] |
+| [Métrica 2] | [Valor] | [Meta] | [Método] |
+
+---
+
+## Esforço Estimado
+
+| Dimensão | Estimativa |
+|----------|------------|
+| Complexidade Técnica | Baixa / Média / Alta |
+| Tempo Estimado | [X semanas/sprints] |
+| Dependências | [Lista ou "Nenhuma"] |
+| Riscos Principais | [1-2 riscos críticos] |
+
+---
+
+## Próximos Passos
+
+Se aprovado:
+1. [Próximo passo 1]
+2. [Próximo passo 2]
+3. [Próximo passo 3]
+
+---
+
+## Decisão Solicitada
+
+[ ] Aprovar e priorizar para [quarter/sprint]
+[ ] Aprovar mas não priorizar agora
+[ ] Rejeitar - [motivo esperado]
+[ ] Precisa de mais informações sobre [aspecto]
+```
+
+---
+
+## Diretrizes de Escrita
+
+### Tom e Estilo
+- **Conciso:** Cada seção deve ser escaneável em segundos
+- **Orientado a dados:** Inclua números sempre que possível
+- **Objetivo:** Evite linguagem promocional, seja factual
+- **Acionável:** Termine com decisão clara solicitada
+
+### Tamanho
+- Máximo 2 páginas (idealmente 1)
+- Cada seção: 3-5 bullet points ou 2-3 parágrafos curtos
+- TL;DR: máximo 50 palavras
+
+### Referências
+- Reference personas from @context/USERS.md
+- Identify the domain and reference @global-context/{domain}/DOMAIN-KPIS.md for metrics
+- Use terminology from @context/TERMINOLOGY.md
+
+---
+
+## Exemplo de TL;DR Bem Escrito
+
+```
+Allow users to pause their subscription temporarily instead of canceling. 
+Affects ~2,000 subscriptions/month (30% of cancels). Estimated to reduce churn by 15-20% 
+with medium technical effort (2 sprints). Positive ROI in 3 months.
+```
+
+---
+
+## Checklist de Qualidade
+
+Antes de finalizar, verifique:
+
+- [ ] TL;DR pode ser entendido por alguém que não conhece o projeto
+- [ ] Problema está descrito com dados, não opiniões
+- [ ] Solução é específica o suficiente para avaliar esforço
+- [ ] Métricas de sucesso são mensuráveis
+- [ ] Riscos principais estão identificados
+- [ ] Próximos passos são acionáveis
+- [ ] Decisão solicitada está clara

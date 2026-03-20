@@ -1,0 +1,253 @@
+---
+description: Progress Tracker - Track initiative progress across phases
+globs: ["pm-progress.json"]
+---
+# Progress Tracker
+
+Este módulo gerencia o tracking de progresso das **iniciativas de produto** via @pm-progress.json.
+
+**Nota:** Não confundir com `to_do's/progress-log.md` (diário pessoal de briefings) nem `to_do's/tasks.md` (tarefas do dia). Este tracker é sobre **fases de iniciativas**, não tarefas pessoais.
+
+---
+
+## Commands
+
+- "Mostrar progresso das iniciativas"
+- "Atualizar progresso de [iniciativa]"
+- "Criar nova iniciativa [nome]"
+- "Qual o status de [iniciativa]?"
+- "Listar iniciativas bloqueadas"
+- "Resumo do quarter"
+
+---
+
+## Progress Phases
+
+Cada iniciativa passa pelas seguintes fases:
+
+```
+1. Research & Discovery
+   └── Output: RESEARCH-INPUT-*.md
+   
+2. One-Pager (Strategic)
+   └── Output: ONE-PAGER-*.md
+   
+3. Requirements Spec
+   └── Output: SPEC-*.md ou PRD-*.md
+   
+4. User Stories
+   └── Output: USER-STORIES-*.md, JIRA-*.md
+   
+5. Review & Approval
+   └── Output: Feedback consolidado
+   
+6. Engineering Handoff
+   └── Output: CONFLUENCE-*.md, Jira tickets
+```
+
+---
+
+## Auto-Update Rules
+
+### Quando criar documento
+
+Após gerar qualquer documento, atualizar @pm-progress.json:
+
+1. Verificar se iniciativa existe
+2. Se não existir, criar nova entrada
+3. Adicionar documento à lista `documents`
+4. Atualizar `current_phase` baseado no tipo de documento
+5. Mover fase anterior para `completed_phases`
+6. Atualizar `last_updated` no metadata
+
+### Mapeamento Documento → Fase
+
+| Document Type | Phase | Next Phase |
+|---------------|-------|------------|
+| RESEARCH-INPUT | research | one_pager |
+| ONE-PAGER | one_pager | requirements |
+| SPEC / PRD | requirements | user_stories |
+| USER-STORIES | user_stories | review |
+| JIRA | user_stories | review |
+| REVIEW | review | handoff |
+| CONFLUENCE | handoff | (complete) |
+
+---
+
+## Initiative Status Values
+
+| Status | Description | When to Use |
+|--------|-------------|-------------|
+| `not_started` | Iniciativa planejada | Apenas na criação |
+| `in_progress` | Em andamento | Fase atual em execução |
+| `blocked` | Bloqueada | Dependência ou impedimento |
+| `on_hold` | Pausada | Prioridade mudou |
+| `completed` | Concluída | Handoff realizado |
+| `cancelled` | Cancelada | Não será mais feita |
+
+---
+
+## JSON Schema
+
+```json
+{
+  "initiatives": {
+    "[slug]": {
+      "name": "string - Nome legível",
+      "created": "YYYY-MM-DD",
+      "status": "not_started|in_progress|blocked|on_hold|completed|cancelled",
+      "priority": "P1|P2|P3",
+      "quarter": "Q1 2026",
+      "completed_phases": ["phase1", "phase2"],
+      "current_phase": "phase_name",
+      "documents": [
+        {
+          "type": "DOCUMENT-TYPE",
+          "path": "documents/FILENAME.md",
+          "status": "draft|completed",
+          "date": "YYYY-MM-DD"
+        }
+      ],
+      "next_actions": ["action1", "action2"],
+      "blockers": ["blocker1"],
+      "notes": "Optional notes"
+    }
+  }
+}
+```
+
+---
+
+## Display Templates
+
+### Single Initiative Status
+
+Quando perguntado sobre uma iniciativa específica:
+
+```markdown
+## [Initiative Name]
+
+| Field | Value |
+|-------|-------|
+| **Status** | 🟡 In Progress |
+| **Current Phase** | Requirements Spec |
+| **Priority** | P1 |
+| **Quarter** | Q1 2026 |
+
+### Progress
+✅ Research & Discovery
+✅ One-Pager (Strategic)
+🔄 Requirements Spec ← Current
+⬜ User Stories
+⬜ Review & Approval
+⬜ Engineering Handoff
+
+### Documents
+| Document | Status | Date |
+|----------|--------|------|
+| RESEARCH-INPUT-feature-2026-01-20.md | ✅ Complete | 2026-01-20 |
+| ONE-PAGER-feature-2026-01-22.md | ✅ Complete | 2026-01-22 |
+
+### Next Actions
+- [ ] Complete requirements spec
+- [ ] Schedule engineering review
+
+### Blockers
+- None
+```
+
+### Quarter Summary
+
+Quando perguntado sobre resumo do quarter:
+
+```markdown
+## Q1 2026 - Initiative Summary
+
+### By Status
+| Status | Count | Initiatives |
+|--------|-------|-------------|
+| 🟢 Completed | 2 | feature-a, feature-b |
+| 🟡 In Progress | 3 | feature-c, feature-d, feature-e |
+| 🔴 Blocked | 1 | feature-f |
+| ⚪ Not Started | 2 | feature-g, feature-h |
+
+### By Priority
+| Priority | In Progress | Completed |
+|----------|-------------|-----------|
+| P1 | 2 | 1 |
+| P2 | 1 | 1 |
+| P3 | 0 | 0 |
+
+### Blocked Initiatives
+| Initiative | Blocker | Since |
+|------------|---------|-------|
+| feature-f | Waiting for API from Team X | 2026-01-15 |
+
+### Coming Up
+| Initiative | Current Phase | Next Milestone |
+|------------|---------------|----------------|
+| feature-c | Requirements | User Stories by Jan 30 |
+| feature-d | One-Pager | Stakeholder Review Jan 28 |
+```
+
+---
+
+## Automation Prompts
+
+### Create New Initiative
+
+```
+Criar nova iniciativa "[Nome]" com:
+- Prioridade: P1/P2/P3
+- Quarter: Q1 2026
+- Primeira fase: research
+```
+
+### Update After Document Creation
+
+Após cada documento, internamente atualizar:
+
+```javascript
+// Pseudo-code for update logic
+initiative.documents.push({
+  type: documentType,
+  path: documentPath,
+  status: "completed",
+  date: today
+});
+
+if (currentPhaseComplete) {
+  initiative.completed_phases.push(initiative.current_phase);
+  initiative.current_phase = nextPhase;
+}
+
+metadata.last_updated = today;
+statistics = recalculate(initiatives);
+```
+
+### Mark as Blocked
+
+```
+Marcar [iniciativa] como bloqueada:
+- Blocker: [descrição do impedimento]
+- Dependência: [time/pessoa/recurso]
+```
+
+### Complete Initiative
+
+```
+Finalizar iniciativa [nome]:
+- Status: completed
+- Mover current_phase para completed_phases
+- Atualizar statistics
+```
+
+---
+
+## Best Practices
+
+1. **Atualizar após cada documento** - Não deixar para depois
+2. **Documentar blockers imediatamente** - Visibilidade é importante
+3. **Revisar semanalmente** - Manter progresso atualizado
+4. **Usar slugs consistentes** - kebab-case para nomes de iniciativa
+5. **Não deletar, marcar como cancelled** - Manter histórico

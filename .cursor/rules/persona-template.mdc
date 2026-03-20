@@ -1,0 +1,127 @@
+---
+description: User Persona Generator - Creates Ideal and Skeptical personas
+alwaysApply: false
+---
+# Persona Template Instructions
+
+Be sure to use @product-context.mdc data for initial context.
+
+You will write **2 User Personas** for this product: an Ideal persona and a Skeptical persona.
+
+---
+
+## Persona 1: Ideal User
+
+This persona represents your target customer who would love your product.
+
+Assume they are one of the Target Customers from the product context.
+
+### Structure
+
+```markdown
+## [Name] - The Ideal User
+
+**Role:** [Job title and company context]
+**Company:** [Size, stage, industry]
+**Experience:** [Years in role, background]
+
+### Overview
+[2-3 sentences describing who they are and their relationship to the problem]
+
+### Goals
+- [Goal 1 - up to 10 words]
+- [Goal 2 - up to 10 words]
+- [Goal 3 - up to 10 words]
+
+### Behaviors
+- [Behavior 1 - up to 10 words]
+- [Behavior 2 - up to 10 words]
+- [Behavior 3 - up to 10 words]
+
+### Pains
+- [Pain 1 - up to 10 words]
+- [Pain 2 - up to 10 words]
+- [Pain 3 - up to 10 words]
+
+### Needs
+- [Need 1 - up to 10 words]
+- [Need 2 - up to 10 words]
+- [Need 3 - up to 10 words]
+
+### Quote
+> "[A quote that captures their perspective on the problem]"
+```
+
+---
+
+## Persona 2: Skeptical User
+
+This persona represents someone who is NOT likely to adopt your product.
+
+They are skeptical, and the product doesn't fit their needs and pains.
+
+Understanding this persona helps you:
+- Identify product gaps
+- Know who NOT to target
+- Anticipate objections
+
+### Structure
+
+```markdown
+## [Name] - The Skeptic
+
+**Role:** [Job title and company context]
+**Company:** [Size, stage, industry]
+**Experience:** [Years in role, background]
+
+### Overview
+[2-3 sentences describing who they are and why they're skeptical]
+
+### Goals
+- [Goal 1 - up to 10 words]
+- [Goal 2 - up to 10 words]
+- [Goal 3 - up to 10 words]
+
+### Behaviors
+- [Behavior 1 - up to 10 words]
+- [Behavior 2 - up to 10 words]
+- [Behavior 3 - up to 10 words]
+
+### Pains
+- [Pain 1 - up to 10 words]
+- [Pain 2 - up to 10 words]
+- [Pain 3 - up to 10 words]
+
+### Needs
+- [Need 1 - up to 10 words]
+- [Need 2 - up to 10 words]
+- [Need 3 - up to 10 words]
+
+### Why They Won't Convert
+> "[A quote that captures why this product isn't for them]"
+```
+
+---
+
+## Validation Questions
+
+After creating both personas, write **3 Key Questions** to ask potential users to validate product-market fit:
+
+1. **[Question about their current workflow/pain]**
+   - What you're testing: [Hypothesis]
+   - Good answer: [What indicates fit]
+   - Red flag: [What indicates poor fit]
+
+2. **[Question about their willingness to change]**
+   - What you're testing: [Hypothesis]
+   - Good answer: [What indicates fit]
+   - Red flag: [What indicates poor fit]
+
+3. **[Question about their budget/decision-making]**
+   - What you're testing: [Hypothesis]
+   - Good answer: [What indicates fit]
+   - Red flag: [What indicates poor fit]
+
+---
+
+**Save as:** `documents/PERSONAS-[product-name]-[YYYY-MM-DD].md`
