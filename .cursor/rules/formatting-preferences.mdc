@@ -5,15 +5,15 @@ alwaysApply: true
 
 # Formatting Preferences
 
-- **Never use blockquotes** (`>`) in responses. Use normal text, lists, or sections with headers.
+- **Nunca usar blockquotes** (`>`) em respostas. Usar texto normal, listas, ou seções com headers.
 
 ## Mermaid Diagrams
 
-When generating or including Mermaid diagrams in documents:
+Ao gerar ou incluir diagramas Mermaid em documentos:
 
-- Always use neutral theme: `%%{init: {'theme': 'neutral'}}%%` on the first line
-- Never use explicit colors/styling (`style`, `classDef`, `:::`) — breaks in dark mode
-- Use camelCase or underscores in node IDs (never spaces)
-- Escape special characters in labels with double quotes: `A["Process (main)"]`
-- Avoid reserved keywords as node IDs (`end`, `subgraph`, `graph`)
-- For subgraphs, use explicit IDs: `subgraph authFlow [Authentication Flow]`
+- Sempre usar tema neutral: `%%{init: {'theme': 'neutral'}}%%` na primeira linha
+- Nunca usar cores/styling explícitos (`style`, `classDef`, `:::`) — quebra no dark mode
+- Usar camelCase ou underscores em node IDs (nunca espaços)
+- Escapar caracteres especiais em labels com aspas duplas: `A["Process (main)"]`
+- Evitar keywords reservados como node IDs (`end`, `subgraph`, `graph`)
+- Para subgraphs, usar IDs explícitos: `subgraph authFlow [Authentication Flow]`

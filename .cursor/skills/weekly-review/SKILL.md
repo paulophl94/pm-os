@@ -14,11 +14,14 @@ Use this skill at the end of the week (Friday afternoon) to:
 ## Trigger Commands
 
 - "Weekly review"
+- "Review da semana"
+- "Sintese semanal"
+- "Fechar a semana"
 - "Friday review"
-- "Close the week"
-- "Week synthesis"
 
 ## Instructions
+
+When the user triggers a weekly review, execute the following steps:
 
 ### Step 1: Load Week Context
 
@@ -32,125 +35,238 @@ Read: @to_do's/quarter-goals.md (quarter-level progress)
 Read: @to_do's/commitments.md (open and completed commitments)
 Read: @to_do's/tasks.md (current state of tasks)
 Read: @to_do's/learnings/ (preferences.md and patterns.md, if exist)
+Read: @to_do's/toolkit-backlog.md (pending toolkit improvements)
+Read: @to_do's/learnings/usage-log.md (skill/template usage tracking)
+Read: @to_do's/learnings/career-evidence.md (career evidence, if exists)
 ```
 
-### Step 2: Fetch Week's Meetings
+### Step 2: Fetch Week's Meetings from Fireflies
 
-If a meeting transcription MCP is available, fetch this week's meetings and summaries. Extract themes, key decisions, and patterns across all meetings.
+```
+Tool: fireflies_get_transcripts
+Arguments:
+  fromDate: [Monday of this week in ISO 8601]
+  toDate: [Today in ISO 8601]
+  mine: true
+  limit: 30
+```
 
-**If unavailable:** Build synthesis from briefings, tasks, and user input only.
+For each meeting, get the summary:
+```
+Tool: fireflies_get_summary
+Arguments:
+  transcriptId: [meeting ID]
+```
+
+Extract themes, key decisions, and patterns across all meetings.
 
 ### Step 3: Analyze the Week
 
 Synthesize across all data sources:
 
-1. **Week Priorities Assessment:** For each Top 3 priority — did it advance? Grade: Achieved / Partial / Not Advanced
-2. **Meeting Patterns:** Recurring topics, conflicting messages, decisions that shift priorities
-3. **Commitment Health:** How many closed, how many stale (>3 days)
-4. **Quarter Goals Progress:** Update progress percentages, assess on-track status
-5. **Learnings Synthesis:** What worked, what didn't, new preferences or patterns
+1. **Week Priorities Assessment:** For each of the Top 3 priorities:
+   - Did it advance? How much?
+   - What drove progress or blocked it?
+   - Grade: Achieved / Partial / Not Advanced
+
+2. **Meeting Patterns:** Across all meetings this week:
+   - What topics came up repeatedly?
+   - Who was in the most meetings?
+   - Were there conflicting messages from different stakeholders?
+   - What decisions were made that shift priorities?
+
+3. **Commitment Health:** From commitments.md:
+   - How many were closed this week?
+   - How many are stale (>3 days)?
+   - Are there patterns in who is late?
+
+4. **Quarter Goals Progress:** From quarter-goals.md:
+   - Update progress percentages based on this week's work
+   - Are we on track? Behind? Ahead?
+   - What needs to change to hit the targets?
+
+5. **Learnings Synthesis:** From daily reviews and conversations:
+   - What worked well this week? (repeat it)
+   - What didn't work? (fix it)
+   - Any new preferences or patterns to capture?
 
 ### Step 4: Ask User for Input
 
-Quick prompt:
+Quick prompt (keep it brief):
 
-1. What was the biggest win this week?
-2. What frustrated you or didn't go as expected?
-3. Anything strategic you noticed but didn't document?
-4. Priorities for next week? (or want me to suggest?)
+> **Review rapido da semana:**
+>
+> 1. Qual foi a maior vitoria da semana?
+> 2. O que te frustrou ou nao saiu como esperado?
+> 3. Algo estrategico que voce percebeu mas nao documentou?
+> 4. Prioridades para semana que vem? (ou quer que eu sugira?)
 
-Accept brief answers. If user says "suggest", generate priorities based on analysis.
+Accept brief answers. If user says "sugere", generate priorities based on analysis.
 
 ### Step 5: Generate Weekly Review File
 
 Save to `@to_do's/weekly-reviews/YYYY-WXX.md`:
 
 ```markdown
-# Weekly Review - Week XX (YYYY-MM-DD to YYYY-MM-DD)
+# Weekly Review - Semana XX (YYYY-MM-DD a YYYY-MM-DD)
 
-## TL;DR
+## TL;DR da Semana
 
-[2-3 sentences capturing the essence of the week]
+[2-3 sentences capturing the essence of the week. What defined it? Was it a week of progress, firefighting, planning, or execution?]
 
-## Week Priorities: How Did It Go?
+## Prioridades da Semana: Como Foi?
 
-| # | Priority | Result | Grade |
-|---|----------|--------|-------|
+| # | Prioridade | Resultado | Grade |
+|---|------------|-----------|-------|
 | 1 | [Priority] | [What happened] | Achieved / Partial / Not Advanced |
-| 2 | [Priority] | [What happened] | Grade |
-| 3 | [Priority] | [What happened] | Grade |
+| 2 | [Priority] | [What happened] | Achieved / Partial / Not Advanced |
+| 3 | [Priority] | [What happened] | Achieved / Partial / Not Advanced |
 
-**Analysis:** [1-2 sentences on why priorities advanced or not]
+**Analise:** [1-2 sentences on why priorities advanced or not. Were they realistic? Did emergencies derail them?]
 
-## Meetings This Week
+## Reunioes da Semana
 
-| Day | Meeting | Key Decision | Impact |
-|-----|---------|--------------|--------|
-| Mon | [Meeting] | [Decision] | High/Med/Low |
+| Dia | Reuniao | Decisao-Chave | Impact |
+|-----|---------|---------------|--------|
+| Seg | [Meeting] | [Decision] | [High/Med/Low] |
+| ... | ... | ... | ... |
 
-**Total:** X meetings | **Recurring themes:** [theme 1, theme 2]
+**Total:** X reunioes | **Temas recorrentes:** [theme 1, theme 2]
 
-## Patterns and Themes
+## Patterns e Temas
 
-- **[Theme 1]:** [What pattern emerged]
+- **[Theme 1]:** [What pattern emerged across meetings/tasks]
 - **[Theme 2]:** [Another recurring topic]
+- **[Theme 3]:** [Strategic insight]
 
-## Quarter Progress
+## Progresso no Quarter
 
-| Goal | Progress | Trend | Risk |
-|------|----------|-------|------|
+| Meta | Progresso | Tendencia | Risco |
+|------|-----------|-----------|-------|
 | [Quarter goal 1] | XX% | On track / Behind / Ahead | [Risk if any] |
+| [Quarter goal 2] | XX% | ... | ... |
 
-**Weeks remaining in quarter:** X
+**Semanas restantes no quarter:** X
 
 ## Commitment Health
 
-- **Closed this week:** X
-- **Pending:** Y (Z older than 3 days)
-- **New:** W
+- **Fechados esta semana:** X
+- **Pendentes:** Y (Z com mais de 3 dias)
+- **Novos:** W
+- **Quem esta devendo mais:** [Name — X items pendentes]
 
-## Week Learnings
+## Learnings da Semana
 
-### What worked
+### O que funcionou
 - [Repeat these patterns]
 
-### What didn't work
+### O que nao funcionou
 - [Fix these patterns]
 
-### Strategic insights
+### Insights estrategicos
 - [Observations that matter for quarter goals or beyond]
 
-## Priorities for Next Week
+## Prioridades para Proxima Semana
 
-### Suggested Top 3
+### Top 3 Sugeridas
 
-1. **[Priority 1]** — Connects to: [Quarter goal]. [Why this is #1]
-2. **[Priority 2]** — Connects to: [Quarter goal]. [Why]
-3. **[Priority 3]** — Connects to: [Quarter goal]. [Why]
+1. **[Priority 1]** — Conecta a: [Quarter goal]. [Why this is #1 next week]
+2. **[Priority 2]** — Conecta a: [Quarter goal]. [Why]
+3. **[Priority 3]** — Conecta a: [Quarter goal]. [Why]
 
-### Also on radar
+### Tambem no radar
 - [Item that didn't make Top 3 but matters]
+- [Item carried over from this week]
 
 ---
-*Review done: [timestamp]*
+*Review feito em: [timestamp]*
 ```
 
 ### Step 6: Update Week Priorities
 
-**Automatically** update `@to_do's/week-priorities.md` with new Top 3.
+**Automatically** update `@to_do's/week-priorities.md`:
+
+1. Move current week's priorities to "Semana Anterior" section with results
+2. Write the new Top 3 in the main section (from user input or suggested)
+3. Update the week date range and timestamp
 
 ### Step 7: Update Quarter Goals
 
-**Automatically** update `@to_do's/quarter-goals.md` with progress percentages.
+**Automatically** update `@to_do's/quarter-goals.md`:
+
+1. Update progress percentages based on the week's analysis
+2. Update initiative statuses if any changed
+3. Update the "Atualizado" timestamp
 
 ### Step 8: Capture Learnings
 
-Append to `@to_do's/learnings/preferences.md` and `@to_do's/learnings/patterns.md` as appropriate.
+If the user shared learnings or strategic insights:
+
+1. Append to `@to_do's/learnings/preferences.md` (if about working style)
+2. Append to `@to_do's/learnings/patterns.md` (if about errors or anti-patterns)
+
+### Step 9: Surface Toolkit Improvements
+
+Read `@to_do's/toolkit-backlog.md` and surface actionable improvements:
+
+1. List top 3 pending improvements by impact (H > M > L)
+2. Ask: "Quer implementar alguma dessas melhorias?"
+3. If any improvement has been pending for 4+ weeks, flag it
+
+Format:
+> **Toolkit Backlog — Top 3 pendentes:**
+> 1. `^imp-XXX` [Description] (Impacto: H, há X dias)
+> 2. `^imp-XXX` [Description] (Impacto: M, há X dias)
+> 3. `^imp-XXX` [Description] (Impacto: M, há X dias)
+
+### Step 10: Update Usage Log
+
+Read `@to_do's/learnings/usage-log.md` and update the summary section:
+
+1. Count usage by template, skill, reviewer, and framework this week
+2. Identify templates/skills never used in the last 30 days
+3. Generate a "Sugestão da semana" — recommend 1 unused template or skill with a brief reason why it would be useful based on the week's work
+
+### Step 11: Skill Ratings Summary
+
+Read `@to_do's/learnings/skill-ratings.md` (if exists) and surface skills with average rating <3:
+
+> **Skills com rating baixo esta semana:** [skill-name] (media: X.X) — investigar?
+
+### Step 12: Notify User
+
+> **Weekly review completo!**
+>
+> - Semana: X/3 prioridades avancaram
+> - Quarter: [on track / behind] com X semanas restantes
+> - Proxima semana: [Top priority #1]
+> - [Stale commitments warning if any]
+> - Toolkit: X melhorias pendentes (top: [top improvement])
+> - Sugestao da semana: experimentar [unused template/skill]
+> - Review salvo em `to_do's/weekly-reviews/YYYY-WXX.md`
 
 ## Tone Guidelines
 
-- Analytical but not cold — this is a moment of reflection
+- Be analytical but not cold — this is a moment of reflection
 - Celebrate wins, even small ones connected to quarter goals
-- Be honest about what didn't work — focus on "what to change"
+- Be honest about what didn't work — but focus on "what to change" not "what went wrong"
 - Keep strategic insights sharp and actionable
-- Process should take 10-15 minutes max
+- The whole process should take 10-15 minutes max
+
+## Error Handling
+
+### No Daily Reviews
+If no daily reviews exist for the week:
+- Build the synthesis from briefings, tasks, and Fireflies data
+- Suggest starting daily reviews next week for richer weekly synthesis
+
+### No Fireflies Data
+If Fireflies is unavailable:
+- Build from briefings, tasks, and user input only
+- Note: "Sem dados de reunioes do Fireflies esta semana"
+
+### First Week Using This
+If no previous weekly review exists:
+- Skip the comparison with last week
+- Focus on establishing the baseline
+- Suggest the user fill in quarter-goals.md if not yet done

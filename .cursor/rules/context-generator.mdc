@@ -69,8 +69,69 @@ After generating all sections, update @product-context.mdc with the new content.
 
 Use the edit tool to update only the specific sections mentioned above.
 
-## Step 4: Confirm
+## Step 4: Configure Daily Rituals
 
-After updating, confirm with the user:
+Ask the user about their workflow preferences:
 
-> "I've updated your product context. You can now use commands like 'Create a PRD for...' or 'Write user stories for...' and I'll reference this context automatically."
+> "Vamos configurar seus rituais diários. Responda brevemente:"
+>
+> 1. **Morning briefing:** Quer começar o dia com um briefing? (sim/não)
+> 2. **Daily review:** Quer fechar o dia com reflexão e captura de learnings? (sim/não)
+> 3. **Weekly review:** Quer fazer síntese semanal às sextas? (sim/não)
+> 4. **Meeting notes:** Você grava reuniões (Fireflies, Otter, Granola) ou prefere colar notas manualmente?
+
+Based on answers, update `@to_do's/learnings/preferences.md` with ritual preferences.
+
+## Step 5: Configure Integrations
+
+Ask about available integrations:
+
+> "Quais ferramentas você usa? (responda sim/não para cada)"
+>
+> 1. **Jira/Linear** — Para tracking de features? Qual project key?
+> 2. **Slack** — Para comunicação com o time?
+> 3. **Fireflies/Otter** — Para transcrição de reuniões?
+> 4. **Google Calendar** — Para meeting prep automático?
+> 5. **Databricks/data platform** — Para consulta de dados/métricas?
+
+Note which MCPs are available and add to preferences. If a tool isn't connected, inform about the fallback (per `session-protocol.mdc`).
+
+## Step 6: Create Initial Person Pages
+
+Ask for key stakeholders:
+
+> "Liste 3-5 pessoas com quem você mais interage no dia-a-dia (nome e papel):"
+> Ex: "Rafael - Tech Lead, Camila - Designer, Alejo - PM Manager"
+
+For each person mentioned:
+1. Create a person page in `@context/people/` using `_TEMPLATE.md`
+2. Fill in name, role, and relationship
+3. Leave sections like "Histórico de Reuniões" empty for future population
+
+## Step 7: Seed Planning Files
+
+If the user is starting fresh, seed the planning system:
+
+1. Ask: "Quais são suas 3-5 metas para este quarter?" → populate `@to_do's/quarter-goals.md`
+2. Ask: "Quais são suas Top 3 prioridades para esta semana?" → populate `@to_do's/week-priorities.md`
+3. Create empty `@to_do's/tasks.md` with P1/P2 structure if it doesn't exist
+4. Create empty `@to_do's/commitments.md` if it doesn't exist
+
+## Step 8: Confirm
+
+After completing all steps, confirm with the user:
+
+> **Setup completo!**
+>
+> - Contexto do produto configurado
+> - Rituais: [morning briefing: sim/não] | [daily review: sim/não] | [weekly review: sim/não]
+> - Integrações detectadas: [list]
+> - Person pages criadas: [count] stakeholders
+> - Planning: quarter goals e week priorities configurados
+>
+> **Comandos para começar:**
+> - "Morning briefing" — Começar o dia
+> - "Criar PRD para [feature]" — Gerar documentos
+> - "Processar notas da reunião" — Após reuniões
+>
+> **Para referência completa:** veja [COMMANDS.md](COMMANDS.md) e [QUICK-START.md](QUICK-START.md)

@@ -29,6 +29,9 @@ Gerencia suas tarefas pessoais diárias na pasta @to_do's/.
 | "Completar to-do [título]" | Marca como [x] e move para Concluídas |
 | "To-do's de hoje" | Lista P1 e P2 de tasks.md |
 | "Morning briefing" | Atualiza tasks.md E progress-log.md |
+| "Mostrar commitments" | Lista commitments pendentes de commitments.md |
+| "Commitments de [pessoa]" | Filtra commitments por pessoa |
+| "Commitments velhos" | Lista commitments >3 dias sem update |
 
 ## Natural Language Triggers
 
@@ -47,16 +50,27 @@ Regras:
 
 ---
 
+## Task IDs
+
+Tarefas importantes recebem IDs únicos para rastreabilidade cross-file: `#T-MMDD-N`
+
+- **Formato:** `#T-` + mês/dia (4 dígitos) + `-` + sequencial (1, 2, 3...)
+- **Quando usar:** Tarefas P1, tarefas que aparecem em múltiplos lugares (tasks + meeting notes + person pages)
+- **Quando não usar:** Tarefas simples/one-off que não precisam de rastreamento
+- **Cross-referência:** Ao criar action item em meeting-notes que vira task, usar o mesmo ID
+- **Completar:** Manter o ID ao completar: `- [x] #T-0321-1 Revisar PRD`
+
 ## Ao Adicionar Tarefa
 
 Adicionar na seção correta de `tasks.md`:
 
 ```markdown
 ## Hoje - P1 (Alta Prioridade)
-- [ ] Nova tarefa urgente
+- [ ] #T-0321-1 Nova tarefa urgente (rastreável)
+- [ ] Nova tarefa simples (sem ID, one-off)
 
 ## Hoje - P2 (Média Prioridade)
-- [ ] Nova tarefa importante
+- [ ] #T-0321-2 Nova tarefa importante
 ```
 
 ---
@@ -124,6 +138,21 @@ Cada morning briefing adiciona uma entrada:
 | **P1** | Urgente, impacta entregas, bloqueadores |
 | **P2** | Importante mas não urgente, follow-ups |
 | **P3** | Nice to have, vai para backlog.md |
+
+## Commitment IDs
+
+Commitments usam IDs únicos para rastreabilidade cross-file: `^c-YYYYMMDD-NNN`
+
+- O meeting-notes skill gera IDs automaticamente ao extrair commitments
+- Ao referenciar um commitment em tasks.md ou person pages, usar o mesmo ID
+- Ao completar, manter o ID: `- [x] ^c-20260321-001 ...`
+- Ao consultar commitments, filtrar por pessoa, idade, ou status
+
+**Consulta de commitments:**
+- "Mostrar commitments" → lista todos os pendentes com idade
+- "Commitments de [pessoa]" → filtra por stakeholder
+- "Commitments velhos" → mostra >3 dias, ordenados por idade
+- Formato de saída: tabela com ID, descrição, pessoa, idade em dias, contexto
 
 ---
 
