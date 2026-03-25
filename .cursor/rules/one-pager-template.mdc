@@ -1,151 +1,151 @@
 ---
-description: One-Pager Generator - Documento estratégico conciso para validação inicial
+description: One-Pager Generator - Concise strategic document for initial validation
 alwaysApply: false
 ---
 
 # One-Pager Generator
 
-Gera um documento estratégico conciso (1-2 páginas) para validação inicial com stakeholders. Mais leve que um PRD completo, ideal para obter buy-in antes de investir em especificação detalhada.
+Generates a concise strategic document (1-2 pages) for initial stakeholder validation. Lighter than a full PRD, ideal for getting buy-in before investing in detailed specification.
 
 ---
 
-## Quando Usar
+## When to Use
 
-- Validar uma ideia/feature com stakeholders antes de detalhar
-- Apresentar proposta em reunião de priorização
-- Alinhar expectativas iniciais com engenharia
-- Documentar decisão de investir (ou não) em uma iniciativa
-
----
-
-## Processo de Geração
-
-### 1. Coletar Informações
-
-Antes de gerar, pergunte:
-
-1. **Feature/Iniciativa:** Qual é o nome e uma descrição em 1 linha?
-2. **Problema:** Qual problema estamos resolvendo? Para quem?
-3. **Evidências:** Que dados/feedback suportam isso? (métricas, pesquisa, tickets)
-4. **Urgência:** Por que agora? O que muda se não fizermos?
-
-### 2. Gerar Documento
-
-Crie o documento seguindo o template abaixo.
-
-### 3. Salvar
-
-Salve em `/documents/` com nome: `ONE-PAGER-[feature]-[YYYY-MM-DD].md`
+- Validate an idea/feature with stakeholders before detailing
+- Present a proposal in a prioritization meeting
+- Align initial expectations with engineering
+- Document a decision to invest (or not) in an initiative
 
 ---
 
-## Template do One-Pager
+## Generation Process
+
+### 1. Gather Information
+
+Before generating, ask:
+
+1. **Feature/Initiative:** What is the name and a one-line description?
+2. **Problem:** What problem are we solving? For whom?
+3. **Evidence:** What data/feedback supports this? (metrics, research, tickets)
+4. **Urgency:** Why now? What changes if we don't do it?
+
+### 2. Generate Document
+
+Create the document following the template below.
+
+### 3. Save
+
+Save to `/documents/` with name: `ONE-PAGER-[feature]-[YYYY-MM-DD].md`
+
+---
+
+## One-Pager Template
 
 ```markdown
-# One-Pager: [Nome da Feature/Iniciativa]
+# One-Pager: [Feature/Initiative Name]
 
-**Autor:** [Nome]
-**Data:** [YYYY-MM-DD]
-**Status:** Draft | Em Review | Aprovado | Rejeitado
+**Author:** [Name]
+**Date:** [YYYY-MM-DD]
+**Status:** Draft | In Review | Approved | Rejected
 
 ---
 
 ## TL;DR
 
-[2-3 frases que resumem: O que é, para quem, por que importa]
+[2-3 sentences summarizing: What it is, for whom, why it matters]
 
 ---
 
-## Problema
+## Problem
 
-### O que está acontecendo?
-[Descrição clara do problema. Use dados concretos.]
+### What is happening?
+[Clear description of the problem. Use concrete data.]
 
-### Quem é afetado?
-[Segmento de usuários + volume estimado]
+### Who is affected?
+[User segment + estimated volume]
 
-### Qual o impacto?
-[Consequência do problema: churn, receita perdida, NPS, tickets de suporte]
-
----
-
-## Proposta de Solução
-
-### O que vamos fazer?
-[Descrição em alto nível da solução - 3-5 bullet points]
-
-### O que NÃO vamos fazer (nesta versão)?
-[Scope out explícito - o que fica para depois]
+### What is the impact?
+[Consequence of the problem: churn, lost revenue, NPS, support tickets]
 
 ---
 
-## Por Que Agora?
+## Proposed Solution
 
-[Justificativa de timing: oportunidade de mercado, dependência de outro projeto, 
-feedback recorrente, janela competitiva, etc.]
+### What will we do?
+[High-level description of the solution - 3-5 bullet points]
 
----
-
-## Impacto Esperado
-
-| Métrica | Atual | Esperado | Como Medir |
-|---------|-------|----------|------------|
-| [Métrica 1] | [Valor] | [Meta] | [Método] |
-| [Métrica 2] | [Valor] | [Meta] | [Método] |
+### What will we NOT do (in this version)?
+[Explicit scope out - what's deferred to later]
 
 ---
 
-## Esforço Estimado
+## Why Now?
 
-| Dimensão | Estimativa |
-|----------|------------|
-| Complexidade Técnica | Baixa / Média / Alta |
-| Tempo Estimado | [X semanas/sprints] |
-| Dependências | [Lista ou "Nenhuma"] |
-| Riscos Principais | [1-2 riscos críticos] |
+[Timing justification: market opportunity, dependency on another project,
+recurring feedback, competitive window, etc.]
 
 ---
 
-## Próximos Passos
+## Expected Impact
 
-Se aprovado:
-1. [Próximo passo 1]
-2. [Próximo passo 2]
-3. [Próximo passo 3]
+| Metric | Current | Expected | How to Measure |
+|--------|---------|----------|----------------|
+| [Metric 1] | [Value] | [Target] | [Method] |
+| [Metric 2] | [Value] | [Target] | [Method] |
 
 ---
 
-## Decisão Solicitada
+## Estimated Effort
 
-[ ] Aprovar e priorizar para [quarter/sprint]
-[ ] Aprovar mas não priorizar agora
-[ ] Rejeitar - [motivo esperado]
-[ ] Precisa de mais informações sobre [aspecto]
+| Dimension | Estimate |
+|-----------|----------|
+| Technical Complexity | Low / Medium / High |
+| Estimated Time | [X weeks/sprints] |
+| Dependencies | [List or "None"] |
+| Key Risks | [1-2 critical risks] |
+
+---
+
+## Next Steps
+
+If approved:
+1. [Next step 1]
+2. [Next step 2]
+3. [Next step 3]
+
+---
+
+## Decision Requested
+
+[ ] Approve and prioritize for [quarter/sprint]
+[ ] Approve but don't prioritize now
+[ ] Reject - [expected reason]
+[ ] Need more information about [aspect]
 ```
 
 ---
 
-## Diretrizes de Escrita
+## Writing Guidelines
 
-### Tom e Estilo
-- **Conciso:** Cada seção deve ser escaneável em segundos
-- **Orientado a dados:** Inclua números sempre que possível
-- **Objetivo:** Evite linguagem promocional, seja factual
-- **Acionável:** Termine com decisão clara solicitada
+### Tone and Style
+- **Concise:** Each section should be scannable in seconds
+- **Data-driven:** Include numbers whenever possible
+- **Objective:** Avoid promotional language, be factual
+- **Actionable:** End with a clear decision requested
 
-### Tamanho
-- Máximo 2 páginas (idealmente 1)
-- Cada seção: 3-5 bullet points ou 2-3 parágrafos curtos
-- TL;DR: máximo 50 palavras
+### Length
+- Maximum 2 pages (ideally 1)
+- Each section: 3-5 bullet points or 2-3 short paragraphs
+- TL;DR: maximum 50 words
 
-### Referências
-- Reference personas from @context/USERS.md
-- Identify the domain and reference @global-context/{domain}/DOMAIN-KPIS.md for metrics
-- Use terminology from @context/TERMINOLOGY.md
+### References
+- Reference personas from `context/USERS.md`
+- Identify the domain and reference `global-context/{domain}/DOMAIN-KPIS.md` for metrics
+- Use terminology from `context/TERMINOLOGY.md`
 
 ---
 
-## Exemplo de TL;DR Bem Escrito
+## Well-Written TL;DR Example
 
 ```
 Allow users to pause their subscription temporarily instead of canceling. 
@@ -155,14 +155,14 @@ with medium technical effort (2 sprints). Positive ROI in 3 months.
 
 ---
 
-## Checklist de Qualidade
+## Quality Checklist
 
-Antes de finalizar, verifique:
+Before finalizing, verify:
 
-- [ ] TL;DR pode ser entendido por alguém que não conhece o projeto
-- [ ] Problema está descrito com dados, não opiniões
-- [ ] Solução é específica o suficiente para avaliar esforço
-- [ ] Métricas de sucesso são mensuráveis
-- [ ] Riscos principais estão identificados
-- [ ] Próximos passos são acionáveis
-- [ ] Decisão solicitada está clara
+- [ ] TL;DR can be understood by someone unfamiliar with the project
+- [ ] Problem is described with data, not opinions
+- [ ] Solution is specific enough to evaluate effort
+- [ ] Success metrics are measurable
+- [ ] Key risks are identified
+- [ ] Next steps are actionable
+- [ ] Decision requested is clear

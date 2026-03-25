@@ -4,134 +4,112 @@ alwaysApply: false
 ---
 # Product Context Generator
 
-This tool helps you generate and update the data in @product-context.mdc.
+This wizard populates `product-context.mdc` with real product data. It can be invoked standalone ("Help me fill in the product context") or from `/start` onboarding.
 
-You are generating context for a product as if you are a Product Manager that specializes in creating Product Management documents such as PRDs, Lean Canvas, or User Stories.
+Each phase updates a specific section of product-context.mdc. The wizard output maps 1:1 to the file structure.
 
-## Step 1: Initial Question
+## Invocation Modes
 
-Ask the user a single question first:
+- **Standalone:** Run all 4 phases in sequence.
+- **From /start (Quick):** Run Phases 1-2 only.
+- **From /start (Full):** Run Phases 1-3.
+- **From /start (Power):** Run all 4 phases.
 
-> "Define the Product Concept - this is a 1-line description of the product you are creating."
+When invoked from `/start`, the start rule tells you which phases to run. Follow that instruction.
 
-(Skip this if the user already provided this information when invoking this rule.)
+## Phase 1: Who Are You
 
-## Step 2: Generate Context
+Before any other question, introduce the purpose briefly (1-2 sentences): the answers will be used to structure workspace context so that generated outputs — PRDs, user stories, analyses — are more accurate and tailored. Use first person ("so I can generate more relevant documents"). Never refer to "Cursor" by name.
 
-After the user answers, generate content for each section:
+Then ask:
 
-### Problem Statement
-Generate 3 problems that this product solves. Each should be:
-- Specific and measurable where possible
-- Focused on user pain, not product features
-- Written from the customer's perspective
+- What's your name, your company, and what team or group do you work with?
 
-### Business Field
-Provide 3 business fields (1-4 words each) that describe the market:
-- Primary field (most specific)
-- Secondary field (broader category)
-- Tertiary field (ecosystem)
+(Skip if the user already provided this information. If invoked from `/start`, always include the "why" preamble.)
 
-### Type of Business
-Determine: B2B, B2C, B2B2C, B2G, or other based on the product concept.
+STOP — wait for the user to respond.
 
-### Target Customers
-List 3 customer segments:
-- Include role/title, company size, and key characteristic
-- Be specific (not just "businesses" but "Series A-C startups with 20-200 employees")
+## Phase 2: Your Product
 
-### Specific Solution
-List 3 main components of the solution:
-- Focus on capabilities, not features
-- Each should address one of the problems listed
+Ask the user to describe their product in 1-2 sentences. Prompt:
 
-### Differentiator
-Write 1-2 sentences explaining:
-- What competitors exist
-- Why this solution is different/better
-- The unique value proposition
+- "Describe your product — what it does, who it's for, and what makes it different."
 
-### Product Summary
-Write a 100-200 word summary that:
-- Synthesizes all the above
-- Could serve as an elevator pitch
-- Includes the mission if applicable
+If the user gives a short answer, that's fine. If they're detailed, acknowledge the richness.
 
-## Step 3: Update the File
+STOP — wait for the user to respond.
 
-After generating all sections, update @product-context.mdc with the new content.
+**After the user responds**, use their answer to fill in the **Product Identity** table in `product-context.mdc`:
 
-**IMPORTANT**: Preserve the following elements exactly as they are:
-- The YAML frontmatter (description, alwaysApply)
-- The "Writing Style and File Format" section
-- The "AI File Creation Instructions" section
-- All formatting, spacing, and structure
+| Field | How to fill |
+|-------|-------------|
+| **Product** | Extract product name from the answer |
+| **Description** | 1-sentence description of what the product does and who it's for |
+| **Model** | Infer: B2B, B2C, B2B2C, Marketplace, B2G, or other |
+| **Differentiator** | Extract or synthesize the unique value proposition |
 
-Use the edit tool to update only the specific sections mentioned above.
+**Update rules:**
+- Use the edit tool to replace ONLY the `<!-- ... -->` placeholders in the Product Identity table
+- Preserve all other sections exactly as they are
+- Preserve the YAML frontmatter
 
-## Step 4: Configure Daily Rituals
+After updating, briefly confirm what was captured: "Here's what I've got — [1-2 sentence summary]. Does that sound right?" Let the user correct if needed.
 
-Ask the user about their workflow preferences:
+If this is the last phase requested (Quick setup), skip to the Confirmation step.
 
-> "Vamos configurar seus rituais diários. Responda brevemente:"
->
-> 1. **Morning briefing:** Quer começar o dia com um briefing? (sim/não)
-> 2. **Daily review:** Quer fechar o dia com reflexão e captura de learnings? (sim/não)
-> 3. **Weekly review:** Quer fazer síntese semanal às sextas? (sim/não)
-> 4. **Meeting notes:** Você grava reuniões (Fireflies, Otter, Granola) ou prefere colar notas manualmente?
+## Phase 3: Your Domains
 
-Based on answers, update `@to_do's/learnings/preferences.md` with ritual preferences.
+Ask the user:
 
-## Step 5: Configure Integrations
+- "Do you manage one product area, or multiple domains? For example, you might own 'Subscriptions' and 'B2B Sales' as separate domains within the same product."
 
-Ask about available integrations:
+STOP — wait for the user to respond.
 
-> "Quais ferramentas você usa? (responda sim/não para cada)"
->
-> 1. **Jira/Linear** — Para tracking de features? Qual project key?
-> 2. **Slack** — Para comunicação com o time?
-> 3. **Fireflies/Otter** — Para transcrição de reuniões?
-> 4. **Google Calendar** — Para meeting prep automático?
-> 5. **Databricks/data platform** — Para consulta de dados/métricas?
+**After the user responds:**
 
-Note which MCPs are available and add to preferences. If a tool isn't connected, inform about the fallback (per `session-protocol.mdc`).
+### Single domain:
+- Update the Active Domains table in `product-context.mdc` to have a single column with the domain name, mission, and status
+- Update the Canonical Path Map to replace `{domain}` with the actual domain slug (kebab-case)
+- Create the domain folder: `global-context/{domain}/` with empty template files copied from `global-context/_TEMPLATE-*.md`
 
-## Step 6: Create Initial Person Pages
+### Multiple domains:
+- Update the Active Domains table with one column per domain (name, mission, status)
+- Update the Canonical Path Map — note that users should replace `{domain}` with each domain name
+- Create a folder for each domain in `global-context/` with empty template files
 
-Ask for key stakeholders:
+**Domain folder setup:** For each domain, create:
+- `global-context/{domain}/DOMAIN-VISION.md` (copy from `_TEMPLATE-DOMAIN-VISION.md`, replace `[Domain Name]` with actual name)
+- `global-context/{domain}/DOMAIN-KPIS.md` (copy from `_TEMPLATE-DOMAIN-KPIS.md`)
+- `global-context/{domain}/ROADMAP.md` (copy from `_TEMPLATE-ROADMAP.md`)
+- `global-context/{domain}/ARCHITECTURE.md` (copy from `_TEMPLATE-ARCHITECTURE.md`)
 
-> "Liste 3-5 pessoas com quem você mais interage no dia-a-dia (nome e papel):"
-> Ex: "Rafael - Tech Lead, Camila - Designer, Alejo - PM Manager"
+Also update the Active Domains table rows for **Context** and **Docs** to point to the actual domain paths instead of `domain1/domain2`.
 
-For each person mentioned:
-1. Create a person page in `@context/people/` using `_TEMPLATE.md`
-2. Fill in name, role, and relationship
-3. Leave sections like "Histórico de Reuniões" empty for future population
+If this is the last phase requested (Full setup), skip to the Confirmation step.
 
-## Step 7: Seed Planning Files
+## Phase 4: Your Working Preferences
 
-If the user is starting fresh, seed the planning system:
+Ask the user (all at once — this is a lightweight phase):
 
-1. Ask: "Quais são suas 3-5 metas para este quarter?" → populate `@to_do's/quarter-goals.md`
-2. Ask: "Quais são suas Top 3 prioridades para esta semana?" → populate `@to_do's/week-priorities.md`
-3. Create empty `@to_do's/tasks.md` with P1/P2 structure if it doesn't exist
-4. Create empty `@to_do's/commitments.md` if it doesn't exist
+- "A few quick preferences:
+  1. What **language** should I use? (English, Portuguese BR, Spanish LATAM, etc.)
+  2. What **tools** do you use daily? (Jira, Linear, Slack, Figma, etc.)
+  3. Any **tone** preference? (I default to direct and concise — Chief of Staff style.)"
 
-## Step 8: Confirm
+STOP — wait for the user to respond.
 
-After completing all steps, confirm with the user:
+**After the user responds**, update the **Working Preferences** section in `product-context.mdc`:
 
-> **Setup completo!**
->
-> - Contexto do produto configurado
-> - Rituais: [morning briefing: sim/não] | [daily review: sim/não] | [weekly review: sim/não]
-> - Integrações detectadas: [list]
-> - Person pages criadas: [count] stakeholders
-> - Planning: quarter goals e week priorities configurados
->
-> **Comandos para começar:**
-> - "Morning briefing" — Começar o dia
-> - "Criar PRD para [feature]" — Gerar documentos
-> - "Processar notas da reunião" — Após reuniões
->
-> **Para referência completa:** veja [COMMANDS.md](COMMANDS.md) e [QUICK-START.md](QUICK-START.md)
+- Update **Language** with the user's choice
+- Update **Tools** with the user's actual tools
+- Update **Tone** if the user expressed a preference (keep the default if they didn't)
+- Leave other preferences (Format, Routine, Actions, Tone by audience) at their defaults
+
+## Confirmation
+
+After completing all requested phases, confirm:
+
+- "Your product context is configured. Everything I generate from now on — PRDs, user stories, analyses — will reference your product, your users, and your terminology automatically."
+
+If invoked standalone (not from `/start`), also mention:
+- "You can update any of this anytime by editing `product-context.mdc` directly or asking me to update it."

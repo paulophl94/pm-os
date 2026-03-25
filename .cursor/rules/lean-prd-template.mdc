@@ -1,0 +1,142 @@
+---
+description: Lean PRD Generator - Lightweight 6-section PRD for most features
+alwaysApply: false
+---
+# Lean PRD Template
+
+A streamlined PRD for features that don't need the full 15-section treatment. Covers the essentials: what, why, how, and how we'll know it worked.
+
+For complex features requiring press release, OKRs, detailed risk analysis, and competitive positioning, use `prd-template.mdc` instead.
+
+---
+
+## When to Use
+
+- Standard features with clear scope
+- Internal improvements and optimizations
+- Features where the problem and solution are well-understood
+- When you need a PRD in 15 minutes, not 2 hours
+
+---
+
+## Process
+
+Before writing, ask:
+
+1. **"What feature are you building?"** (do not suggest ideas)
+2. **"Who is the primary user and what problem does this solve for them?"**
+3. **"What is NOT in scope?"**
+
+ONLY THEN generate the document using `product-context.mdc` data for context.
+
+---
+
+## Template
+
+```markdown
+# Lean PRD: [Feature Name]
+
+**Author:** [Name]
+**Date:** [YYYY-MM-DD]
+**Status:** Draft | In Review | Approved
+**Domain:** [Domain name]
+
+---
+
+## 1. Problem & Opportunity
+
+### The Problem
+[2-3 sentences. What's happening? Who's affected? What's the cost of inaction?]
+
+### Evidence
+[Data points, user feedback, support tickets, or research that validates this problem]
+
+### Opportunity
+[1-2 sentences. What do we gain by solving this? Revenue, retention, efficiency?]
+
+---
+
+## 2. Solution
+
+### What We're Building
+[3-5 bullet points describing the solution at a level an engineer can estimate]
+
+### What's NOT in Scope
+[Explicit list of what this version does NOT include]
+
+### User Flow
+[Step-by-step of the primary user journey, or a simple diagram]
+
+---
+
+## 3. Success Metrics
+
+| Metric | Baseline | Target | Measurement Method |
+|--------|----------|--------|-------------------|
+| [Primary metric] | [Current value] | [Target value] | [How we measure] |
+| [Secondary metric] | [Current value] | [Target value] | [How we measure] |
+
+**Guardrails:** [Metrics that should NOT degrade — e.g., page load time, error rate]
+
+---
+
+## 4. Requirements
+
+### Functional Requirements
+- [Requirement 1: specific, testable behavior]
+- [Requirement 2]
+- [Requirement 3]
+
+### Edge Cases
+- [What happens when X?]
+- [What if the user does Y?]
+- [How does this interact with Z?]
+
+### Non-Functional Requirements
+- **Performance:** [Response time, throughput expectations]
+- **Compatibility:** [Platforms, browsers, integrations]
+- **Data:** [Storage, migration, privacy considerations]
+
+---
+
+## 5. Risks & Dependencies
+
+| Risk | Likelihood | Impact | Mitigation |
+|------|-----------|--------|------------|
+| [Risk 1] | Low/Med/High | Low/Med/High | [What we'll do about it] |
+| [Risk 2] | Low/Med/High | Low/Med/High | [What we'll do about it] |
+
+**Dependencies:**
+- [Team/system dependency and its status]
+
+---
+
+## 6. Timeline & Rollout
+
+| Phase | What | Duration |
+|-------|------|----------|
+| Design | [Scope] | [X days/weeks] |
+| Development | [Scope] | [X sprints] |
+| Testing | [QA, beta] | [X days/weeks] |
+| Rollout | [Strategy: phased, flag, full] | [X days/weeks] |
+
+**Rollback plan:** [How we revert if something goes wrong]
+```
+
+---
+
+## Quality Checklist
+
+Before finalizing:
+
+- [ ] Problem is validated with data, not assumptions
+- [ ] Solution is specific enough to estimate effort
+- [ ] Success metrics have baselines and targets
+- [ ] Scope out is explicit (what we're NOT doing)
+- [ ] Edge cases are identified
+- [ ] Risks have mitigations
+- [ ] Timeline is realistic given team capacity
+
+---
+
+**Save as:** `documents/PRD-[feature-name]-[YYYY-MM-DD].md`

@@ -4,7 +4,7 @@ alwaysApply: false
 ---
 # Roadmap Template Instructions
 
-Be sure to use @product-context.mdc data for initial context.
+Be sure to use `product-context.mdc` data for initial context.
 
 Use markdown formatting with short bullets for each item.
 

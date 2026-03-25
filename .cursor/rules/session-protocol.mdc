@@ -4,97 +4,62 @@ alwaysApply: true
 ---
 # Session Protocol
 
-Protocolo silencioso executado na primeira interação de cada conversa.
+> **Editor note:** This is the canonical source. For editors without `.mdc` support, `CLAUDE.md` references this file.
 
-## Session Start (silencioso)
+Silent protocol executed on the first interaction of each conversation.
 
-Na primeira resposta de cada conversa, verificar silenciosamente:
+## Session Start (silent)
 
-1. **Staleness de tasks** — Ler `to_do's/tasks.md`, identificar P1 pendentes há >5 dias → flag ⏰
-2. **Staleness de commitments** — Ler `to_do's/commitments.md`, identificar commitments >3 dias sem update → flag ⏰
-3. **Briefing do dia** — Verificar se `to_do's/briefings/YYYY-MM-DD.md` existe para hoje; se não, sugerir morning briefing
+On the first response of each conversation, silently execute two phases:
 
-**Regras:**
-- Nunca bloquear o pedido do usuário — responder primeiro, appendar alertas ao final
-- Máximo 3 alertas por sessão (evitar ruído)
-- Se nenhum alerta, não mencionar — silêncio é o comportamento padrão
-- Não executar se o primeiro pedido já é "morning briefing" ou "daily review" (os skills já cobrem staleness)
+### Phase 1: Load Strategic Context (silent, no output)
 
-**Formato dos alertas:**
+Silently read these files to establish strategic awareness for the entire conversation:
+
+1. `global-context/shared/pillars.md` — know the strategic pillars (if exists)
+2. `to_do's/week-priorities.md` — know the current week's Top 3 (if exists)
+3. `pm-progress.json` — know active initiatives and their phases (metadata only)
+
+**Purpose:** Every conversation should be strategically aware. This context informs task prioritization, document alignment, and coaching suggestions without the user needing to provide it.
+
+**Rules:** Load silently. Never mention what was loaded. If files don't exist, skip gracefully.
+
+### Phase 2: Staleness Checks (alert only if issues found)
+
+1. **Incomplete onboarding** — Check if `to_do's/learnings/onboarding-state.json` exists with `"status": "in_progress"`. If so, flag with the last completed step so the user can resume.
+2. **Task staleness** — Read `to_do's/tasks.md`, identify P1 tasks pending >5 days -> flag
+3. **Commitment staleness** — Read `to_do's/commitments.md`, identify commitments >3 days without update -> flag with person name and original context
+4. **Initiative staleness** — Read `pm-progress.json`, identify `in_progress` initiatives where metadata `last_updated` is >7 days ago -> flag with current phase
+5. **Today's briefing** — Check if `to_do's/briefings/YYYY-MM-DD.md` exists for today; if not, suggest morning briefing
+
+**Rules:**
+- Never block the user's request — respond first, append alerts at the end
+- Maximum 3 alerts per session (avoid noise — prioritize by severity)
+- If no alerts, don't mention — silence is the default behavior
+- Don't execute if the first request is already "morning briefing" or "daily review" (skills already cover staleness)
+
+**Alert format:**
 
 ```
 ---
-⏰ **Atenção rápida:**
-- Task "X" pendente há 7 dias (P1)
-- Commitment "Y" para Fulano sem update há 4 dias
-- Briefing de hoje ainda não foi feito — rodar morning briefing?
+**Quick attention:**
+- Onboarding started but not finished — say "/start" to pick up where you left off
+- Task "X" pending for 7 days (P1)
+- Commitment "Y" without update for 4 days (owed to [Person])
+- Initiative "Z" without progress for 12 days (phase: requirements)
+- Today's briefing not done yet — run morning briefing?
 ```
-
-## Feature Discovery (primeira interação da semana)
-
-Na primeira interação de cada **semana** (segunda-feira, ou primeiro uso da semana), verificar silenciosamente:
-
-1. Ler `to_do's/learnings/usage-log.md`
-2. Identificar templates, skills, reviewers ou frameworks **nunca usados** nos últimos 30 dias
-3. Sugerir **1 item** que seria útil baseado no trabalho recente do usuário
-
-**Maturity Path (do básico ao avançado):**
-
-| Tier | Itens | Pré-requisito |
-|------|-------|---------------|
-| **Tier 1 (Core)** | PRD, One-Pager, Morning Briefing, Meeting Notes | Nenhum |
-| **Tier 2 (Analysis)** | RICE, Risk Analysis, Multi-perspective Review, Daily Review | Já usou Tier 1 |
-| **Tier 3 (Strategic)** | Epic Plan, Roadmap, KPI-Revenue, Career Review, Weekly Review | Já usou Tier 2 |
-| **Tier 4 (Advanced)** | Lean Canvas, Positioning, User Journey, Competitor Analysis, Metrics Analyzer | Já usou Tier 3 |
-
-**Formato:**
-
-```
-💡 **Dica da semana:** Você ainda não experimentou [template/skill]. [1 frase explicando por que seria útil dado o que você fez recentemente]. Quer tentar?
-```
-
-**Regras:**
-- Máximo 1 sugestão por semana
-- Não sugerir se o usuário está claramente no meio de algo urgente
-- Não repetir a mesma sugestão em semanas consecutivas
-- Se o usage-log não existe ou está vazio, sugerir começar por Tier 1
-- Skip: se usuário disser "skip dicas" → não sugerir nesta semana
-
-## Session Continuity
-
-Restaurar contexto da sessão anterior para evitar "começar do zero":
-
-1. **Ler última entrada** de `to_do's/session-log.md` (se existir)
-2. **Contexto útil inclui:** documento em progresso, decisão pendente, thread de discussão aberta
-3. **Ao final de sessões longas** (ou no daily review), registrar nova entrada no topo do session-log:
-
-```markdown
-## YYYY-MM-DD HH:MM
-
-**Trabalhando em:** [documento/feature/análise em andamento]
-**Decisões pendentes:** [escolhas que precisam de input ou follow-up]
-**Próximos passos:** [o que fazer na próxima sessão]
-**Contexto relevante:** [1-2 linhas de contexto que seria perdido]
-```
-
-**Regras:**
-- Só registrar se houve trabalho substantivo (não registrar sessões de 1 pergunta)
-- Máximo 5 entradas no session-log (ao atingir, remover as mais antigas)
-- Na restauração, mencionar brevemente: "Continuando de onde paramos: [contexto]" — não reproduzir o log inteiro
-- Se o session-log está vazio ou não existe, seguir normalmente sem mencionar
 
 ## Tool Availability (Graceful Degradation)
 
-Quando um MCP falha ou está indisponível, nunca travar o workflow. Informar brevemente e oferecer alternativa.
+When an MCP fails or is unavailable, never block the workflow. Briefly inform and offer alternative.
 
 | MCP | Fallback |
 |-----|----------|
-| Fireflies | Pedir transcript colado manualmente ou arquivo |
-| Jira (Atlassian MCP) | Gerar conteúdo de ticket em markdown para criação manual |
-| Slack MCP | Gerar mensagem formatada para copy-paste |
-| Google Docs/Sheets | Trabalhar com markdown local equivalente |
-| Figma | Descrever componentes textualmente |
-| Databricks | Mostrar comando `databricks auth login --host <YOUR_HOST> --profile databricks_mcp` |
-| OpenMetadata | Usar tabela de known tables do data-excellence-tools; informar que metadata enriquecida não está disponível |
+| Meeting transcription (Fireflies, etc.) | Ask for transcript pasted manually or as file |
+| Project tracker (Jira, Linear, etc.) | Generate ticket content in markdown for manual creation |
+| Chat (Slack, etc.) | Generate formatted message for copy-paste |
+| Docs/Sheets | Work with local markdown equivalent |
+| Design tool (Figma, etc.) | Describe components textually |
 
-**Regra:** Informar o fallback em uma linha. Não pedir desculpas nem explicar detalhes técnicos do erro.
+**Rule:** Inform the fallback in one line. Don't apologize or explain technical error details.

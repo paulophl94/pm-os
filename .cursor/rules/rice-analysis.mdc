@@ -26,7 +26,7 @@ This template can help prioritize *up to 10* feature ideas at a time.
 
 If they provided more than 10, inform them you'll take the first 10 only.
 
-Be sure to use @product-context.mdc data for initial context.
+Be sure to use `product-context.mdc` data for initial context.
 
 ---
 

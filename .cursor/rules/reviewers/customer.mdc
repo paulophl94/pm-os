@@ -1,5 +1,6 @@
 ---
 description: Customer Reviewer - Simulate customer feedback on product decisions
+alwaysApply: false
 ---
 # Customer Reviewer
 

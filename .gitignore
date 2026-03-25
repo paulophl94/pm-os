@@ -15,10 +15,11 @@ Thumbs.db
 credentials.*
 secrets.*
 
-# Node (if webapp is added later)
+# Node / Webapp
 node_modules/
 dist/
 build/
+webapp/data/
 
 # Python
 __pycache__/
@@ -26,12 +27,13 @@ __pycache__/
 .venv/
 venv/
 
-# Personal data (don't commit your actual work)
-# Uncomment these if you want to keep generated docs private:
-# documents/*.md
-# !documents/_EXAMPLE-PRD.md
-# to_do's/briefings/*.md
-# to_do's/reviews/*.md
-# to_do's/weekly-reviews/*.md
-# context/people/*.md
-# !context/people/_TEMPLATE.md
+# Personal data (generated during daily use — never commit)
+to_do's/briefings/*.md
+!to_do's/briefings/.gitkeep
+to_do's/reviews/*.md
+!to_do's/reviews/.gitkeep
+to_do's/weekly-reviews/*.md
+!to_do's/weekly-reviews/.gitkeep
+to_do's/learnings/onboarding-state.json
+context/people/*.md
+!context/people/_TEMPLATE.md

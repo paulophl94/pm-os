@@ -1,19 +1,20 @@
 # Tasks
 
-**Updated:** <!-- Auto-updated by morning briefing -->
+**Updated:** <!-- YYYY-MM-DD -->
 
 ---
 
 ## In Progress
-<!-- What you're working on right now -->
 
 ## Today - P1 (High Priority)
-<!-- Max 3 P1 per day (2 if many meetings) -->
+<!-- Max 3 P1 tasks per day (2 if many meetings) -->
+<!-- Format: - [ ] Task description (^pm-YYYYMMDD-NNN) [Pillar: Name] -->
 
 ## Today - P2 (Medium Priority)
+<!-- Important but not urgent -->
 
 ## To Schedule
-<!-- Meetings and calls to set up -->
+<!-- Tasks that need a time slot but aren't for today -->
 
 ## Completed Today
-<!-- Move completed tasks here -->
+<!-- Format: - [x] Task description (^pm-YYYYMMDD-NNN) ✅YYYY-MM-DD -->

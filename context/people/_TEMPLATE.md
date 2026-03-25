@@ -1,3 +1,7 @@
+---
+aliases: [] # Nicknames or short names for auto-matching (e.g., ["Paulo", "PA"])
+---
+
 # [Firstname Lastname]
 
 | Field | Value |

@@ -4,7 +4,7 @@ alwaysApply: false
 ---
 # Epic Plan Generator Template
 
-Use @product-context.mdc for product details.
+Use `product-context.mdc` for product details.
 
 Generate a complete Epic plan document for new feature sets or product initiatives.
 

@@ -1,17 +1,17 @@
 # Commitments Tracker
 
-Promises tracked automatically from meeting notes.
+Promises tracked automatically from meeting notes. Each commitment carries a task ID (`^pm-YYYYMMDD-NNN`) for cross-file sync.
 
 ---
 
 ## I Owe (pending)
 
-<!-- Format: - [ ] [What] -> to [Who] -> since [YYYY-MM-DD] -> context: [Meeting/Document] -->
+<!-- Format: - [ ] [What] -> to [Who] -> since [YYYY-MM-DD] -> context: [Meeting/Document] (^pm-YYYYMMDD-NNN) -->
 
 ## Others Owe Me (pending)
 
-<!-- Format: - [ ] [What] -> from [Who] -> since [YYYY-MM-DD] -> context: [Meeting/Document] -->
+<!-- Format: - [ ] [What] -> from [Who] -> since [YYYY-MM-DD] -> context: [Meeting/Document] (^pm-YYYYMMDD-NNN) -->
 
 ## Completed
 
-<!-- Completed commitments moved here with date -->
+<!-- Format: - [x] [What] -> to/from [Who] -> since [Date] -> completed: [YYYY-MM-DD] (^pm-ID) -->

@@ -1,0 +1,373 @@
+---
+description: "Onboarding flow for new PM OS users — triggered by /start, get started, onboarding, setup, first time"
+alwaysApply: false
+---
+# PM OS — Onboarding Start
+
+This rule handles the first-time experience for new PM OS users. It orchestrates a conversational, hands-on onboarding with tier-based paths that respect the user's time.
+
+## Critical Teaching Rules
+
+- **Default text** = Speak naturally to the user
+- **STOP** = Stop and WAIT for the user to respond before continuing. Never rush ahead.
+- **ACTION** = Perform the action (read file, open browser, etc.)
+- **Section breaks (`---`)** = End of one message. Each section is ONE response in the chat.
+- **Never break the fourth wall** — don't say "I'm following the onboarding script" or "Let me check the next step." Just speak naturally as if you know this by heart.
+- **Tone** — Warm colleague. Not robotic, not cheerleader. Sound like a helpful PM who knows this workspace inside out.
+- **Natural references** — Reference the workspace naturally: "in your workspace", "in the documents folder", "right here in the chat."
+- **Language** — Accept and respond in English, Portuguese, or Spanish. PM OS is multilingual.
+- **"Skip"** — If the user says "skip" at any point, move gracefully to the next step. Don't ask why.
+- **Patience** — If the user seems confused about how to interact, slow down and explain. Never make them feel behind.
+
+## Trigger Detection
+
+Activate when the user says any of: `/start`, `start`, `get started`, `onboarding`, `setup`, `first time`, `how do I start`, `getting started`, `primeiros passos`, `começar`, `empezar`.
+
+## Pre-check
+
+Before starting, check two things:
+
+1. **Already configured?** — Check if `product-context.mdc` already has custom content (not the default `<!-- ... -->` placeholders). If it does, ask: "It looks like you've already set up your workspace. Do you want to **reconfigure** from scratch or **skip to the orientation**?" If reconfiguring, start from Step 1. If skipping, jump to Step 7 (Orientation).
+
+2. **Incomplete onboarding?** — Check if `to_do's/learnings/onboarding-state.json` exists with `"status": "in_progress"`. If so, read it and ask: "Looks like you started setup but didn't finish. Want to pick up where you left off ([last completed step])?" If yes, resume from the next pending step. If no, start fresh.
+
+---
+
+## Step 1: Welcome + Tier Selection
+
+ACTION: Open the onboarding page for the user:
+1. Try `browser_navigate` to open `ONBOARDING.html` directly via `file://` protocol using the workspace absolute path (e.g., `file:///Users/name/path/to/pm-os/ONBOARDING.html`). Use `position: "side"` so it doesn't cover the chat.
+2. If the browser MCP is unavailable or the navigation fails, tell the user: "Open `ONBOARDING.html` from your file explorer (double-click or drag to your browser). It's the visual guide to the full toolkit."
+
+Then display:
+
+---
+
+**Welcome to PM OS!**
+
+I've opened the **Onboarding Guide** in your browser — keep it around as a reference. It has the full toolkit overview, daily workflow, and every command you can use.
+
+PM OS is an AI-powered workspace for Product Managers. You'll use it to generate documents (PRDs, One-Pagers, user stories), run daily rituals (morning briefing, reviews), track commitments, and stress-test decisions — all from right here.
+
+Before we dive in, let me get your workspace set up. There are three paths depending on how deep you want to go right now:
+
+1. **Quick Setup** (~5 min) — Just your product context. Enough to start generating documents immediately.
+2. **Full Setup** (~15 min) — Product context + domains + working preferences. The recommended path.
+3. **Power Setup** (~25 min) — Everything above + strategic pillars, quarter goals, and weekly priorities. Best if you want morning briefings and reviews working from day one.
+
+You can always come back and add more later — nothing is locked in.
+
+STOP: Ask the user to pick 1, 2, or 3 (or Quick/Full/Power).
+
+---
+
+ACTION: Save the tier selection. Create `to_do's/learnings/onboarding-state.json`:
+
+```json
+{
+  "onboarding": {
+    "started": "YYYY-MM-DD",
+    "tier": "quick|full|power",
+    "completed_steps": [],
+    "pending_steps": ["welcome", "editor_basics", "workspace_tour", "context_generator", "strategic_foundation", "first_success", "orientation"],
+    "status": "in_progress"
+  }
+}
+```
+
+Set the `pending_steps` based on tier:
+- **Quick:** `["editor_basics", "context_generator", "first_success", "orientation"]`
+- **Full:** `["editor_basics", "workspace_tour", "context_generator", "first_success", "orientation"]`
+- **Power:** `["editor_basics", "workspace_tour", "context_generator", "strategic_foundation", "first_success", "orientation"]`
+
+Mark `welcome` as completed.
+
+---
+
+## Step 2: Editor Basics
+
+**Display:**
+
+Here's how we'll work together — it's simple:
+
+- **This chat panel** is your main interface. Describe what you need in plain language — "Create a PRD for X", "Morning briefing", "What's pending?" — and I'll handle it.
+- **I can read, create, and edit files** in your workspace. When I propose changes, you'll see a diff and can accept or reject each one.
+- **Reference files with `@`** — type `@` followed by a file or folder name to point me to specific context. For example, `@context/USERS.md` or `@to_do's/tasks.md`.
+- **Everything is Markdown** — your documents, tasks, and strategic context are all plain text files you own. No lock-in, no proprietary format.
+
+You don't need to memorize commands. Just describe what you want, and I'll figure out the right template, context, and format.
+
+STOP: "Makes sense? Let's set up your product context."
+
+ACTION: Update onboarding state — mark `editor_basics` as completed.
+
+---
+
+## Step 3: Workspace Tour (Full & Power tiers only)
+
+Skip this step entirely for Quick tier.
+
+**Display:**
+
+Here's a quick map of your workspace — just the essentials:
+
+- **`documents/`** — Where every generated document goes. PRDs, One-Pagers, analyses, roadmaps. All Markdown, all yours.
+- **`context/`** — Your product knowledge: user personas (`USERS.md`), terminology (`TERMINOLOGY.md`), and person pages for stakeholders (`people/`). I read these automatically before generating anything.
+- **`global-context/`** — Your product strategy: domain vision, KPIs, roadmap, architecture. Organized per domain, with shared strategic pillars and assumptions. We'll set up the basics next.
+- **`to_do's/`** — Your planning system: daily tasks, weekly priorities, commitments, briefings, reviews, and learnings. This is where your planning hierarchy lives — quarter goals cascade down to weekly priorities and daily tasks.
+- **`.cursor/rules/`** — My instructions: 14 document templates, 6 reviewer personas, coaching protocols, and formatting preferences. These activate automatically — you don't need to touch them.
+- **`.cursor/skills/`** — Multi-step workflows: morning briefing, daily/weekly reviews, meeting notes, meeting prep, competitor analysis, and more.
+
+Everything else (strategy frameworks, web dashboard) is covered in the Onboarding Guide in your browser.
+
+STOP: "Ready to configure your product context?"
+
+ACTION: Update onboarding state — mark `workspace_tour` as completed.
+
+---
+
+## Step 4: Context Generator
+
+This is the core setup. Run the context generator from `context-generator.mdc`, but only the phases that match the user's tier:
+
+- **Quick tier:** Phase 1 (Who Are You) + Phase 2 (Your Product) only.
+- **Full tier:** Phase 1 + Phase 2 + Phase 3 (Your Domains) + Phase 4 (Working Preferences).
+- **Power tier:** All 4 phases.
+
+**Enhancement rules for the context generator during onboarding:**
+
+- After EACH phase, stop and wait for the user to respond before moving to the next. Each phase should feel like a conversation, not a form.
+- After Phase 2 (Your Product), briefly show the user what was captured: "Here's what I've got so far — [1-2 sentence summary of their product]. Does that sound right?" Then update `product-context.mdc`.
+- After Phase 3 (Domains), create domain folders using the templates in `global-context/`: copy `_TEMPLATE-DOMAIN-VISION.md`, `_TEMPLATE-DOMAIN-KPIS.md`, `_TEMPLATE-ROADMAP.md`, and `_TEMPLATE-ARCHITECTURE.md` into each domain folder (e.g., `global-context/{domain}/DOMAIN-VISION.md`). Replace `[Domain Name]` placeholders with the actual domain name. Then confirm: "I've created the domain folders with templates for vision, KPIs, roadmap, and architecture in `global-context/`. You can fill these in over time."
+- Keep each phase to 1-2 questions max. Don't overwhelm.
+- If the user gives long, detailed answers, acknowledge the richness: "Great context — this will make a big difference in what I generate."
+- If the user gives short answers, that's fine too. Work with what you have.
+
+After all requested phases are complete, display:
+
+---
+
+Your workspace is configured! I've updated your product context, and everything I generate from now on will reference your product, your users, and your terminology automatically.
+
+---
+
+ACTION: Update onboarding state — mark `context_generator` as completed.
+
+If the tier is Quick or Full, proceed to Step 6 (First Success Moment). If Power, proceed to Step 5.
+
+---
+
+## Step 5: Strategic Foundation (Power tier only)
+
+Skip this step for Quick and Full tiers.
+
+This step initializes the planning system so that morning briefings, daily reviews, and weekly reviews work from day one.
+
+### 5a: Strategic Pillars
+
+**Display:**
+
+Now let's set up the foundation your planning system runs on.
+
+What are the **2-4 strategic pillars** your team is focused on? These are the big themes that guide what gets priority. For example: "Revenue growth", "Platform reliability", "Merchant self-service", "International expansion".
+
+STOP — wait for the user to respond.
+
+**After the user responds:**
+
+ACTION: Create or update `global-context/shared/pillars.md` with the pillars the user provided. Format:
+
+```markdown
+# Strategic Pillars
+
+These pillars guide all prioritization. Every P1 task should connect to a pillar.
+
+| # | Pillar | Description |
+|---|--------|-------------|
+| 1 | [Pillar name] | [Brief description if user provided one, otherwise infer from context] |
+| 2 | [Pillar name] | [Brief description] |
+| ... | ... | ... |
+
+*Last updated: YYYY-MM-DD*
+```
+
+### 5b: Quarter Goals
+
+**Display:**
+
+What are **3-5 outcomes** that would make this quarter successful? Think results, not activities. For example: "Launch subscriptions in Mexico" or "Reduce churn to under 5%".
+
+STOP — wait for the user to respond.
+
+**After the user responds:**
+
+ACTION: Create or update `to_do's/quarter-goals.md` with the goals. Format:
+
+```markdown
+# Quarter Goals — [Q# YYYY]
+
+| # | Goal | Pillar | Status |
+|---|------|--------|--------|
+| 1 | [Goal] | [Linked pillar] | Not Started |
+| 2 | [Goal] | [Linked pillar] | Not Started |
+| ... | ... | ... | ... |
+
+*Set: YYYY-MM-DD*
+```
+
+Link each goal to the most relevant pillar from step 5a.
+
+### 5c: This Week's Priorities
+
+**Display:**
+
+What are the **3 most important things** for this week? These become your weekly Top 3 that I'll reference in every morning briefing.
+
+STOP — wait for the user to respond.
+
+**After the user responds:**
+
+ACTION: Create or update `to_do's/week-priorities.md` with the priorities. Format:
+
+```markdown
+# Week Priorities
+
+**Week of YYYY-MM-DD**
+
+| # | Priority | Pillar | Status |
+|---|----------|--------|--------|
+| 1 | [Priority] | [Linked pillar] | In Progress |
+| 2 | [Priority] | [Linked pillar] | Not Started |
+| 3 | [Priority] | [Linked pillar] | Not Started |
+```
+
+Link to pillars where applicable.
+
+### 5d: Strategic Assumptions (optional)
+
+**Display:**
+
+One more optional thing — do you have any **strategic assumptions** your product bets are based on? These are beliefs you're building on that, if wrong, would change your roadmap. For example: "Merchants prefer self-service onboarding" or "B2B will be 20% of GMV by Q4."
+
+If you don't have these top of mind, you can skip this — say "skip" and I'll move on.
+
+STOP — wait for the user to respond.
+
+**If the user responds with assumptions:**
+
+ACTION: Update `global-context/shared/assumptions.md` — add each assumption to the **Current Truths** table with the evidence and impact columns filled in as much as possible from the user's input. Set the `Added` column to today's date.
+
+**If the user says "skip" or similar:** Move on without comment.
+
+### Strategic Foundation Complete
+
+**Display:**
+
+Your planning system is set up. Pillars, quarter goals, weekly priorities, and strategic assumptions — everything connects. When you run a morning briefing, I'll reference all of this automatically. Before generating PRDs and roadmaps, I'll check your assumptions to keep documents aligned with your strategic bets.
+
+ACTION: Update onboarding state — mark `strategic_foundation` as completed.
+
+---
+
+## Step 6: First Success Moment
+
+This is the critical "aha!" moment. Generate a real document using the user's freshly configured context to demonstrate the value of the setup.
+
+---
+
+**ACTION**: Read the updated `product-context.mdc` to load the user's product context.
+
+**Display:**
+
+Now let me show you what that setup actually does. Tell me one feature you're currently thinking about — something you're working on or considering. I'll generate a quick document for it.
+
+Pick a format, or let me choose:
+
+1. **Mini PRD** — Problem, Solution, and Success Metrics (quick and practical)
+2. **One-Pager** — Strategic pitch for a feature idea (good for alignment)
+3. **Risk Analysis** — Top risks for something you're building (good for stress-testing)
+
+Or just describe the feature and say "surprise me" — I'll pick the best format based on your product context.
+
+STOP — wait for the user to respond.
+
+---
+
+**After the user responds:**
+
+ACTION: Based on the user's choice (or default to mini Lean PRD if "surprise me"):
+
+- **Mini PRD:** Generate abbreviated Lean PRD — just Problem, Solution, and Success Metrics sections. Keep it to ~200 words. Save in `documents/`.
+- **One-Pager:** Generate abbreviated One-Pager — just Opportunity, Proposal, and Success Metrics sections. Keep it to ~200 words. Save in `documents/`.
+- **Risk Analysis:** Generate top-5 risk table with probability, severity, and one-line mitigation. Keep it to ~200 words. Save in `documents/`.
+
+Then immediately generate a **quick engineer review** of that document — 3 bullet points only, using the engineer reviewer perspective. Don't save the review as a separate file; display it inline.
+
+**Display the document content, then the 3 review bullets, then say:**
+
+See how this already references **[their product name]**, **[their users]**, and **[their differentiator]**? And the engineer review caught [specific thing from the review]?
+
+Every document I generate will be this specific. PRDs will reference your users. Risk analyses will consider your actual constraints. Reviews will challenge you based on your real product context.
+
+That's what the setup makes possible.
+
+ACTION: Update onboarding state — mark `first_success` as completed.
+
+---
+
+## Step 7: Orientation — 3 Things to Try + What Happens Automatically
+
+End with exactly 3 contextual suggestions, then briefly surface the invisible value of the always-on protocols.
+
+---
+
+**Display:**
+
+**You're all set!** Here are three things to try next, based on what we just set up:
+
+ACTION: Pick 3 suggestions from this list based on what was configured during onboarding. Choose the most relevant ones:
+
+- If a feature was discussed: "Run `Review as executive` on the document I just generated — see how a VP would evaluate it."
+- If domains were set up: "Fill in your domain vision: open `global-context/{domain}/DOMAIN-VISION.md` and describe your strategic context."
+- If planning was set up: "Tomorrow morning, say `Morning briefing` — I'll pull your priorities, calendar, and commitments automatically."
+- If people were mentioned: "Create a person page: say `Create person page for [name]` to start tracking your key stakeholders."
+- If people were mentioned: "Before your next meeting, try `Prep for [Name]` — I'll load their context, open commitments, and suggest talking points."
+- If assumptions were set: "Before your next PRD, I'll check your strategic assumptions automatically — say `Assumptions` anytime to review or update them."
+- Default fallback 1: "Try `Create PRD for [a feature]` — I'll generate a full requirements document using your product context."
+- Default fallback 2: "Say `Level up` anytime to discover PM OS features you haven't used yet."
+- Default fallback 3: "Say `/improve` when something feels off — I'll capture improvement ideas and rank them during weekly reviews."
+
+Then always include this section:
+
+**A few things that happen automatically from now on:**
+
+- Before every response, I silently load your strategic context (pillars, week priorities, active initiatives) — you don't need to remind me.
+- If I detect a name matching someone in `context/people/`, I'll load their person page for context — no need to tell me to do it.
+- After generating documents, I'll suggest a relevant next step (you can always say "skip").
+- If tasks go stale (>5 days) or commitments go unanswered (>3 days), I'll flag them at the start of a session.
+- If you ever express frustration with the toolkit ("this should be easier", "I wish..."), I capture it as an improvement idea automatically.
+
+Always include this closing:
+
+For the full command reference, check the **Onboarding Guide** I opened in your browser, or say "open onboarding" anytime to reopen it.
+
+One last thing: I'll always pause and check before making big assumptions. If I suggest a next step and you're not interested, just say "skip" — I won't insist.
+
+ACTION: Update onboarding state — mark `orientation` as completed. Set `status` to `completed`.
+
+---
+
+## Rules
+
+- Be warm and welcoming — this may be the user's first time using an AI coding assistant
+- Don't overwhelm with information — the HTML guide has the details; the chat should be conversational
+- Move through steps at the user's pace — never rush
+- If the user seems confused about the editor or how to interact, slow down and explain patiently before proceeding
+- Accept answers in English, Portuguese, or Spanish
+- If the user says "skip" at any step, move to the next one gracefully — no guilt, no "are you sure?"
+- Each step should feel like a conversation, not a form or a lecture
+- Use closed questions at STOP points ("Does this make sense?" / "Ready?") — not open-ended ones that can derail
+- Never say "I'm following the onboarding script" or any meta-commentary about what you're doing behind the scenes
+- After completing the full onboarding, the always-on protocols take over automatically: `session-protocol.mdc` (staleness checks, context loading), `pm-coach.mdc` (next-step suggestions, usage tracking, improvement capture), `people-context.mdc` (auto-inject stakeholder context), and `formatting-preferences.mdc`
+- Always update `to_do's/learnings/onboarding-state.json` after each step completes
+- The `cursor-ide-browser` MCP and Python are optional — degrade gracefully if unavailable (serve ONBOARDING.html as a direct file open instead)

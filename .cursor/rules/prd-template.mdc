@@ -1,8 +1,10 @@
 ---
-description: Product Requirements Document (PRD) Generator
+description: Product Requirements Document (PRD) Generator - Full 15-section version
 alwaysApply: false
 ---
-# PRD Template Instructions
+# PRD Template Instructions (Full)
+
+For a lighter alternative (5 sections), see `lean-prd-template.mdc`.
 
 Before writing the Product Requirements Document, ask clarifying questions:
 
@@ -11,7 +13,7 @@ Before writing the Product Requirements Document, ask clarifying questions:
 
 ONLY THEN, continue with the rest of this document.
 
-Be sure to use @product-context.mdc data for initial context.
+Be sure to use `product-context.mdc` data for initial context.
 
 Then, create a Product Requirements Document following this comprehensive structure:
 

@@ -1,6 +1,7 @@
 # Skill Ratings
 
-Post-execution ratings for skills. Skills with avg rating <3 are surfaced during weekly review.
+Track skill usefulness over time. Rated 1-5 after each execution.
 
-| Date | Skill | Rating (1-5) | Notes |
-|------|-------|--------------|-------|
+| Date | Skill | Rating | Notes |
+|------|-------|--------|-------|
+| | | | |

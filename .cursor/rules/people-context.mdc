@@ -1,0 +1,47 @@
+---
+description: People Context - Auto-inject person page context when stakeholders are mentioned
+alwaysApply: true
+---
+# People Context Auto-Injection
+
+> **Editor note:** This is the canonical source. For editors without `.mdc` support, `CLAUDE.md` references this file.
+
+When a person name matching a file in `context/people/` is mentioned in conversation, in a document being worked on, or in a file being read, **silently load their person page** for additional context.
+
+## Protocol
+
+1. **Detection:** When a person name appears in the current conversation or document, check if `context/people/Firstname-Lastname.md` exists
+2. **Loading:** If found, silently read the person page to inform your response with:
+   - Their role and relationship (internal/external/partner)
+   - Recent meeting history and open items
+   - Communication preferences and key context
+3. **Application:** Use person context to enrich responses — adapt tone, reference past interactions, surface open commitments
+4. **Silence:** Never announce "I loaded person context for X" — just use it naturally
+
+## Matching Rules
+
+- Match full names: "Paulo Amorim" -> `context/people/Paulo-Amorim.md`
+- Match first names when unambiguous (only one person with that first name in the registry)
+- Match aliases defined in person page frontmatter `aliases:` field
+- Case-insensitive matching
+
+## When to Trigger
+
+- User mentions a person by name in conversation
+- A document being generated references a person
+- Meeting notes are being processed (load all participant pages)
+- Morning briefing prep (load pages for meeting attendees)
+- Commitments are being reviewed (load pages for commitment counterparts)
+
+## When NOT to Trigger
+
+- Generic role references ("the engineer", "the designer") without specific names
+- Historical references to people not in the person registry
+- When the user explicitly says they don't need person context
+
+## People Registry
+
+Maintained automatically. When a new person page is created in `context/people/`, add their name here for quick lookup.
+
+<!-- Add entries as: Firstname Lastname | filename | aliases -->
+<!-- Example: Paulo Amorim | Paulo-Amorim.md | Paulo -->

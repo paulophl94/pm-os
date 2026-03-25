@@ -182,7 +182,26 @@ Save to `@to_do's/weekly-reviews/YYYY-WXX.md`:
 *Review feito em: [timestamp]*
 ```
 
-### Step 6: Update Week Priorities
+### Step 6: Assumptions Check (quarterly)
+
+If this is the **last week of a quarter** (weeks 13, 26, 39, 52) or the first review of a new quarter:
+
+1. Read `@global-context/shared/assumptions.md`
+2. Prompt the user: "Quarterly assumption check — are these still valid?"
+3. For each Current Truth and 6-Month Bet, briefly assess if evidence still supports it
+4. Move invalidated assumptions to the "Invalidated" section
+5. Suggest new assumptions based on the quarter's learnings
+
+If not a quarter boundary, skip this step silently.
+
+### Step 7: Toolkit Health
+
+Read `@to_do's/toolkit-improvements.md` and briefly surface:
+- Total improvement ideas captured
+- Top 1-2 by potential impact (if any have been scored)
+- Suggest: "Want to review and implement a toolkit improvement this week?"
+
+### Step 8: Update Week Priorities
 
 **Automatically** update `@to_do's/week-priorities.md`:
 
@@ -190,7 +209,7 @@ Save to `@to_do's/weekly-reviews/YYYY-WXX.md`:
 2. Write the new Top 3 in the main section (from user input or suggested)
 3. Update the week date range and timestamp
 
-### Step 7: Update Quarter Goals
+### Step 9: Update Quarter Goals
 
 **Automatically** update `@to_do's/quarter-goals.md`:
 
@@ -198,7 +217,7 @@ Save to `@to_do's/weekly-reviews/YYYY-WXX.md`:
 2. Update initiative statuses if any changed
 3. Update the "Atualizado" timestamp
 
-### Step 8: Capture Learnings
+### Step 10: Capture Learnings
 
 If the user shared learnings or strategic insights:
 
@@ -244,6 +263,8 @@ Read `@to_do's/learnings/skill-ratings.md` (if exists) and surface skills with a
 > - Toolkit: X melhorias pendentes (top: [top improvement])
 > - Sugestao da semana: experimentar [unused template/skill]
 > - Review salvo em `to_do's/weekly-reviews/YYYY-WXX.md`
+
+**Usage tracking:** Update `@to_do's/learnings/usage-log.md` — increment the "Weekly Review" row count and update "Last Used" date.
 
 ## Tone Guidelines
 

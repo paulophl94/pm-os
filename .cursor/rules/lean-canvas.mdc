@@ -4,7 +4,7 @@ alwaysApply: false
 ---
 # Lean Canvas Template Instructions
 
-Be sure to use @product-context.mdc data for initial context.
+Be sure to use `product-context.mdc` data for initial context.
 
 When creating the Lean Canvas, you can modify responses while thinking through the canvas sequentially. Each section builds on the previous.
 

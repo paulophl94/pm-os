@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PM OS — Onboarding Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Karla:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Karla', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --bg-primary: #08080f;
+  --bg-secondary: #0f0f1a;
+  --bg-card: #151524;
+  --bg-card-hover: #1c1c30;
+  --border: #252540;
+  --text-primary: #e8eaf0;
+  --text-secondary: #8b8fa8;
+  --text-muted: #5a5e78;
+  --accent: #7c5cfc;
+  --accent-dim: rgba(124,92,252,0.12);
+  --accent2: #2dd4bf;
+  --accent2-dim: rgba(45,212,191,0.12);
+  --success: #34d399;
+  --warning: #fbbf24;
+  --error: #f87171;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --max-w: 1120px;
+  --nav-h: 56px;
+}
+[data-theme="light"]{
+  --bg-primary: #f8f9fc;
+  --bg-secondary: #eef0f6;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f3f5fb;
+  --border: #dde0ec;
+  --text-primary: #1a1d2e;
+  --text-secondary: #5c6078;
+  --text-muted: #8b8fa8;
+  --accent: #6343e8;
+  --accent-dim: rgba(99,67,232,0.08);
+  --accent2: #0d9488;
+  --accent2-dim: rgba(13,148,136,0.08);
+}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 24px)}
+body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-primary);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.2}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{font-family:var(--font-mono);font-size:.875em;background:var(--accent-dim);padding:2px 7px;border-radius:4px;color:var(--accent)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:rgba(8,8,15,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,32px);z-index:100;transition:background .3s}
+[data-theme="light"] nav{background:rgba(248,249,252,.85)}
+.nav-logo{font-family:var(--font-display);font-weight:800;font-size:1.1rem;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}
+.nav-logo span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;gap:6px;list-style:none}
+.nav-links a{font-size:.82rem;font-weight:500;color:var(--text-secondary);padding:6px 12px;border-radius:6px;transition:color .2s,background .2s;text-decoration:none}
+.nav-links a:hover,.nav-links a.active{color:var(--text-primary);background:var(--accent-dim)}
+.theme-btn{background:none;border:1px solid var(--border);border-radius:8px;width:36px;height:36px;cursor:pointer;font-size:1.1rem;display:grid;place-items:center;color:var(--text-secondary);transition:border-color .2s,color .2s}
+.theme-btn:hover{border-color:var(--accent);color:var(--accent)}
+.nav-toggle{display:none;background:none;border:none;color:var(--text-primary);font-size:1.3rem;cursor:pointer}
+@media(max-width:860px){
+  .nav-links{position:fixed;top:var(--nav-h);left:0;right:0;background:var(--bg-secondary);border-bottom:1px solid var(--border);flex-direction:column;padding:12px;gap:2px;transform:translateY(-120%);transition:transform .3s;opacity:0;pointer-events:none}
+  .nav-links.open{transform:translateY(0);opacity:1;pointer-events:auto}
+  .nav-toggle{display:block}
+}
+
+/* SECTIONS */
+.section{padding:100px clamp(16px,5vw,32px) 80px;opacity:0;transform:translateY(32px);transition:opacity .6s ease,transform .6s ease}
+.section.visible{opacity:1;transform:translateY(0)}
+.section-inner{max-width:var(--max-w);margin:0 auto}
+.section-label{font-family:var(--font-mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.section-label::before{content:'';width:24px;height:1px;background:var(--accent)}
+.section-title{font-size:clamp(1.75rem,4vw,2.5rem);margin-bottom:16px}
+.section-subtitle{color:var(--text-secondary);font-size:1.05rem;max-width:640px;margin-bottom:48px}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding-top:var(--nav-h)}
+#hero .section-inner{position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:500;color:var(--accent);background:var(--accent-dim);border:1px solid rgba(124,92,252,.2);padding:6px 16px;border-radius:999px;margin-bottom:24px}
+.hero-title{font-size:clamp(3rem,8vw,5.5rem);font-weight:800;letter-spacing:-.03em;line-height:1;margin-bottom:20px}
+.hero-title em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-desc{font-size:clamp(1rem,2vw,1.2rem);color:var(--text-secondary);max-width:560px;margin:0 auto 40px}
+.hero-cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;font-family:var(--font-display);font-weight:600;font-size:.95rem;padding:14px 28px;border-radius:10px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;text-decoration:none}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(124,92,252,.3);text-decoration:none}
+.hero-grid{position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(124,92,252,.06) 1px,transparent 0);background-size:48px 48px;opacity:.6}
+.hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;filter:blur(120px);opacity:.15;pointer-events:none}
+.hero-glow.a{background:var(--accent);top:-20%;left:-10%}
+.hero-glow.b{background:var(--accent2);bottom:-30%;right:-10%}
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--text-muted);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;animation:float 2.5s ease-in-out infinite}
+.scroll-hint::after{content:'↓';font-size:1.1rem}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+/* CARDS */
+.cards-grid{display:grid;gap:16px}
+.cards-grid.cols-2{grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
+.cards-grid.cols-3{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.cards-grid.cols-4{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:border-color .2s,transform .2s,background .2s}
+.card:hover{border-color:var(--accent);background:var(--bg-card-hover);transform:translateY(-2px)}
+.card-icon{font-size:1.6rem;margin-bottom:12px}
+.card-title{font-family:var(--font-display);font-weight:600;font-size:1rem;margin-bottom:6px}
+.card-desc{color:var(--text-secondary);font-size:.9rem}
+.card-meta{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);margin-top:12px}
+.card-cmd{display:inline-block;background:var(--accent-dim);border:1px solid rgba(124,92,252,.15);padding:4px 10px;border-radius:6px;font-family:var(--font-mono);font-size:.75rem;color:var(--accent);margin-top:10px}
+
+/* CURSOR MOCKUP */
+.cursor-mockup{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;max-width:860px;margin:0 auto 48px}
+.cm-titlebar{background:var(--bg-card);padding:10px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);font-size:.78rem;color:var(--text-muted)}
+.cm-dots{display:flex;gap:6px}
+.cm-dots span{width:10px;height:10px;border-radius:50%}
+.cm-dots span:nth-child(1){background:#f87171}
+.cm-dots span:nth-child(2){background:#fbbf24}
+.cm-dots span:nth-child(3){background:#34d399}
+.cm-body{display:grid;grid-template-columns:200px 1fr 260px;min-height:340px}
+@media(max-width:700px){.cm-body{grid-template-columns:1fr;min-height:auto}}
+.cm-panel{padding:16px;border-right:1px solid var(--border);font-size:.78rem;color:var(--text-secondary);overflow-y:auto}
+.cm-panel:last-child{border-right:none;background:rgba(124,92,252,.04)}
+.cm-panel-label{font-family:var(--font-mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.cm-editor-content{display:flex;flex-direction:column;gap:12px;height:100%}
+.cm-editor-placeholder{display:flex;align-items:center;justify-content:center;flex:1;text-align:center;color:var(--text-muted);font-size:.82rem;padding:20px}
+.cm-editor-file{animation:fadeUp .25s ease}
+.cm-editor-file .cm-ef-path{font-family:var(--font-mono);font-size:.7rem;color:var(--accent);background:var(--accent-dim);padding:4px 10px;border-radius:4px 4px 0 0;border-bottom:1px solid var(--border)}
+.cm-editor-file .cm-ef-body{padding:14px;font-size:.82rem;line-height:1.6;color:var(--text-secondary)}
+.cm-editor-file .cm-ef-body strong{color:var(--text-primary);font-weight:600}
+.cm-editor-file .cm-ef-tag{display:inline-block;font-family:var(--font-mono);font-size:.65rem;padding:2px 6px;border-radius:3px;margin-right:4px;margin-top:6px}
+.cm-ef-tag.rule{background:var(--accent-dim);color:var(--accent)}
+.cm-ef-tag.skill{background:var(--accent2-dim);color:var(--accent2)}
+.cm-ef-tag.doc{background:rgba(251,191,36,.1);color:var(--warning)}
+.cm-ef-tag.config{background:rgba(248,113,113,.1);color:var(--error)}
+
+/* File tree */
+.cm-tree{list-style:none;padding:0;margin:0;font-size:.78rem}
+.cm-tree ul{list-style:none;padding-left:14px;margin:0;overflow:hidden;transition:max-height .25s ease}
+.cm-tree li{position:relative}
+.cm-tree-item{display:flex;align-items:center;gap:5px;padding:3px 6px;border-radius:4px;cursor:pointer;user-select:none;white-space:nowrap;transition:background .15s,color .15s}
+.cm-tree-item:hover{background:var(--accent-dim)}
+.cm-tree-item.selected{background:var(--accent-dim);color:var(--accent)}
+.cm-tree-icon{flex-shrink:0;width:14px;text-align:center;font-size:.7rem;opacity:.6}
+.cm-tree-chevron{flex-shrink:0;width:12px;text-align:center;font-size:.55rem;color:var(--text-muted);transition:transform .2s}
+.cm-tree-chevron.open{transform:rotate(90deg)}
+.cm-tree-name{overflow:hidden;text-overflow:ellipsis}
+
+.cm-chat-msg{background:var(--accent-dim);border-radius:8px;padding:10px 14px;font-size:.82rem;margin-bottom:8px;line-height:1.5;color:var(--text-primary)}
+.cm-chat-input{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.82rem;color:var(--text-muted);margin-top:auto}
+
+/* CALLOUT STRIP */
+.callout-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+@media(max-width:860px){.callout-strip{grid-template-columns:1fr;gap:16px}}
+.callout{display:flex;flex-direction:column;gap:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;position:relative;transition:border-color .25s,transform .25s,box-shadow .25s}
+.callout:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 32px rgba(124,92,252,.08)}
+.callout-num{font-family:var(--font-display);font-weight:800;font-size:.85rem;color:#fff;background:var(--accent);width:32px;height:32px;border-radius:8px;display:grid;place-items:center;flex-shrink:0}
+.callout h4{font-family:var(--font-display);font-size:1.05rem;font-weight:700;line-height:1.3;display:flex;align-items:center;gap:6px}
+.callout h4 .callout-sep{color:var(--text-muted);font-weight:400}
+.callout p{font-size:.88rem;color:var(--text-secondary);line-height:1.6}
+.callout kbd{display:inline-block;font-family:var(--font-mono);font-size:.78rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:5px;padding:2px 8px;color:var(--text-primary);box-shadow:0 1px 2px rgba(0,0,0,.1);white-space:nowrap}
+
+/* TALK EXAMPLES */
+.talk-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:40px}
+@media(max-width:700px){.talk-grid{grid-template-columns:1fr}}
+.talk-col h4{font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:16px}
+.talk-example{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;margin-bottom:8px;font-size:.88rem}
+.talk-example .label{font-family:var(--font-mono);font-size:.7rem;color:var(--accent2);margin-bottom:6px}
+
+/* TABS */
+.tabs-bar{display:flex;gap:4px;margin-bottom:32px;overflow-x:auto;padding-bottom:4px}
+.tab-btn{font-family:var(--font-display);font-weight:600;font-size:.85rem;padding:10px 20px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text-secondary);cursor:pointer;white-space:nowrap;transition:all .2s}
+.tab-btn:hover{color:var(--text-primary);border-color:var(--text-muted)}
+.tab-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.tab-count{font-family:var(--font-mono);font-size:.7rem;background:var(--accent-dim);padding:2px 7px;border-radius:4px;margin-left:6px;color:var(--accent)}
+.tab-btn.active .tab-count{background:rgba(255,255,255,.2);color:#fff}
+
+/* REVIEWER CARD */
+.reviewer-card{display:flex;gap:16px;align-items:flex-start}
+.reviewer-avatar{width:42px;height:42px;border-radius:50%;background:var(--accent-dim);display:grid;place-items:center;font-size:1.2rem;flex-shrink:0}
+.reviewer-info{flex:1}
+.reviewer-name{font-weight:600;font-size:.95rem}
+.reviewer-role{font-size:.78rem;color:var(--text-muted);margin-bottom:4px}
+
+/* TIMELINE */
+.timeline{position:relative;max-width:800px;margin:0 auto}
+.tl-track{display:flex;justify-content:space-between;position:relative;padding:0 20px}
+.tl-track::before{content:'';position:absolute;top:24px;left:60px;right:60px;height:2px;background:var(--border)}
+.tl-node{display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;position:relative;z-index:2;flex:1}
+.tl-dot{width:48px;height:48px;border-radius:50%;background:var(--bg-card);border:2px solid var(--border);display:grid;place-items:center;font-size:1.3rem;transition:border-color .3s,background .3s,transform .3s}
+.tl-node:hover .tl-dot,.tl-node.active .tl-dot{border-color:var(--accent);background:var(--accent-dim);transform:scale(1.1)}
+.tl-label{font-family:var(--font-display);font-size:.82rem;font-weight:600;text-align:center}
+.tl-time{font-family:var(--font-mono);font-size:.65rem;color:var(--text-muted)}
+.tl-detail{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-top:32px;display:none}
+.tl-detail.active{display:block;animation:fadeUp .35s ease}
+.tl-detail h4{font-size:1.1rem;margin-bottom:8px}
+.tl-detail p{color:var(--text-secondary);font-size:.92rem;margin-bottom:12px}
+.tl-detail ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.tl-detail li{display:flex;gap:8px;align-items:baseline;font-size:.88rem;color:var(--text-secondary)}
+.tl-detail li::before{content:'→';color:var(--accent);flex-shrink:0}
+@media(max-width:600px){.tl-track{flex-direction:column;gap:16px;align-items:flex-start;padding:0}.tl-track::before{top:0;bottom:0;left:43px;width:2px;height:auto}}
+
+/* PLANNING FLOW */
+.planning-flow{display:flex;flex-direction:column;align-items:center;gap:0;max-width:700px;margin:0 auto}
+.pf-node{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 28px;text-align:center;position:relative;transition:border-color .2s;width:100%;max-width:360px}
+.pf-node:hover{border-color:var(--accent)}
+.pf-node .pf-title{font-family:var(--font-display);font-weight:600;font-size:.95rem}
+.pf-node .pf-file{font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);margin-top:4px}
+.pf-arrow{color:var(--text-muted);font-size:1.2rem;padding:6px 0}
+.pf-branch{display:flex;gap:24px;justify-content:center;width:100%;flex-wrap:wrap}
+.pf-branch .pf-node{max-width:220px;flex:1;min-width:180px}
+.pf-connector{display:flex;gap:0;align-items:center;justify-content:center;color:var(--text-muted);font-size:.8rem;padding:6px 0}
+.pf-connector::before,.pf-connector::after{content:'';height:1px;width:40px;background:var(--border)}
+
+/* TIERS */
+.tiers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;position:relative}
+@media(max-width:800px){.tiers-grid{grid-template-columns:1fr}}
+.tier{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:32px 24px;position:relative;overflow:hidden;transition:border-color .2s,transform .2s}
+.tier:hover{border-color:var(--accent);transform:translateY(-4px)}
+.tier-badge{position:absolute;top:0;right:0;font-family:var(--font-mono);font-size:.65rem;background:var(--accent-dim);color:var(--accent);padding:6px 14px;border-bottom-left-radius:8px}
+.tier-icon{font-size:2rem;margin-bottom:16px}
+.tier h3{font-size:1.15rem;margin-bottom:4px}
+.tier-time{font-family:var(--font-mono);font-size:.78rem;color:var(--accent2);margin-bottom:16px}
+.tier-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.tier-list li{display:flex;gap:8px;align-items:baseline;font-size:.88rem;color:var(--text-secondary)}
+.tier-list li::before{content:'•';color:var(--accent);font-weight:700}
+.tier-arrow{display:none}
+@media(min-width:801px){
+  .tier-arrow{display:grid;place-items:center;position:absolute;top:50%;right:-22px;z-index:2;width:24px;height:24px;background:var(--bg-primary);border:1px solid var(--border);border-radius:50%;color:var(--text-muted);font-size:.7rem;transform:translateY(-50%)}
+}
+
+/* COMMANDS */
+.cmd-controls{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.cmd-search{flex:1;min-width:200px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 16px;font-family:var(--font-body);font-size:.9rem;color:var(--text-primary);outline:none;transition:border-color .2s}
+.cmd-search::placeholder{color:var(--text-muted)}
+.cmd-search:focus{border-color:var(--accent)}
+.cmd-filters{display:flex;gap:4px;flex-wrap:wrap}
+.cmd-filter{font-family:var(--font-display);font-size:.75rem;font-weight:600;padding:8px 14px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text-secondary);cursor:pointer;white-space:nowrap;transition:all .15s}
+.cmd-filter:hover{border-color:var(--text-muted);color:var(--text-primary)}
+.cmd-filter.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.cmd-table{width:100%;border-collapse:separate;border-spacing:0}
+.cmd-table th{font-family:var(--font-display);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);text-align:left;padding:12px 16px;border-bottom:1px solid var(--border);position:sticky;top:var(--nav-h);background:var(--bg-primary);z-index:5}
+.cmd-table td{padding:12px 16px;border-bottom:1px solid var(--border);font-size:.88rem;vertical-align:top}
+.cmd-table tr:hover td{background:var(--bg-card)}
+.cmd-table .cmd-command{font-family:var(--font-mono);font-size:.8rem;color:var(--accent);white-space:nowrap}
+.cmd-table .cmd-cat{font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);background:var(--bg-secondary);padding:3px 8px;border-radius:4px;white-space:nowrap}
+.cmd-empty{text-align:center;padding:48px 16px;color:var(--text-muted)}
+
+/* CTA */
+#start-section{text-align:center;padding-bottom:120px}
+.cta-box{background:linear-gradient(135deg,rgba(124,92,252,.08),rgba(45,212,191,.08));border:1px solid rgba(124,92,252,.2);border-radius:var(--radius);padding:48px 32px;max-width:600px;margin:0 auto}
+.cta-box h3{font-size:1.4rem;margin-bottom:8px}
+.cta-box p{color:var(--text-secondary);margin-bottom:24px}
+.cta-cmd{display:inline-block;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 28px;font-family:var(--font-mono);font-size:1rem;color:var(--accent);letter-spacing:-.01em;cursor:pointer;transition:border-color .2s,background .2s;user-select:all}
+.cta-cmd:hover{border-color:var(--accent);background:var(--accent-dim)}
+.cta-sub{font-size:.82rem;color:var(--text-muted);margin-top:16px}
+
+/* UTILS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.mt-24{margin-top:24px}
+.mt-48{margin-top:48px}
+.text-muted{color:var(--text-secondary)}
+.badge{font-family:var(--font-mono);font-size:.7rem;padding:3px 8px;border-radius:4px;white-space:nowrap}
+.badge-accent{background:var(--accent-dim);color:var(--accent)}
+.badge-teal{background:var(--accent2-dim);color:var(--accent2)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">⬡ <span>PM OS</span></div>
+  <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+  <ul class="nav-links">
+    <li><a href="#cursor">1. What is Cursor</a></li>
+    <li><a href="#day">2. Your Day</a></li>
+    <li><a href="#setup">3. Setup</a></li>
+    <li><a href="#toolkit">4. Toolkit</a></li>
+    <li><a href="#commands">Reference</a></li>
+    <li><a href="#checklist">Checklist</a></li>
+  </ul>
+  <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">☽</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="section visible">
+  <div class="hero-grid"></div>
+  <div class="hero-glow a"></div>
+  <div class="hero-glow b"></div>
+  <div class="section-inner">
+    <div class="hero-badge">Open Source</div>
+    <h1 class="hero-title">PM <em>OS</em></h1>
+    <p class="hero-desc">An AI-powered workspace for Product Managers. Generate documents, run daily rituals, track commitments, and stress-test decisions — all from a single place. No code required.</p>
+    <a href="#cursor" class="hero-cta">Get Started →</a>
+  </div>
+  <div class="scroll-hint">Scroll to explore</div>
+</section>
+
+<!-- WHAT IS CURSOR? -->
+<section id="cursor" class="section">
+  <div class="section-inner">
+    <div class="section-label">Step 1</div>
+    <h2 class="section-title">What is Cursor?</h2>
+    <p class="section-subtitle">Cursor is an AI-native editor — think of it as a text editor with a built-in AI assistant. It reads, creates, and edits files in your workspace. You don't need to know how to code. Just open the chat panel and describe what you need in plain language.</p>
+
+    <div class="cursor-mockup">
+      <div class="cm-titlebar">
+        <div class="cm-dots"><span></span><span></span><span></span></div>
+        PM OS — Cursor
+      </div>
+      <div class="cm-body">
+        <div class="cm-panel" style="padding:12px 8px">
+          <div class="cm-panel-label" style="padding:0 6px">① File Explorer</div>
+          <ul class="cm-tree" id="file-tree"></ul>
+        </div>
+        <div class="cm-panel">
+          <div class="cm-panel-label">② Editor Area</div>
+          <div class="cm-editor-content" id="editor-content">
+            <div class="cm-editor-placeholder">Click a file in the explorer to see what it does.</div>
+          </div>
+        </div>
+        <div class="cm-panel" style="border-right:none">
+          <div class="cm-panel-label">③ Chat Panel</div>
+          <div class="cm-chat-msg">Create a PRD for the new onboarding flow</div>
+          <div class="cm-chat-msg" style="background:var(--accent2-dim)">I'll generate a full PRD aligned with your product vision. Let me read the context first...</div>
+          <div class="cm-chat-input">Type your request here... (⌘L)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout-strip">
+      <div class="callout">
+        <div class="callout-num">1</div>
+        <h4>Chat Panel <span class="callout-sep">—</span> Your main interface</h4>
+        <p>Press <kbd>⌘L</kbd> (Mac) or <kbd>Ctrl+L</kbd> (Windows) to open it. This is where you talk to PM OS. Type what you need in plain language — no special syntax required.</p>
+      </div>
+      <div class="callout">
+        <div class="callout-num">2</div>
+        <h4>Agent Mode <span class="callout-sep">—</span> AI that acts</h4>
+        <p>Unlike a simple chatbot, PM OS can read and create files in your workspace. It loads your product context, understands your strategy, and generates real documents you own.</p>
+      </div>
+      <div class="callout">
+        <div class="callout-num">3</div>
+        <h4>Rules &amp; Skills <span class="callout-sep">—</span> The brain</h4>
+        <p><strong>Rules</strong> are persistent instructions that shape every response (templates, tone, coaching). <strong>Skills</strong> are multi-step workflows (daily briefing, meeting processing). Both live in <code>.cursor/</code> and you can customize them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- A DAY WITH PM OS -->
+<section id="day" class="section">
+  <div class="section-inner">
+    <div class="section-label">Step 2</div>
+    <h2 class="section-title">A Day With PM OS</h2>
+    <p class="section-subtitle">From the first coffee to end-of-day reflection — a daily rhythm that compounds knowledge over time. Click each stage below to see what happens.</p>
+
+    <div class="timeline">
+      <div class="tl-track" id="tl-track"></div>
+      <div id="tl-details"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SETUP -->
+<section id="setup" class="section">
+  <div class="section-inner">
+    <div class="section-label">Step 3</div>
+    <h2 class="section-title">Setup</h2>
+    <p class="section-subtitle">Start light and grow into the full system. You can stop at any tier — each one is useful on its own. Pick the level that fits your needs today.</p>
+
+    <div class="tiers-grid">
+      <div class="tier">
+        <div class="tier-badge">START HERE</div>
+        <div class="tier-icon">📄</div>
+        <h3>Quick Setup</h3>
+        <div class="tier-time">~5 minutes</div>
+        <ul class="tier-list">
+          <li>Product identity (name, model, differentiator)</li>
+          <li>14 document templates (PRD, One-Pager, RICE, etc.)</li>
+          <li>6 multi-perspective reviewers</li>
+          <li>6 strategy frameworks</li>
+          <li>PM coaching (next-step suggestions)</li>
+        </ul>
+        <div class="tier-arrow">→</div>
+      </div>
+      <div class="tier">
+        <div class="tier-icon">🔁</div>
+        <h3>Full Setup</h3>
+        <div class="tier-time">~15 minutes</div>
+        <ul class="tier-list">
+          <li>Everything in Quick, plus:</li>
+          <li>Domain configuration &amp; folder creation</li>
+          <li>Working preferences (language, tone, tools)</li>
+          <li>Morning briefing, daily &amp; weekly reviews</li>
+          <li>Meeting notes with commitment tracking</li>
+          <li>Person pages for stakeholders</li>
+          <li>Session continuity across chats</li>
+        </ul>
+        <div class="tier-arrow">→</div>
+      </div>
+      <div class="tier">
+        <div class="tier-icon">🔗</div>
+        <h3>Power Setup</h3>
+        <div class="tier-time">~25 minutes</div>
+        <ul class="tier-list">
+          <li>Everything in Full, plus:</li>
+          <li>Strategic pillars</li>
+          <li>Quarter goals</li>
+          <li>Weekly priorities (Top 3)</li>
+          <li>Morning briefings work from day one</li>
+          <li>Connect tools (Jira, Slack, Calendar) after setup</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card mt-48" style="max-width:700px;margin-left:auto;margin-right:auto">
+      <div class="card-title">⚡ Quick Start</div>
+      <div class="card-desc">
+        <ol style="display:flex;flex-direction:column;gap:10px;padding-left:20px;margin-top:12px;color:var(--text-secondary)">
+          <li>Download <a href="https://cursor.com" target="_blank" rel="noopener noreferrer">Cursor</a> and install it</li>
+          <li>Clone the repo: <code>git clone https://github.com/paulophl94/pm-os.git</code></li>
+          <li>Open the <code>pm-os</code> folder in Cursor</li>
+          <li>Press <code>⌘L</code> to open the Chat Panel</li>
+          <li>Type: <code>/start</code> — the wizard will ask you to pick a setup tier (Quick 5 min, Full 15 min, or Power 25 min) and guide you from there</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE TOOLKIT -->
+<section id="toolkit" class="section">
+  <div class="section-inner">
+    <div class="section-label">Step 4</div>
+    <h2 class="section-title">The Toolkit</h2>
+    <p class="section-subtitle">14 document templates, 6 review personas, 8 workflow skills, and 6 strategy frameworks — all context-aware. No commands to memorize — just describe what you need in natural language.</p>
+
+    <div class="talk-grid" style="margin-bottom:48px">
+      <div class="talk-col">
+        <h4>🎯 Structured requests</h4>
+        <div class="talk-example"><div class="label">Create a document</div>"Create a PRD for the new onboarding flow"</div>
+        <div class="talk-example"><div class="label">Get feedback</div>"Review this as an engineer"</div>
+        <div class="talk-example"><div class="label">Start your day</div>"Morning briefing" or "What's on today?"</div>
+        <div class="talk-example"><div class="label">Process a meeting</div>"I had a meeting about X, here are the notes"</div>
+        <div class="talk-example"><div class="label">Check tasks</div>"What's pending?" or "Show my to-dos"</div>
+      </div>
+      <div class="talk-col">
+        <h4>💬 Casual and multilingual — works too</h4>
+        <div class="talk-example"><div class="label">Portuguese</div>"Criar PRD para onboarding" / "Gerar One-Pager"</div>
+        <div class="talk-example"><div class="label">Casual</div>"What would an engineer think of this?"</div>
+        <div class="talk-example"><div class="label">Casual</div>"Good morning" / "Começar o dia"</div>
+        <div class="talk-example"><div class="label">With context</div>"Process notes from my sync with the design team"</div>
+        <div class="talk-example"><div class="label">Casual</div>"O que tenho pra fazer?" / "Meus to-do's"</div>
+      </div>
+    </div>
+
+    <div class="card" style="max-width:600px;margin:0 auto 48px;text-align:center">
+      <div class="card-icon">💡</div>
+      <div class="card-title">Pro Tip: Be Specific</div>
+      <div class="card-desc">
+        <strong>Good:</strong> "Create PRD for self-service password reset on mobile"<br>
+        <strong>Vague:</strong> "Create PRD for authentication"<br><br>
+        The more context you give, the better the output. Include the scope, platform, and user segment whenever possible.
+      </div>
+    </div>
+
+    <div class="tabs-bar" id="toolkit-tabs"></div>
+    <div id="toolkit-panels"></div>
+  </div>
+</section>
+
+<!-- COMMAND REFERENCE -->
+<section id="commands" class="section">
+  <div class="section-inner">
+    <div class="section-label">Reference</div>
+    <h2 class="section-title">Command Reference</h2>
+    <p class="section-subtitle">Every command available in PM OS. Use the search box or filter by category to find what you need. Remember: you can also just describe what you want in natural language.</p>
+
+    <div class="cmd-controls">
+      <input type="text" class="cmd-search" id="cmd-search" placeholder="Search commands...">
+      <div class="cmd-filters" id="cmd-filters"></div>
+    </div>
+    <div style="overflow-x:auto">
+      <table class="cmd-table">
+        <thead><tr><th>Command</th><th>Description</th><th>Category</th></tr></thead>
+        <tbody id="cmd-tbody"></tbody>
+      </table>
+    </div>
+    <div class="cmd-empty" id="cmd-empty" style="display:none">No commands match your search.</div>
+  </div>
+</section>
+
+<!-- SETUP CHECKLIST -->
+<section id="checklist" class="section">
+  <div class="section-inner">
+    <div class="section-label">After Setup</div>
+    <h2 class="section-title">Setup Checklist</h2>
+    <p class="section-subtitle">Track what's configured in your workspace. The <code>/start</code> wizard handles the essentials — come back here to see what you can fill in over time.</p>
+
+    <div class="cards-grid cols-2">
+      <div class="card">
+        <div class="card-icon">🎯</div>
+        <div class="card-title">Product Context</div>
+        <div class="card-desc">
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;margin-top:8px;font-size:.88rem;color:var(--text-secondary)">
+            <li>☐ Product Identity (name, model, differentiator)</li>
+            <li>☐ Active Domains (missions, statuses)</li>
+            <li>☐ Working Preferences (language, tone, tools)</li>
+            <li>☐ Terminology glossary</li>
+          </ul>
+        </div>
+        <div class="card-meta">File: <code>.cursor/rules/product-context.mdc</code></div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🧭</div>
+        <div class="card-title">Strategic Foundation</div>
+        <div class="card-desc">
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;margin-top:8px;font-size:.88rem;color:var(--text-secondary)">
+            <li>☐ Strategic pillars (2-4 themes)</li>
+            <li>☐ Quarter goals (3-5 outcomes)</li>
+            <li>☐ Week priorities (Top 3)</li>
+            <li>☐ Strategic assumptions</li>
+          </ul>
+        </div>
+        <div class="card-meta">Folder: <code>global-context/shared/</code> &amp; <code>to_do's/</code></div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌐</div>
+        <div class="card-title">Domain Context</div>
+        <div class="card-desc">
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;margin-top:8px;font-size:.88rem;color:var(--text-secondary)">
+            <li>☐ Domain vision &amp; strategy</li>
+            <li>☐ Domain KPIs &amp; targets</li>
+            <li>☐ Current roadmap</li>
+            <li>☐ Architecture overview</li>
+          </ul>
+        </div>
+        <div class="card-meta">Folder: <code>global-context/{domain}/</code></div>
+      </div>
+      <div class="card">
+        <div class="card-icon">👥</div>
+        <div class="card-title">People &amp; Users</div>
+        <div class="card-desc">
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;margin-top:8px;font-size:.88rem;color:var(--text-secondary)">
+            <li>☐ Key stakeholder person pages</li>
+            <li>☐ User personas</li>
+            <li>☐ Commitment tracking started</li>
+          </ul>
+        </div>
+        <div class="card-meta">Folder: <code>context/people/</code></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT TO DO AFTER SETUP -->
+<section id="after-setup" class="section">
+  <div class="section-inner">
+    <div class="section-label">Next Steps</div>
+    <h2 class="section-title">What To Do After Setup</h2>
+    <p class="section-subtitle">Based on which setup tier you completed, here's where to go next.</p>
+
+    <div class="cards-grid cols-3">
+      <div class="card">
+        <div class="card-icon">📄</div>
+        <div class="card-title">After Quick Setup</div>
+        <div class="card-desc">
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;font-size:.88rem;color:var(--text-secondary)">
+            <li>→ Try <code>Create PRD for [feature]</code></li>
+            <li>→ Try <code>Review as engineer</code></li>
+            <li>→ Fill in domain context when ready</li>
+            <li>→ Re-run <code>/start</code> for Full setup later</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔁</div>
+        <div class="card-title">After Full Setup</div>
+        <div class="card-desc">
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;font-size:.88rem;color:var(--text-secondary)">
+            <li>→ Say <code>Morning briefing</code> tomorrow</li>
+            <li>→ Create person pages for key stakeholders</li>
+            <li>→ Fill in domain vision &amp; KPIs</li>
+            <li>→ Set up quarter goals &amp; pillars</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔗</div>
+        <div class="card-title">After Power Setup</div>
+        <div class="card-desc">
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;font-size:.88rem;color:var(--text-secondary)">
+            <li>→ Run your first <code>Morning briefing</code></li>
+            <li>→ Connect MCPs (Jira, Slack, Calendar)</li>
+            <li>→ Fill in domain roadmap &amp; architecture</li>
+            <li>→ Say <code>Level up</code> to discover more</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GETTING STARTED CTA -->
+<section id="start-section" class="section">
+  <div class="section-inner">
+    <div class="cta-box">
+      <h3>Ready to Start?</h3>
+      <p>Open the Chat Panel in Cursor and type:</p>
+      <div class="cta-cmd">/start</div>
+      <div class="cta-sub">The wizard will ask you to pick a tier — Quick (5 min), Full (15 min), or Power (25 min).<br>You can always upgrade your setup later.</div>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ── THEME ── */
+function toggleTheme(){
+  const html=document.documentElement;
+  const next=html.getAttribute('data-theme')==='dark'?'light':'dark';
+  html.setAttribute('data-theme',next);
+  document.querySelector('.theme-btn').textContent=next==='dark'?'☽':'☀';
+  try{localStorage.setItem('pmos-theme',next)}catch(e){}
+}
+try{const saved=localStorage.getItem('pmos-theme');if(saved){document.documentElement.setAttribute('data-theme',saved);document.querySelector('.theme-btn').textContent=saved==='dark'?'☽':'☀'}}catch(e){}
+
+/* ── SCROLL REVEAL ── */
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.12});
+document.querySelectorAll('.section:not(#hero)').forEach(s=>obs.observe(s));
+
+/* ── ACTIVE NAV ── */
+const sections=[...document.querySelectorAll('.section[id]')];
+const navLinks=[...document.querySelectorAll('.nav-links a')];
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id});
+  navLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+cur)});
+},{passive:true});
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.nav-links').classList.remove('open')));
+
+/* ── DATA: TOOLKIT ── */
+const toolkitData={
+  templates:{label:'Templates',count:14,items:[
+    {icon:'📋',title:'PRD',cmd:'Create PRD for [feature]',desc:'Full PRD with 15 sections — problem, solution, user stories, metrics, and more.'},
+    {icon:'📝',title:'One-Pager',cmd:'Generate One-Pager for [feature]',desc:'Strategic 1-2 page validation document for stakeholder alignment.'},
+    {icon:'👤',title:'User Stories',cmd:'Write user stories for [feature]',desc:'User stories with Gherkin acceptance criteria, ready for dev handoff.'},
+    {icon:'📊',title:'RICE Analysis',cmd:'Prioritize using RICE',desc:'Score features by Reach, Impact, Confidence, Effort with recommendations.'},
+    {icon:'⚠️',title:'Risk Analysis',cmd:'Analyze risks of [feature]',desc:'Risk matrix with probability, severity, and mitigation strategies.'},
+    {icon:'🧩',title:'Lean Canvas',cmd:'Create Lean Canvas for [product]',desc:'9-section strategy canvas: problem, solution, metrics, advantage.'},
+    {icon:'🗺️',title:'Roadmap',cmd:'Create roadmap for [quarter]',desc:'Quarterly strategic plan with themes, milestones, and dependencies.'},
+    {icon:'🏗️',title:'Epic Plan',cmd:'Generate epic plan for [feature]',desc:'Epic structure with sub-epics, scope, and delivery phases.'},
+    {icon:'💰',title:'KPI-Revenue',cmd:'Connect KPIs to revenue',desc:'Link product metrics to business outcomes with North Star mapping.'},
+    {icon:'📢',title:'Status Update',cmd:'Generate status update',desc:'Executive communication for stakeholders — progress, blockers, asks.'},
+    {icon:'🎭',title:'Personas',cmd:'Create personas for [segment]',desc:'Ideal + Skeptical personas with goals, frustrations, and behaviors.'},
+    {icon:'🎯',title:'Positioning',cmd:'Create elevator pitch',desc:'Product positioning statement and JTBD-based pitch.'},
+    {icon:'🛤️',title:'User Journey',cmd:'Map user journey for [flow]',desc:'End-to-end journey map with touchpoints, emotions, and opportunities.'},
+    {icon:'📖',title:'Feature Docs',cmd:'Document feature [name]',desc:'Reverse-engineer documentation from an existing feature.'},
+  ]},
+  reviewers:{label:'Reviewers',count:6,items:[
+    {icon:'⚙️',title:'Engineer',name:'Staff Engineer perspective',cmd:'Review as engineer',desc:'Technical feasibility, edge cases, scalability, and implementation complexity.'},
+    {icon:'📈',title:'Executive',name:'VP Product perspective',cmd:'Review as executive',desc:'Strategic alignment, ROI, resource justification, and market positioning.'},
+    {icon:'🔬',title:'User Researcher',name:'Sr. UX Researcher perspective',cmd:'Review as user researcher',desc:'User need validation, adoption risks, usability, and research gaps.'},
+    {icon:'📉',title:'Data Analyst',name:'Sr. Data Analyst perspective',cmd:'Review as data analyst',desc:'Metrics definition, experiment design, data feasibility, and measurement plans.'},
+    {icon:'🛒',title:'Customer',name:'Multiple user personas',cmd:'Review as customer',desc:'Value clarity and ease of use from the perspective of your product\'s end users.'},
+    {icon:'🤝',title:'Customer Success',name:'CS Team Lead',cmd:'Review as customer success',desc:'Support impact, adoption friction, communication, and customer experience.'},
+  ]},
+  skills:{label:'Skills',count:8,items:[
+    {icon:'☀️',title:'Morning Briefing',cmd:'Morning briefing',desc:'Pulls calendar, meetings, tracker, commitments. Generates Today\'s Three priorities.',meta:'Daily — start of day'},
+    {icon:'🌅',title:'Daily Review',cmd:'Daily review',desc:'Compares planned vs actual, captures learnings, career evidence prompt, saves session.',meta:'Daily — end of day'},
+    {icon:'📊',title:'Weekly Review',cmd:'Weekly review',desc:'Synthesizes the week, evaluates quarter progress, suggests next week\'s Top 3.',meta:'Friday'},
+    {icon:'📝',title:'Meeting Notes',cmd:'Process meeting notes',desc:'Extracts decisions, action items with IDs, updates person pages and commitments.',meta:'After any meeting'},
+    {icon:'🎯',title:'Meeting Prep',cmd:'Prep for meeting with [Name]',desc:'Loads person context, surfaces open commitments, reviews recent interactions, and suggests talking points.',meta:'Before meetings'},
+    {icon:'🔍',title:'Competitor Analysis',cmd:'Analyze competitor [name]',desc:'Web research, feature matrix, battlecard, and strategic implications.',meta:'As needed'},
+    {icon:'📐',title:'Metrics Analyzer',cmd:'Analyze metrics impact of [feature]',desc:'Impact estimation, experiment design, and measurement plan.',meta:'Per feature'},
+    {icon:'🔗',title:'Atlassian Helper',cmd:'Export to Confluence / Create Jira tickets',desc:'Convert documents to Confluence wiki markup or structured Jira epics.',meta:'As needed'},
+  ]},
+  frameworks:{label:'Frameworks',count:6,items:[
+    {icon:'🧭',title:'Rumelt Strategy Kernel',cmd:'Apply Rumelt framework',desc:'Diagnose strategic problems, define guiding policy, plan coherent actions.'},
+    {icon:'💎',title:'Gibson Biddle DHM',cmd:'Apply DHM framework',desc:'Prioritize by Delight, Hard-to-copy, and Margin-enhancing dimensions.'},
+    {icon:'😈',title:'Devil\'s Advocate',cmd:'Stress-test this strategy',desc:'Challenge assumptions, identify blind spots, surface hidden risks.'},
+    {icon:'📏',title:'Impact Estimation',cmd:'Estimate impact of [feature]',desc:'Quantify expected impact with users × rate × lift × value formula.'},
+    {icon:'⚖️',title:'SWOT Analysis',cmd:'SWOT analysis for [product]',desc:'Map strengths, weaknesses, opportunities, and threats.'},
+    {icon:'🎤',title:'Presentation Best Practices',cmd:'Help with presentation',desc:'Action titles, storytelling structure, and slide design patterns.'},
+  ]},
+};
+
+/* Render toolkit tabs and panels */
+const tabsBar=document.getElementById('toolkit-tabs');
+const panelsDiv=document.getElementById('toolkit-panels');
+let firstTab=true;
+for(const[key,data] of Object.entries(toolkitData)){
+  const btn=document.createElement('button');
+  btn.className='tab-btn'+(firstTab?' active':'');
+  btn.dataset.tab=key;
+  btn.innerHTML=`${data.label}<span class="tab-count">${data.count}</span>`;
+  btn.onclick=()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-'+key).classList.add('active');
+  };
+  tabsBar.appendChild(btn);
+
+  const panel=document.createElement('div');
+  panel.className='tab-panel'+(firstTab?' active':'');
+  panel.id='panel-'+key;
+
+  if(key==='reviewers'){
+    panel.innerHTML=`<div class="cards-grid cols-2">${data.items.map(i=>`
+      <div class="card"><div class="reviewer-card">
+        <div class="reviewer-avatar">${i.icon}</div>
+        <div class="reviewer-info">
+          <div class="reviewer-name">${i.title}</div>
+          <div class="reviewer-role">${i.name}</div>
+          <div class="card-desc">${i.desc}</div>
+          <div class="card-cmd">${i.cmd}</div>
+        </div>
+      </div></div>`).join('')}</div>`;
+  } else if(key==='skills'){
+    panel.innerHTML=`<div class="cards-grid cols-3">${data.items.map(i=>`
+      <div class="card">
+        <div class="card-icon">${i.icon}</div>
+        <div class="card-title">${i.title}</div>
+        <div class="card-desc">${i.desc}</div>
+        ${i.meta?`<div class="card-meta"><span class="badge badge-teal">${i.meta}</span></div>`:''}
+        <div class="card-cmd">${i.cmd}</div>
+      </div>`).join('')}</div>`;
+  } else {
+    panel.innerHTML=`<div class="cards-grid cols-3">${data.items.map(i=>`
+      <div class="card">
+        <div class="card-icon">${i.icon}</div>
+        <div class="card-title">${i.title}</div>
+        <div class="card-desc">${i.desc}</div>
+        <div class="card-cmd">${i.cmd}</div>
+      </div>`).join('')}</div>`;
+  }
+  panelsDiv.appendChild(panel);
+  firstTab=false;
+}
+
+/* ── DATA: TIMELINE ── */
+const tlData=[
+  {icon:'☀️',label:'Morning',time:'Start of day',title:'Morning Briefing',desc:'Begin your day with full context — no more 30 minutes of reconstruction.',items:['Calendar and meeting prep loaded','Initiative and project status pulled','Stale commitments flagged (>3 days without update)','Today\'s Three priorities suggested (max 3 P1)','Session context restored from yesterday']},
+  {icon:'📝',label:'During Day',time:'Working hours',title:'Documents, Reviews & Meetings',desc:'Generate and refine documents. Process meetings as they happen.',items:['Create PRDs, One-Pagers, specs with full context','Run multi-perspective reviews (6 personas)','Process meeting notes → auto-update person pages','Track commitments with unique IDs','Use frameworks for strategic decisions']},
+  {icon:'🌅',label:'End of Day',time:'Before closing',title:'Daily Review',desc:'Reflect on what happened. Capture learnings and prep tomorrow.',items:['Compare planned vs actual (Today\'s Three)','Capture learnings and preferences','Career evidence prompt for significant work','Session context saved for tomorrow','Stale tasks and commitments flagged']},
+  {icon:'📊',label:'Friday',time:'End of week',title:'Weekly Review',desc:'Synthesize the week. Set up next week for success.',items:['Week synthesis with patterns identified','Quarter progress evaluation','Top 3 priorities for next week suggested','Toolkit improvements surfaced from backlog','Unused skill recommendation (feature discovery)']},
+];
+
+const tlTrack=document.getElementById('tl-track');
+const tlDetails=document.getElementById('tl-details');
+tlData.forEach((d,i)=>{
+  const node=document.createElement('div');
+  node.className='tl-node'+(i===0?' active':'');
+  node.innerHTML=`<div class="tl-dot">${d.icon}</div><div class="tl-label">${d.label}</div><div class="tl-time">${d.time}</div>`;
+  node.onclick=()=>{
+    document.querySelectorAll('.tl-node').forEach(n=>n.classList.remove('active'));
+    document.querySelectorAll('.tl-detail').forEach(n=>n.classList.remove('active'));
+    node.classList.add('active');
+    document.getElementById('tl-detail-'+i).classList.add('active');
+  };
+  tlTrack.appendChild(node);
+
+  const detail=document.createElement('div');
+  detail.className='tl-detail'+(i===0?' active':'');
+  detail.id='tl-detail-'+i;
+  detail.innerHTML=`<h4>${d.title}</h4><p>${d.desc}</p><ul>${d.items.map(it=>`<li>${it}</li>`).join('')}</ul>`;
+  tlDetails.appendChild(detail);
+});
+
+/* ── DATA: COMMANDS ── */
+const commands=[
+  {cat:'Documents',cmd:'Create PRD for [feature]',desc:'Full PRD with 15 sections'},
+  {cat:'Documents',cmd:'Generate One-Pager for [feature]',desc:'Strategic validation document'},
+  {cat:'Documents',cmd:'Generate Spec for [feature]',desc:'Detailed requirements specification'},
+  {cat:'Documents',cmd:'Write user stories for [feature]',desc:'User stories + Gherkin acceptance criteria'},
+  {cat:'Documents',cmd:'Process research input about [topic]',desc:'Synthesize raw research data'},
+  {cat:'Documents',cmd:'Document feature [name]',desc:'Reverse-engineer feature documentation'},
+  {cat:'Strategy',cmd:'Create roadmap for [quarter]',desc:'Quarterly strategic plan'},
+  {cat:'Strategy',cmd:'Create Lean Canvas for [product]',desc:'9-section strategy canvas'},
+  {cat:'Strategy',cmd:'Create personas for [segment]',desc:'Ideal + Skeptical personas'},
+  {cat:'Strategy',cmd:'Create elevator pitch',desc:'Positioning + JTBD pitch'},
+  {cat:'Strategy',cmd:'Map user journey for [flow]',desc:'End-to-end journey map'},
+  {cat:'Strategy',cmd:'Generate epic plan for [feature]',desc:'Epic structure with sub-epics'},
+  {cat:'Strategy',cmd:'Connect KPIs to revenue',desc:'KPI-revenue linkage + North Star'},
+  {cat:'Analysis',cmd:'Prioritize using RICE',desc:'RICE scoring with recommendations'},
+  {cat:'Analysis',cmd:'Analyze risks of [feature]',desc:'Risk matrix with mitigations'},
+  {cat:'Analysis',cmd:'Analyze metrics impact of [feature]',desc:'Metrics impact + experiment design'},
+  {cat:'Analysis',cmd:'Analyze competitor [name]',desc:'Full competitive analysis + battlecard'},
+  {cat:'Analysis',cmd:'Estimate impact of [feature]',desc:'Quantify expected feature impact'},
+  {cat:'Analysis',cmd:'SWOT analysis for [product]',desc:'Strengths, weaknesses, opportunities, threats'},
+  {cat:'Reviews',cmd:'Review as engineer',desc:'Technical feasibility, edge cases, scalability'},
+  {cat:'Reviews',cmd:'Review as executive',desc:'Strategic alignment, ROI, resource justification'},
+  {cat:'Reviews',cmd:'Review as user researcher',desc:'User need validation, adoption risks'},
+  {cat:'Reviews',cmd:'Review as data analyst',desc:'Metrics definition, experiment design'},
+  {cat:'Reviews',cmd:'Review as customer',desc:'Value clarity from your user personas'},
+  {cat:'Reviews',cmd:'Review as customer success',desc:'Support impact, adoption, customer experience'},
+  {cat:'Reviews',cmd:'Full document review',desc:'All 6 perspectives + consolidated feedback'},
+  {cat:'Workflow',cmd:'Morning briefing',desc:'Full daily briefing with Today\'s Three'},
+  {cat:'Workflow',cmd:'Daily review',desc:'End-of-day reflection + learnings capture'},
+  {cat:'Workflow',cmd:'Weekly review',desc:'Week synthesis + next week\'s priorities'},
+  {cat:'Workflow',cmd:'Process meeting notes',desc:'Extract decisions, action items, update person pages'},
+  {cat:'Workflow',cmd:'Prep for meeting with [Name]',desc:'Load person context, open items, and talking points'},
+  {cat:'Workflow',cmd:'Brief me for [meeting]',desc:'Full meeting prep with relationship context'},
+  {cat:'Workflow',cmd:'Career review',desc:'Synthesize career evidence for self-reviews'},
+  {cat:'Planning',cmd:'Show my to-do\'s',desc:'List P1 and P2 pending tasks'},
+  {cat:'Planning',cmd:'Add task: [description]',desc:'Add new task with auto-inferred priority'},
+  {cat:'Planning',cmd:'Complete task [title]',desc:'Mark task done and move to completed'},
+  {cat:'Planning',cmd:'Show initiative progress',desc:'Current status of all initiatives'},
+  {cat:'Planning',cmd:'Generate status update',desc:'Executive communication for stakeholders'},
+  {cat:'Planning',cmd:'Quarter summary',desc:'Quarter-level progress from quarter-goals.md'},
+  {cat:'Planning',cmd:'Assumptions',desc:'Read or update strategic assumptions'},
+  {cat:'People',cmd:'Who is [name]?',desc:'Show person page with history and open items'},
+  {cat:'People',cmd:'Create person page for [name]',desc:'Create stakeholder page in context/people/'},
+  {cat:'People',cmd:'What do I owe [name]?',desc:'List open commitments for a person'},
+  {cat:'People',cmd:'Prep for meeting with [name]',desc:'Load full context for a person'},
+  {cat:'Setup',cmd:'/start',desc:'Run the onboarding wizard'},
+  {cat:'Setup',cmd:'Level up',desc:'Discover PM OS features you haven\'t used yet'},
+  {cat:'Setup',cmd:'/improve',desc:'Review and rank toolkit improvement ideas'},
+  {cat:'Setup',cmd:'Help me fill in the product context',desc:'Context generator wizard'},
+  {cat:'Setup',cmd:'Show terminology',desc:'Key terms from product glossary'},
+  {cat:'Setup',cmd:'Export to Confluence',desc:'Convert document to Confluence wiki markup'},
+  {cat:'Setup',cmd:'Create Jira tickets for [feature]',desc:'Generate Epic + Stories + Tasks'},
+];
+
+const categories=[...new Set(commands.map(c=>c.cat))];
+const filtersDiv=document.getElementById('cmd-filters');
+filtersDiv.innerHTML=`<button class="cmd-filter active" data-cat="All">All</button>`+categories.map(c=>`<button class="cmd-filter" data-cat="${c}">${c}</button>`).join('');
+
+let activeCat='All';
+filtersDiv.querySelectorAll('.cmd-filter').forEach(btn=>{
+  btn.onclick=()=>{
+    filtersDiv.querySelectorAll('.cmd-filter').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    activeCat=btn.dataset.cat;
+    renderCommands();
+  };
+});
+document.getElementById('cmd-search').addEventListener('input',renderCommands);
+
+function renderCommands(){
+  const q=document.getElementById('cmd-search').value.toLowerCase();
+  const filtered=commands.filter(c=>{
+    const matchCat=activeCat==='All'||c.cat===activeCat;
+    const matchQ=!q||c.cmd.toLowerCase().includes(q)||c.desc.toLowerCase().includes(q)||c.cat.toLowerCase().includes(q);
+    return matchCat&&matchQ;
+  });
+  const tbody=document.getElementById('cmd-tbody');
+  const empty=document.getElementById('cmd-empty');
+  if(!filtered.length){tbody.innerHTML='';empty.style.display='block';return}
+  empty.style.display='none';
+  tbody.innerHTML=filtered.map(c=>`<tr><td class="cmd-command">${c.cmd}</td><td>${c.desc}</td><td><span class="cmd-cat">${c.cat}</span></td></tr>`).join('');
+}
+renderCommands();
+
+/* ── INTERACTIVE FILE EXPLORER ── */
+const fileTree = [
+  { name: '.cursor/', icon: '⚙️', children: [
+    { name: 'rules/', icon: '📐', children: [
+      { name: 'product-context.mdc', icon: '📄', tag: 'config', desc: '<strong>Product Context</strong> — the identity file PM OS reads before every response. Contains your product name, model, differentiator, active domains, and working preferences.<br><br>This is the single most important file to fill in. It teaches the AI who you are and what you\'re building.' },
+      { name: 'pm-coach.mdc', icon: '📄', tag: 'rule', desc: '<strong>PM Coach</strong> — always-on coaching protocols. After each task, suggests a relevant next step. Captures career insights and workflow improvements automatically.' },
+      { name: 'pm-workflows.mdc', icon: '📄', tag: 'rule', desc: '<strong>PM Workflows</strong> — document generation logic. Defines how PRDs, One-Pagers, RICE analyses, and other templates are created, including post-document protocol.' },
+      { name: 'prd-template.mdc', icon: '📄', tag: 'rule', desc: '<strong>PRD Template</strong> — full 15-section Product Requirements Document. Includes problem statement, user stories, success metrics, risks, technical constraints, and more.' },
+      { name: 'one-pager-template.mdc', icon: '📄', tag: 'rule', desc: '<strong>One-Pager Template</strong> — concise strategic document for initial validation. Used to quickly align stakeholders before investing in a full PRD.' },
+      { name: 'rice-analysis.mdc', icon: '📄', tag: 'rule', desc: '<strong>RICE Analysis</strong> — prioritization framework. Scores features by Reach, Impact, Confidence, and Effort. Generates ranked recommendations.' },
+      { name: 'session-protocol.mdc', icon: '📄', tag: 'rule', desc: '<strong>Session Protocol</strong> — runs silently on conversation start. Checks for stale tasks (>5 days), stale commitments (>3 days), and whether today\'s briefing was done.' },
+      { name: 'progress-tracker.mdc', icon: '📄', tag: 'rule', desc: '<strong>Progress Tracker</strong> — tracks initiative lifecycle through phases: discovery → requirements → development → launch → monitoring.' },
+      { name: 'todos.mdc', icon: '📄', tag: 'rule', desc: '<strong>Task Management</strong> — personal task system with Today\'s Three, P1/P2 priorities, commitment tracking, and natural language triggers.' },
+      { name: 'lean-prd-template.mdc', icon: '📄', tag: 'rule', desc: '<strong>Lean PRD Template</strong> — lightweight 6-section PRD for features that don\'t need the full 15-section treatment. Covers the essentials: what, why, how, and how we\'ll know it worked.' },
+      { name: 'people-context.mdc', icon: '📄', tag: 'rule', desc: '<strong>People Context</strong> — auto-injects person page context when stakeholder names are mentioned in conversation. Loads role, meeting history, open commitments, and communication preferences silently.' },
+      { name: 'start.mdc', icon: '📄', tag: 'rule', desc: '<strong>Onboarding Wizard</strong> — the /start command. Guides new users through workspace orientation, product context setup, and first success moment.' },
+      { name: 'formatting-preferences.mdc', icon: '📄', tag: 'rule', desc: '<strong>Formatting Preferences</strong> — formatting rules including no blockquotes, neutral Mermaid theme, and diagram conventions.' },
+      { name: 'reviewers/', icon: '👥', children: [
+        { name: 'engineer.mdc', icon: '📄', tag: 'rule', desc: '<strong>Engineer Reviewer</strong> — simulates a Staff Engineer reviewing your document. Checks technical feasibility, edge cases, scalability, API design, and implementation complexity.' },
+        { name: 'executive.mdc', icon: '📄', tag: 'rule', desc: '<strong>Executive Reviewer</strong> — simulates a VP Product. Evaluates strategic alignment, ROI, market positioning, and resource justification.' },
+        { name: 'customer.mdc', icon: '📄', tag: 'rule', desc: '<strong>Customer Reviewer</strong> — simulates your product\'s end users. Tests value clarity, ease of use, and whether the feature solves a real pain.' },
+        { name: 'data-analyst.mdc', icon: '📄', tag: 'rule', desc: '<strong>Data Analyst Reviewer</strong> — checks metrics definitions, experiment design, measurement feasibility, and statistical rigor.' },
+        { name: 'customer-success.mdc', icon: '📄', tag: 'rule', desc: '<strong>CS Reviewer</strong> — evaluates support impact, adoption friction, migration risks, and communication needs.' },
+        { name: 'user-researcher.mdc', icon: '📄', tag: 'rule', desc: '<strong>User Researcher</strong> — validates user need assumptions, identifies adoption risks, checks for research gaps and usability concerns.' },
+      ]},
+    ]},
+    { name: 'skills/', icon: '🧠', children: [
+      { name: 'morning-briefing/', icon: '☀️', tag: 'skill', desc: '<strong>Morning Briefing</strong> — multi-step workflow that pulls calendar, meeting transcripts, tracker status, and commitments. Generates Today\'s Three priorities.' },
+      { name: 'daily-review/', icon: '🌅', tag: 'skill', desc: '<strong>Daily Review</strong> — end-of-day reflection. Compares planned vs actual, captures learnings, prompts for career evidence, saves session context.' },
+      { name: 'weekly-review/', icon: '📊', tag: 'skill', desc: '<strong>Weekly Review</strong> — Friday synthesis. Evaluates quarter progress, identifies patterns, suggests next week\'s Top 3 priorities.' },
+      { name: 'meeting-notes/', icon: '📝', tag: 'skill', desc: '<strong>Meeting Notes</strong> — processes raw meeting notes or transcripts. Extracts decisions, action items with IDs, updates person pages and commitments.' },
+      { name: 'meeting-prep/', icon: '🎯', tag: 'skill', desc: '<strong>Meeting Prep</strong> — proactive preparation for upcoming meetings. Loads person context, surfaces open commitments, reviews recent interactions, and suggests talking points.' },
+      { name: 'competitor-analysis/', icon: '🔍', tag: 'skill', desc: '<strong>Competitor Analysis</strong> — web research, feature matrix, battlecard generation, and strategic implications for your product.' },
+      { name: 'metrics-analyzer/', icon: '📐', tag: 'skill', desc: '<strong>Metrics Analyzer</strong> — estimates feature impact, designs experiments, and creates measurement plans tied to your KPIs.' },
+    ]},
+  ]},
+  { name: 'context/', icon: '📂', children: [
+    { name: 'people/', icon: '👤', tag: 'doc', desc: '<strong>Person Pages</strong> — one file per stakeholder (manager, designer, engineer, etc.). Tracks interaction history, preferences, open commitments, and meeting context.' },
+    { name: 'USERS.md', icon: '📄', tag: 'doc', desc: '<strong>User Personas</strong> — your product\'s user segments with goals, pain points, behaviors, and jobs-to-be-done. Referenced when generating any user-facing document.' },
+    { name: 'TERMINOLOGY.md', icon: '📄', tag: 'doc', desc: '<strong>Terminology</strong> — product glossary ensuring consistent language across all generated documents. Maps internal jargon to user-facing terms.' },
+  ]},
+  { name: 'documents/', icon: '📁', tag: 'doc', desc: '<strong>Documents</strong> — output folder for all generated artifacts: PRDs, One-Pagers, specs, analyses, status updates. Organized by domain subfolders.' },
+  { name: 'frameworks/', icon: '🧭', tag: 'doc', desc: '<strong>Strategy Frameworks</strong> — Rumelt Strategy Kernel, Gibson Biddle DHM, Devil\'s Advocate, SWOT, Impact Estimation, and Presentation Best Practices.' },
+  { name: 'global-context/', icon: '🌐', children: [
+    { name: 'shared/', icon: '📂', children: [
+      { name: 'pillars.md', icon: '📄', tag: 'config', desc: '<strong>Strategic Pillars</strong> — the 3-5 strategic pillars that anchor all prioritization. Every P1 task should connect to a pillar. Reviewed quarterly.' },
+      { name: 'assumptions.md', icon: '📄', tag: 'config', desc: '<strong>Strategic Assumptions</strong> — explicit assumptions your product strategy rests on. Current Truths, 6-Month Bets, 12-Month Bets, and Anti-Truths. Prevents invisible strategic drift.' },
+    ]},
+    { name: 'DOMAIN-VISION.md', icon: '📄', tag: 'config', desc: '<strong>Domain Vision</strong> — strategic mission, target outcomes, and success criteria for a product domain. Template to fill per domain.' },
+    { name: 'DOMAIN-KPIS.md', icon: '📄', tag: 'config', desc: '<strong>Domain KPIs</strong> — metrics hierarchy: North Star, primary, secondary, and guardrail metrics for a domain.' },
+    { name: 'ROADMAP.md', icon: '📄', tag: 'config', desc: '<strong>Roadmap</strong> — quarterly priorities, themes, milestones, and dependencies. Referenced before generating any strategic document.' },
+    { name: 'ARCHITECTURE.md', icon: '📄', tag: 'config', desc: '<strong>Architecture</strong> — technical landscape, system constraints, and integration points. Referenced for technical feasibility checks.' },
+  ]},
+  { name: 'to_do\'s/', icon: '✅', children: [
+    { name: 'tasks.md', icon: '📄', tag: 'doc', desc: '<strong>Today\'s Tasks</strong> — your daily task list with P1/P2 priorities. Max 3 P1 per day. Managed via natural language: "add task X", "done with Y".' },
+    { name: 'commitments.md', icon: '📄', tag: 'doc', desc: '<strong>Commitments</strong> — tracked promises to stakeholders with unique IDs, owners, due dates, and staleness detection (flagged after 3 days).' },
+    { name: 'week-priorities.md', icon: '📄', tag: 'doc', desc: '<strong>Week Priorities</strong> — top 3 goals for the current week. Set during weekly review, referenced in every morning briefing.' },
+    { name: 'quarter-goals.md', icon: '📄', tag: 'doc', desc: '<strong>Quarter Goals</strong> — high-level objectives that cascade down to weekly priorities and daily tasks.' },
+    { name: 'briefings/', icon: '📂', tag: 'doc', desc: '<strong>Briefings</strong> — daily morning briefing outputs, named by date (YYYY-MM-DD.md). Your daily context snapshots.' },
+    { name: 'reviews/', icon: '📂', tag: 'doc', desc: '<strong>Reviews</strong> — daily review outputs. End-of-day reflections with planned vs actual comparisons.' },
+    { name: 'weekly-reviews/', icon: '📂', tag: 'doc', desc: '<strong>Weekly Reviews</strong> — Friday synthesis documents with week patterns, quarter progress, and next week\'s priorities.' },
+    { name: 'learnings/', icon: '📂', tag: 'doc', desc: '<strong>Learnings</strong> — accumulated preferences, patterns, and skill ratings. Feeds the compound learning loop.' },
+    { name: 'toolkit-improvements.md', icon: '📄', tag: 'doc', desc: '<strong>Toolkit Improvements</strong> — ranked backlog of improvement ideas for PM OS itself. Captured automatically from frustration phrases, ranked by impact/effort during weekly reviews.' },
+  ]},
+  { name: 'webapp/', icon: '🖥️', children: [
+    { name: 'frontend/', icon: '⚛️', tag: 'doc', desc: '<strong>PM Co-Pilot Frontend</strong> — React + Vite + Tailwind dashboard. Views: Morning Briefing, Tasks, Commitments, Backlog, Initiative Progress, People.' },
+    { name: 'backend/', icon: '⚙️', tag: 'doc', desc: '<strong>PM Co-Pilot Backend</strong> — Express + TypeScript API. Reads workspace markdown files and serves them to the dashboard. Run with npm run dev.' },
+  ]},
+  { name: 'README.md', icon: '📄', tag: 'doc', desc: '<strong>README</strong> — project overview and quick-start instructions for PM OS. The first file you see on GitHub.' },
+  { name: 'COMMANDS.md', icon: '📄', tag: 'doc', desc: '<strong>Command Reference</strong> — full list of every command, trigger phrase, and natural language variant PM OS understands.' },
+];
+
+function buildTree(items, parentUl) {
+  items.forEach(item => {
+    const li = document.createElement('li');
+    const row = document.createElement('div');
+    row.className = 'cm-tree-item';
+    const isFolder = !!item.children;
+
+    if (isFolder) {
+      const chevron = document.createElement('span');
+      chevron.className = 'cm-tree-chevron';
+      chevron.textContent = '▶';
+      row.appendChild(chevron);
+    } else {
+      const spacer = document.createElement('span');
+      spacer.style.width = '12px';
+      spacer.style.flexShrink = '0';
+      row.appendChild(spacer);
+    }
+
+    const icon = document.createElement('span');
+    icon.className = 'cm-tree-icon';
+    icon.textContent = item.icon;
+    row.appendChild(icon);
+
+    const name = document.createElement('span');
+    name.className = 'cm-tree-name';
+    name.textContent = item.name;
+    row.appendChild(name);
+
+    li.appendChild(row);
+
+    if (isFolder) {
+      const childUl = document.createElement('ul');
+      childUl.style.maxHeight = '0';
+      buildTree(item.children, childUl);
+      li.appendChild(childUl);
+
+      row.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const chevron = row.querySelector('.cm-tree-chevron');
+        const isOpen = chevron.classList.toggle('open');
+        childUl.style.maxHeight = isOpen ? childUl.scrollHeight + 200 + 'px' : '0';
+        if (item.desc) showFileInfo(item, row);
+      });
+    }
+
+    if (item.desc) {
+      row.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showFileInfo(item, row);
+      });
+    }
+
+    parentUl.appendChild(li);
+  });
+}
+
+function showFileInfo(item, row) {
+  document.querySelectorAll('.cm-tree-item.selected').forEach(el => el.classList.remove('selected'));
+  row.classList.add('selected');
+  const editor = document.getElementById('editor-content');
+  const path = getItemPath(item);
+  const tagClass = item.tag || 'doc';
+  const tagLabel = { rule: 'Rule', skill: 'Skill', doc: 'Document', config: 'Config' }[tagClass] || 'File';
+  editor.innerHTML = `
+    <div class="cm-editor-file">
+      <div class="cm-ef-path">${path}</div>
+      <div class="cm-ef-body">
+        ${item.desc}
+        <div style="margin-top:10px"><span class="cm-ef-tag ${tagClass}">${tagLabel}</span></div>
+      </div>
+    </div>`;
+}
+
+function getItemPath(target) {
+  function search(items, prefix) {
+    for (const item of items) {
+      const full = prefix + item.name;
+      if (item === target) return full;
+      if (item.children) {
+        const found = search(item.children, full);
+        if (found) return found;
+      }
+    }
+    return null;
+  }
+  return search(fileTree, '') || target.name;
+}
+
+const treeRoot = document.getElementById('file-tree');
+buildTree(fileTree, treeRoot);
+
+/* Auto-expand .cursor/ on load and select product-context */
+setTimeout(() => {
+  const firstItem = treeRoot.querySelector('.cm-tree-item');
+  if (firstItem) firstItem.click();
+  setTimeout(() => {
+    const rulesItem = treeRoot.querySelector('li > ul > li > .cm-tree-item');
+    if (rulesItem) rulesItem.click();
+    setTimeout(() => {
+      const firstFile = treeRoot.querySelector('li > ul > li > ul > li > .cm-tree-item');
+      if (firstFile) firstFile.click();
+    }, 150);
+  }, 150);
+}, 300);
+</script>
+</body>
+</html>

@@ -1,8 +1,48 @@
 # PM OS — An AI Operating System for Product Managers
 
-**An AI-powered operating system for Product Managers, built on Cursor.** Document generation, daily planning, meeting intelligence, stakeholder tracking, multi-perspective reviews — all configured for your specific product. Fork it, configure your context, start shipping better documents in 10 minutes.
+[![Works with Cursor](https://img.shields.io/badge/Works%20with-Cursor-blue.svg)](https://cursor.com)
+[![Works with Claude Code](https://img.shields.io/badge/Works%20with-Claude%20Code-orange.svg)](https://claude.ai/code)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-Built by a PM who uses this system every day to manage two product domains at a LATAM e-commerce platform. Open source (MIT). No coding required.
+**An AI-powered operating system for Product Managers.** Document generation, daily planning, meeting intelligence, stakeholder tracking, multi-perspective reviews — all configured for your specific product. Fork it, configure your context, start shipping better documents in 10 minutes. Works with Cursor, Claude Code, and other AI editors.
+
+Built by a PM who uses this system every day to manage two product domains at a LATAM e-commerce platform. Open source. No coding required.
+
+---
+
+## Editor Compatibility
+
+PM OS works with any AI editor that can load context files. Pick the one you use:
+
+| Editor | How PM OS loads | Experience |
+|--------|----------------|------------|
+| **[Cursor](https://cursor.com)** | Auto-loads `.cursor/rules/*.mdc` files | Full — rules, skills, and MCP integrations work natively |
+| **[Claude Code](https://claude.ai/code)** | Reads `CLAUDE.md` as workspace instructions | Full — all workflows available via natural language commands |
+| **Other AI editors** | Configure your editor to load `CLAUDE.md` as context | Full — same commands work wherever the context is loaded |
+
+---
+
+## See It In Action
+
+**Without PM OS** — generic AI output:
+```
+User: "Create a PRD for subscription pause"
+AI:   [Generic 2-page document with no product context, wrong terminology,
+       misaligned metrics, no connection to company strategy]
+```
+
+**With PM OS** — context-aware, strategy-aligned output:
+```
+User: "Create a PRD for subscription pause"
+AI:   [Reads your product vision, KPIs, terminology, and architecture]
+      [Generates 15-section PRD aligned with your quarter goals]
+      [Uses correct domain terms, references your metrics targets]
+      [Suggests multi-perspective review as next step]
+```
+
+See [`documents/_EXAMPLE-PRD.md`](documents/_EXAMPLE-PRD.md) for a full example of generated output.
+
+See [`documents/_EXAMPLE-ONE-PAGER.md`](documents/_EXAMPLE-ONE-PAGER.md) for an example One-Pager.
 
 ---
 
@@ -12,35 +52,11 @@ Built by a PM who uses this system every day to manage two product domains at a 
 |---------|---------------------|
 | **Context scattered across 6-8 tools** | One workspace with persistent memory. The AI resumes where yesterday left off. |
 | **30 min every morning reconstructing state** | Morning briefing pulls calendar, meetings, Jira, and commitments automatically. |
-| **Forgotten promises destroy credibility** | Commitment tracker with unique IDs (`^c-YYYYMMDD-NNN`) and staleness detection flags items >3 days old. |
+| **Forgotten promises destroy credibility** | Staleness detection flags commitments >3 days and tasks >5 days with no update. |
 | **Documents lack strategic alignment** | Context Loading Protocol reads your vision, KPIs, and roadmap before generating anything. |
 | **PRDs approved without stress-testing** | Multi-perspective review simulates Engineer, Executive, Researcher, Customer, and CS feedback. |
-| **No system for compounding knowledge** | Daily and weekly reviews capture learnings. Career evidence accumulates. Each session makes the next better. |
+| **No system for compounding knowledge** | Daily and weekly reviews capture learnings. Each session makes the next one better. |
 | **Generic AI output, no product depth** | Product context file teaches the AI your product, users, terminology, and constraints. |
-| **You use 20% of your tools' capabilities** | Feature discovery suggests unused templates and skills weekly based on your maturity path. |
-
----
-
-## A Day With PM OS
-
-```
-Morning:
-  "Morning briefing"    → Today's Three priorities + Meeting prep
-                          + Stale commitments flagged + Session continuity restored
-
-During the day:
-  "Create PRD for X"    → Full PRD aligned with your product vision, KPIs, and roadmap
-  "Review as engineer"  → Technical feasibility review with edge cases and scalability concerns
-  "Process notes"       → Meeting notes → person pages + commitments auto-updated (with IDs)
-
-End of day:
-  "Daily review"        → Planned vs actual + learnings captured
-                          + Career evidence prompt + Session context saved for tomorrow
-
-Friday:
-  "Weekly review"       → Week synthesis + quarter progress + toolkit improvements surfaced
-                          + Next week's Top 3 suggested + Unused skill recommended
-```
 
 ---
 
@@ -53,7 +69,6 @@ Start light, grow into the full system.
 Fork the repo, fill in `product-context.mdc` with your product details, and start generating documents.
 
 **What you get:**
-
 - 14 document templates (PRD, One-Pager, User Stories, RICE, Risk Analysis, Lean Canvas, Roadmap, Epic Plan, KPI-Revenue, Status Update, Personas, Positioning, User Journey, Feature Docs)
 - 6 multi-perspective reviewers (Engineer, Executive, User Researcher, Data Analyst, Customer, Customer Success)
 - 6 strategy frameworks (Rumelt, Gibson Biddle DHM, Devil's Advocate, Impact Estimation, SWOT, Presentation Best Practices)
@@ -64,28 +79,36 @@ Fork the repo, fill in `product-context.mdc` with your product details, and star
 Set up the planning system and daily workflows.
 
 **What you add:**
-
 - Morning briefing, daily review, weekly review skills
-- Meeting notes processor with person page updates and commitment tracking with IDs
-- Planning hierarchy: quarter goals -> week priorities -> daily tasks (with task IDs `#T-MMDD-N`)
-- Commitment tracker with unique IDs and staleness detection
-- Session continuity (context persists between sessions via session-log)
-- Career evidence capture during daily reviews
-- Self-improving system with structured improvement backlog
-- Feature discovery with progressive disclosure (Tier 1-4 maturity path)
-- Learnings capture (preferences, anti-patterns, usage tracking)
+- Meeting notes processor with person page updates
+- Meeting prep with automatic context loading (person pages, open commitments, talking points)
+- Level Up feature (discover unused PM OS capabilities)
+- Toolkit improvement capture and ranking
+- Planning hierarchy: quarter goals -> week priorities -> daily tasks
+- Commitment tracker with staleness detection
+- Learnings capture (preferences and anti-patterns)
 
 ### Tier 3 — Full Integration (30 minutes)
 
-Connect your tools via MCP servers.
+Connect your tools via MCP servers for live data in briefings and workflows.
 
 **What you add:**
-
 - Jira/Linear integration for live initiative tracking
 - Calendar integration for automated meeting prep
 - Meeting transcription (Fireflies, Otter, etc.) for automated summaries
 - Slack for async communication
-- Data platform (Databricks, OpenMetadata) for metrics queries
+
+**Recommended MCP servers:**
+
+| Integration | MCP Server | Used By |
+|-------------|-----------|---------|
+| **Jira/Linear** | [Atlassian MCP](https://www.npmjs.com/package/@anthropic/mcp-atlassian) or [Linear MCP](https://www.npmjs.com/package/@anthropic/mcp-linear) | Morning briefing, progress tracking |
+| **Calendar** | [Google Calendar MCP](https://www.npmjs.com/package/@anthropic/mcp-google-calendar) or [Zapier MCP](https://www.npmjs.com/package/@anthropic/mcp-zapier) | Morning briefing (today's schedule) |
+| **Meeting Notes** | [Fireflies MCP](https://www.npmjs.com/package/@anthropic/mcp-fireflies) or paste transcripts manually | Meeting notes skill |
+| **Slack** | [Slack MCP](https://www.npmjs.com/package/@anthropic/mcp-slack) | Async communication |
+| **Docs** | [Google Docs MCP](https://www.npmjs.com/package/@anthropic/mcp-google-docs) | Export documents |
+
+To install an MCP server: in Cursor go to **Settings > MCP > Add Server**; in Claude Code use the `claude mcp add` command. Each skill gracefully degrades if its MCP is unavailable — you can always paste data manually.
 
 ---
 
@@ -98,22 +121,26 @@ git clone https://github.com/paulophl94/pm-os.git
 cd pm-os
 ```
 
-Open the folder in [Cursor](https://cursor.com).
+Open the folder in your AI editor of choice ([Cursor](https://cursor.com), [Claude Code](https://claude.ai/code), or another AI-enabled editor).
 
-### 2. Configure your product context
+### 2. Run the onboarding
 
-Open Cursor's chat panel and type:
+In your AI chat, type:
 
 ```
-Help me fill in the product context
+/start
 ```
 
-This runs the Context Generator wizard — it walks you through:
+This opens the **[Interactive Onboarding Guide](ONBOARDING.html)** in your browser and launches the setup wizard, which walks you through:
 1. Product concept and positioning
 2. Daily ritual preferences (briefing, reviews)
 3. Tool integrations (Jira, Slack, Fireflies)
 4. Initial stakeholder person pages
 5. Quarter goals and week priorities
+
+The onboarding guide covers everything — how Agent Mode works and how to talk to PM OS in natural language, with instructions for both Cursor and Claude Code.
+
+Or edit `product-context.mdc` manually — replace the `<!-- TODO -->` markers with your product details.
 
 ### 3. Start generating
 
@@ -127,28 +154,25 @@ The AI reads your product context, loads relevant strategy files, and generates 
 
 ## What's Included
 
-### Document Templates (14)
+### Document Templates
 
 | Command | Output | Template |
 |---------|--------|----------|
-| "Create PRD for [feature]" | Full PRD (15 sections) | prd-template.mdc |
-| "Generate One-Pager for [feature]" | Strategic 1-2 page doc | one-pager-template.mdc |
-| "Write user stories for [feature]" | Stories + Gherkin acceptance criteria | user-story-template.mdc |
-| "Prioritize using RICE" | RICE scoring with recommendations | rice-analysis.mdc |
-| "Analyze risks of [feature]" | Risk matrix with mitigations | risk-analysis.mdc |
-| "Create Lean Canvas for [product]" | 9-section strategy canvas | lean-canvas.mdc |
-| "Create roadmap for [quarter]" | Quarterly strategic plan | roadmap-template.mdc |
-| "Generate epic plan for [feature]" | Epic structure with sub-epics | epic-generator.mdc |
-| "Connect KPIs to revenue" | KPI-revenue linkage + North Star | kpi-revenue.mdc |
-| "Generate status update" | Executive communication | status-update-template.mdc |
-| "Create personas for [segment]" | Ideal + Skeptical personas | persona-template.mdc |
-| "Create elevator pitch" | Positioning + JTBD pitch | product-positioning.mdc |
-| "Map user journey for [flow]" | End-to-end journey map | user-journey.mdc |
-| "Document feature [name]" | Feature documentation (reverse) | pm-workflows.mdc |
+| "Create PRD for [feature]" | Lean PRD (6 sections) or Full PRD (15 sections) | `lean-prd-template.mdc` / `prd-template.mdc` |
+| "Generate One-Pager for [feature]" | Strategic 1-2 page doc | `one-pager-template.mdc` |
+| "Write user stories for [feature]" | Stories + Gherkin acceptance criteria | `user-story-template.mdc` |
+| "Prioritize using RICE" | RICE scoring with recommendations | `rice-analysis.mdc` |
+| "Analyze risks of [feature]" | Risk matrix with mitigations | `risk-analysis.mdc` |
+| "Create Lean Canvas for [product]" | 9-section strategy canvas | `lean-canvas.mdc` |
+| "Create roadmap for [quarter]" | Quarterly strategic plan | `roadmap-template.mdc` |
+| "Generate epic plan for [feature]" | Epic structure with sub-epics | `epic-generator.mdc` |
+| "Connect KPIs to revenue" | KPI-revenue linkage + North Star | `kpi-revenue.mdc` |
+| "Generate status update" | Executive communication | `status-update-template.mdc` |
+| "Create personas for [segment]" | Ideal + Skeptical personas | `persona-template.mdc` |
+| "Create elevator pitch" | Positioning + JTBD pitch | `product-positioning.mdc` |
+| "Map user journey for [flow]" | End-to-end journey map | `user-journey.mdc` |
 
-**See [examples/](examples/) for sample outputs from each template.**
-
-### Multi-Perspective Reviews (6)
+### Multi-Perspective Reviews
 
 Simulate a review committee before any human sees your document:
 
@@ -161,21 +185,20 @@ Simulate a review committee before any human sees your document:
 | "Review as customer" | 3 personas (Small/Growth/Enterprise) | Value clarity, ease of use |
 | "Review as customer success" | CS Lead | Support impact, adoption, communication |
 
-### Daily Workflow Skills (9)
+### Daily Workflow Skills (8)
 
 | Skill | When | What It Does |
-|-------|------|--------------|
-| **Morning Briefing** | Start of day | Pulls calendar, meetings, tracker, commitments. Generates Today's Three (max 3 P1). Restores session context. |
-| **Daily Review** | End of day | Compares planned vs actual, captures learnings, career evidence prompt, saves session context for tomorrow. |
-| **Weekly Review** | Friday | Synthesizes the week, evaluates quarter progress, surfaces toolkit improvements, suggests unused skills, sets next week's Top 3. |
-| **Meeting Notes** | After any meeting | Extracts decisions, action items with IDs, updates person pages and commitments. |
-| **Career Review** | As needed | Synthesizes career evidence for self-reviews, promotion assessments, or weekly manager reports. |
+|-------|------|-------------|
+| **Morning Briefing** | Start of day | Pulls calendar, meetings, tracker, commitments. Generates Today's Three (max 3 P1). |
+| **Daily Review** | End of day | Compares planned vs actual, captures learnings, preps tomorrow. |
+| **Weekly Review** | Friday | Synthesizes the week, evaluates quarter progress, suggests next week's Top 3. |
+| **Meeting Notes** | After any meeting | Extracts decisions, action items, updates person pages and commitments. |
+| **Meeting Prep** | Before meetings | Loads person context, surfaces open commitments, suggests talking points. |
 | **Competitor Analysis** | As needed | Web research, feature matrix, battlecard, strategic implications. |
 | **Metrics Analyzer** | Per feature | Impact estimation, experiment design, measurement plan. |
-| **Product Research** | Per domain | HubSpot deals + GitHub issues analysis, insight reports. |
-| **Atlassian Helper** | As needed | Export to Jira/Confluence. |
+| **Atlassian Helper** | As needed | Confluence formatting, Jira ticket templates, epic/story structure; Atlassian MCP when configured. |
 
-### Strategy Frameworks (6)
+### Strategy Frameworks
 
 | Framework | When to Use |
 |-----------|-------------|
@@ -195,48 +218,31 @@ Everything connects — from strategic goals down to today's work:
 ```
 %%{init: {'theme': 'neutral'}}%%
 flowchart TD
-    quarterGoals["Quarter Goals"] --> weekPriorities["Week Priorities"]
-    weekPriorities --> dailyPlan["Daily Plan / Today's Three"]
-    quarterGoals -.-> tasks["Tasks Backlog"]
+    quarterGoals[Quarter Goals] --> weekPriorities[Week Priorities]
+    weekPriorities --> dailyPlan[Daily Plan / Today's Three]
+    quarterGoals -.-> tasks[Tasks Backlog]
     weekPriorities -.-> tasks
     tasks --> dailyPlan
-    dailyPlan --> dailyReview["Daily Review"]
+    dailyPlan --> dailyReview[Daily Review]
     dailyReview -.->|Tomorrow| dailyPlan
-    dailyReview -.->|Friday| weeklyReview["Weekly Review"]
-    weeklyReview -.->|"Next week"| weekPriorities
-    dailyReview -.->|Evidence| careerLib["Career Evidence"]
-    weeklyReview -.->|Improvements| toolkitBacklog["Toolkit Backlog"]
+    dailyReview -.->|Friday| weeklyReview[Weekly Review]
+    weeklyReview -.->|Next week| weekPriorities
 ```
 
-**Quarter Goals** (3-5 outcomes over 3 months) -> **Week Priorities** (Top 3 this week) -> **Daily Plan** (Today's Three) -> **Daily Review** (what happened + career evidence) -> **Weekly Review** (patterns, toolkit improvements, next week's priorities).
+**Quarter Goals** (3-5 outcomes over 3 months) -> **Week Priorities** (Top 3 this week) -> **Daily Plan** (Today's Three) -> **Daily Review** (what happened) -> **Weekly Review** (patterns, next week's priorities).
 
-Work backwards from impact: _What would make you incredibly satisfied three months from now?_
-
----
-
-## Cross-File Tracking
-
-PM OS uses lightweight ID systems for traceability without a database:
-
-| What | ID Format | Example | Used In |
-|------|-----------|---------|---------|
-| **Tasks** | `#T-MMDD-N` | `#T-0321-1` | tasks.md, meeting notes, person pages |
-| **Commitments** | `^c-YYYYMMDD-NNN` | `^c-20260321-001` | commitments.md, meeting notes, person pages |
-| **Improvements** | `^imp-NNN` | `^imp-001` | toolkit-backlog.md |
-
-When the same item appears in multiple files, it uses the same ID for cross-referencing.
+Work backwards from impact: *What would make you incredibly satisfied three months from now?*
 
 ---
 
 ## The System That Improves Itself
 
-PM OS captures learnings and improves over time through three mechanisms:
+PM OS captures learnings and improves over time:
 
-1. **Self-Improving Backlog** — Workflow frustrations are captured automatically in `toolkit-backlog.md` with structured IDs, impact ratings, and prioritization. Weekly review surfaces the top 3.
-
-2. **Feature Discovery** — Usage tracking in `usage-log.md` identifies which templates and skills you've used. A maturity path (Tier 1-4) guides progressive disclosure of capabilities you haven't tried yet.
-
-3. **Compound Learning** — Daily reviews capture preferences and anti-patterns. Career evidence accumulates. Each session makes the next one better.
+- **Daily reviews** capture what worked and what didn't -> stored in `learnings/`
+- **Weekly reviews** synthesize patterns across meetings and decisions
+- **Preferences** (communication style, meeting habits) accumulate automatically
+- **Anti-patterns** (mistakes to avoid) get flagged before they repeat
 
 Day 1: helpful but generic. Week 2: knows your preferences. Month 1: adapted to your work style.
 
@@ -249,14 +255,17 @@ pm-os/
 ├── .cursor/
 │   ├── rules/                     # AI rules and document templates
 │   │   ├── product-context.mdc    # YOUR product (fill this first)
-│   │   ├── pm-coach.mdc           # Coaching protocols (next steps, career, improvements, usage tracking)
+│   │   ├── people-context.mdc     # Auto-inject person context
+│   │   ├── pm-coach.mdc           # Coaching protocols
 │   │   ├── pm-workflows.mdc       # Document generation workflows
-│   │   ├── session-protocol.mdc   # Session-start checks, feature discovery, session continuity
+│   │   ├── session-protocol.mdc   # Session-start checks
 │   │   ├── formatting-preferences.mdc
 │   │   ├── progress-tracker.mdc   # Initiative progress
-│   │   ├── todos.mdc              # Task management with IDs
-│   │   ├── context-generator.mdc  # Enhanced setup wizard
-│   │   ├── prd-template.mdc       # PRD template
+│   │   ├── todos.mdc              # Task management
+│   │   ├── context-generator.mdc  # Setup wizard
+│   │   ├── start.mdc              # Onboarding wizard
+│   │   ├── prd-template.mdc       # Full PRD (15 sections)
+│   │   ├── lean-prd-template.mdc  # Lean PRD (6 sections)
 │   │   ├── one-pager-template.mdc
 │   │   ├── user-story-template.mdc
 │   │   ├── rice-analysis.mdc
@@ -275,34 +284,33 @@ pm-os/
 │       ├── daily-review/
 │       ├── weekly-review/
 │       ├── meeting-notes/
-│       ├── career-review/         # Career evidence synthesis
+│       ├── meeting-prep/
 │       ├── competitor-analysis/
 │       ├── metrics-analyzer/
-│       ├── product-research/
 │       └── atlassian-helper/
 ├── context/                       # Product context
 │   ├── people/                    # Person pages (stakeholders)
 │   ├── USERS.md                   # User personas
 │   └── TERMINOLOGY.md            # Product terminology
+├── global-context/                # Product strategy (create per domain)
+│   ├── shared/                    # Cross-domain glossary, invariants
+│   └── {domain}/                  # DOMAIN-VISION, KPIS, ROADMAP, ARCHITECTURE
 ├── documents/                     # Generated documents output
-├── examples/                      # Sample outputs for each template
 ├── frameworks/                    # Strategy frameworks
 ├── to_do's/                       # Planning system
-│   ├── tasks.md                   # Today's tasks (with #T-MMDD-N IDs)
+│   ├── tasks.md                   # Today's tasks
 │   ├── week-priorities.md         # Top 3 for the week
 │   ├── quarter-goals.md           # Quarter goals
-│   ├── commitments.md             # Promise tracker (with ^c-YYYYMMDD-NNN IDs)
-│   ├── toolkit-backlog.md         # Self-improving system backlog
-│   ├── session-log.md             # Session continuity context
+│   ├── toolkit-improvements.md    # Ranked improvement ideas
+│   ├── commitments.md             # Promise tracker
 │   ├── briefings/                 # Morning briefings
 │   ├── reviews/                   # Daily reviews
 │   ├── weekly-reviews/            # Weekly syntheses
-│   └── learnings/                 # Preferences, patterns, career evidence, usage log
+│   └── learnings/                 # Preferences and anti-patterns
 ├── CLAUDE.md                      # AI workspace instructions
-├── COMMANDS.md                    # Full command reference
+├── README.md
 ├── QUICK-START.md                 # Decision tree for templates
-├── CHANGELOG.md                   # Version history
-└── pm-progress.json               # Initiative tracking
+└── COMMANDS.md                    # Full command reference
 ```
 
 ---
@@ -310,19 +318,15 @@ pm-os/
 ## Why PM OS vs Other Options
 
 | Dimension | PM OS | Dex | Notion Templates | ChatGPT |
-|-----------|-------|-----|------------------|---------|
+|-----------|-------|-----|-------------------|---------|
 | **Built for** | Product Managers | Any role (31 presets) | Anyone | Anyone |
-| **Platform** | Cursor-native | Claude Code + Cursor | Notion | Browser |
-| **Document depth** | 14 PM templates, 6 reviewers, 6 frameworks | General COS workflows | Static templates | No templates |
-| **Planning system** | Quarter -> Week -> Day with staleness + IDs | Quarter -> Week -> Day | Manual | None |
-| **Career development** | Evidence capture + career review skill | Career server MCP | No | No |
-| **Self-improvement** | Structured backlog + usage tracking + feature discovery | Hooks + improvement MCP | No | No |
-| **Cross-file tracking** | Lightweight IDs (tasks, commitments, improvements) | MCP-based sync with unique IDs | No | No |
-| **Data platform** | Databricks/OpenMetadata integration | None | None | None |
-| **Session memory** | Session log with continuity restoration | MCP-based session memory | No | Limited |
-| **License** | MIT (use anywhere) | PolyForm Noncommercial | Varies | N/A |
+| **Platform** | Cursor, Claude Code, other AI editors | Claude Code + Cursor | Notion | Browser |
+| **Depth** | 14 PM templates, 6 reviewers, 6 frameworks | General COS workflows | Static templates | No templates |
+| **Planning system** | Quarter -> Week -> Day with staleness detection | Quarter -> Week -> Day | Manual | None |
+| **License** | Open source | PolyForm Noncommercial | Varies | N/A |
 | **Setup** | 5-30 min (3 tiers) | 10-30 min | Minutes | None |
-| **Cost** | Free + Cursor ($0-20/mo) | Free + Claude Code ($20/mo) | Free-Paid | Free-Paid |
+| **Compound learning** | Yes (daily/weekly reviews) | Yes (hooks + learnings) | No | No |
+| **Cost** | Free + your AI editor ($0-20/mo) | Free + Claude Code ($20/mo) | Free-Paid | Free-Paid |
 
 ---
 
@@ -336,12 +340,10 @@ Found a better template? Built a new skill? Fixed something?
 4. Submit a Pull Request
 
 Areas where contributions are especially welcome:
-
 - New document templates (Architecture Decision Records, Post-Mortems, etc.)
 - New reviewer personas (Designer, Legal, Sales)
 - Localization (translate templates to other languages)
 - MCP integration recipes (Linear, Notion, GitHub Issues)
-- New strategy frameworks
 
 ---
 
@@ -351,12 +353,8 @@ This toolkit was built over months of daily use as a Product Manager at a LATAM 
 
 The insight that changed everything: **the quality of AI output is 80% context and 20% model.** Most people spend all their effort choosing the right model and zero effort structuring their context. This toolkit is the structured context.
 
----
-
-## License
-
-MIT License — use it however you want, including commercially.
+If you want the full story, check out the [AI-Augmented PM series on LinkedIn](https://www.linkedin.com/in/paulophl94/) — 9 posts covering the journey from "hammer" to "workshop."
 
 ---
 
-**Ready to start?** Fork the repo, open in Cursor, type "Help me fill in the product context", and you're off.
+**Ready to start?** Fork the repo, open in your AI editor ([Cursor](https://cursor.com) or [Claude Code](https://claude.ai/code)), type `/start` in the chat, and you're off. See the [Onboarding Guide](ONBOARDING.html) for a full visual walkthrough.

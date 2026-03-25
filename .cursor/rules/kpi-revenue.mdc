@@ -10,7 +10,7 @@ Before writing the KPI-Revenue analysis, ask a clarifying question:
 
 ONLY THEN, continue with the rest of this document.
 
-Be sure to use @product-context.mdc data for initial context.
+Be sure to use `product-context.mdc` data for initial context.
 
 This tool helps you:
 1. Define Product Goals

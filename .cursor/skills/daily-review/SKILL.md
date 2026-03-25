@@ -14,10 +14,9 @@ Use this skill at the end of the workday to:
 ## Trigger Commands
 
 - "Daily review"
-- "Review do dia"
-- "Fim do dia"
-- "Fechar o dia"
 - "End of day"
+- "Close the day"
+- "How did today go"
 
 ## Instructions
 
@@ -32,28 +31,30 @@ Read: @to_do's/tasks.md (current tasks and completions)
 Read: @to_do's/briefings/YYYY-MM-DD.md (today's morning briefing, if exists)
 Read: @to_do's/week-priorities.md (this week's Top 3)
 Read: @to_do's/commitments.md (if exists)
+Read: @pm-progress.json (initiative pipeline status)
 ```
 
 ### Step 2: Analyze the Day
 
 Compare what was planned vs what happened:
 
-1. **Completadas:** Which P1 and P2 tasks were marked as done?
-2. **Nao completadas:** Which P1 tasks are still open? Why? (Ask the user briefly)
-3. **Nao planejadas:** Did the user work on things not in the plan? What emerged?
+1. **Completed:** Which P1 and P2 tasks were marked as done?
+2. **Not completed:** Which P1 tasks are still open? Why? (Ask briefly)
+3. **Unplanned:** Did the user work on things not in the plan? What emerged?
 4. **Week priorities:** Did today's work advance the Top 3 priorities?
+5. **Initiatives:** Did today's work advance any initiative phase? Any documents created or progressed?
 
 ### Step 3: Ask Reflection Questions
 
-Ask the user briefly (keep it lightweight, not a therapy session):
+Ask the user briefly (keep it lightweight):
 
-> **Quick review do dia:**
->
-> 1. O que funcionou bem hoje?
-> 2. Algo te travou ou atrasou?
-> 3. Algo para lembrar pro futuro? (preferencia, erro a evitar, pattern)
+**Quick review of the day:**
 
-**Important:** Keep this conversational and fast. If the user says "nada" or "tranquilo", accept it and move on. Don't insist on deep reflection every day.
+1. What worked well today?
+2. Anything that blocked or delayed you?
+3. Anything to remember for the future? (preference, mistake to avoid, pattern)
+
+**Important:** Keep this conversational and fast. If the user says "nothing" or "all good", accept it and move on.
 
 ### Step 4: Generate Daily Review File
 
@@ -62,55 +63,63 @@ Save to `@to_do's/reviews/YYYY-MM-DD.md`:
 ```markdown
 # Daily Review - YYYY-MM-DD
 
-## Resumo do Dia
+## Day Summary
 
 [1-2 sentences: what defined today. Was it productive? Reactive? Meeting-heavy?]
 
-## Completadas
+## Completed
 
-- [x] [Task 1] *(P1 — conecta a: [week priority])*
+- [x] [Task 1] *(P1 — connects to: [week priority])*
 - [x] [Task 2] *(P2)*
 
-## Nao Completadas (e por que)
+## Not Completed (and why)
 
-- [ ] [Task] — [Motivo: bloqueado por X / nao deu tempo / prioridade mudou]
+- [ ] [Task] — [Reason: blocked by X / no time / priority changed]
 
-## O que Emergiu (nao planejado)
+## What Emerged (unplanned)
 
 - [Item that came up during the day and consumed time]
 
-## Progresso nas Prioridades da Semana
+## Week Priority Progress
 
-| # | Prioridade | Avancou Hoje? | Nota |
-|---|------------|---------------|------|
-| 1 | [Priority] | Sim/Nao | [Brief note] |
-| 2 | [Priority] | Sim/Nao | [Brief note] |
-| 3 | [Priority] | Sim/Nao | [Brief note] |
+| # | Priority | Advanced Today? | Note |
+|---|----------|-----------------|------|
+| 1 | [Priority] | Yes/No | [Brief note] |
+| 2 | [Priority] | Yes/No | [Brief note] |
+| 3 | [Priority] | Yes/No | [Brief note] |
+
+## Initiative Progress
+
+| Initiative | Phase | Advanced Today? | Note |
+|---|---|---|---|
+| [Name] | [Current phase] | Yes/No | [Document created, review done, etc.] |
+
+[If no active initiatives: omit this section]
 
 ## Learnings
 
-- [O que funcionou — para repetir]
-- [O que nao funcionou — para evitar]
-- [Pattern ou preferencia a lembrar]
+- [What worked — to repeat]
+- [What didn't work — to avoid]
+- [Pattern or preference to remember]
 
-## Open Loops para Amanha
+## Open Loops for Tomorrow
 
-- [ ] [Task que ficou pendente]
-- [ ] [Follow-up que precisa acontecer]
-- [ ] [Commitment que esta ficando velho]
+- [ ] [Task that's still pending]
+- [ ] [Follow-up that needs to happen]
+- [ ] [Commitment that's getting old]
 
 ---
-*Review feito em: [timestamp]*
+*Review done: [timestamp]*
 ```
 
 ### Step 5: Update Tasks
 
 **Automatically** update `@to_do's/tasks.md`:
 
-1. Archive today's completed tasks to a "Concluidas [date]" section
-2. Move incomplete P1 tasks to tomorrow (keep them in "Hoje - P1")
-3. If any task has been in P1 for 5+ consecutive days, add "⏰" prefix
-4. Update the "Atualizado" timestamp
+1. Archive today's completed tasks to a "Completed [date]" section
+2. Move incomplete P1 tasks to tomorrow (keep in "Today - P1")
+3. If any task has been in P1 for 5+ consecutive days, add warning prefix
+4. Update timestamp
 
 ### Step 6: Update Learnings (if any)
 
@@ -119,74 +128,45 @@ If the user shared learnings or patterns:
 1. **Preferences** (how they like to work): Append to `@to_do's/learnings/preferences.md`
 2. **Patterns/Errors** (things to avoid): Append to `@to_do's/learnings/patterns.md`
 
-Format for each entry:
-```markdown
-### YYYY-MM-DD
-- [Learning captured]
-```
+**Surface past learnings:** After recording new learnings, check `@to_do's/learnings/patterns.md` for any existing pattern that's relevant to today's work. If found, briefly surface it: "Reminder: you noted [pattern] on [date] — still relevant today."
 
-If the files don't exist yet, create them with the entry.
+**Usage tracking:** Update `@to_do's/learnings/usage-log.md` — increment the "Daily Review" row count and update "Last Used" date.
 
-### Step 7: Check Stale Commitments
+### Step 7: Commitment Review
 
-Read `@to_do's/commitments.md` (if exists) and flag any commitment older than 3 days:
+Read `@to_do's/commitments.md` and perform a full commitment health check:
 
-> **Commitments pendentes ha mais de 3 dias:**
-> - [Commitment] — desde [date] (X dias). Resolver amanha ou escalar?
-
-### Step 8: Update Session Log
-
-**Automatically** update `@to_do's/session-log.md` with context for tomorrow's session:
-
-1. Add a new entry at the top of the file (below the header)
-2. Include: what was being worked on, pending decisions, suggested next steps
-3. Keep max 5 entries — remove oldest if needed
+1. **Stale commitments:** Flag any commitment older than 3 days without update
+2. **Completed today:** Move any commitments that were fulfilled today to the "Completed" section with date stamp
+3. **Cross-reference:** For stale commitments, load the relevant person page from `context/people/` to add context on who is involved
+4. **Surface in review:** Include a "Commitment Health" section in the daily review output:
 
 ```markdown
-## YYYY-MM-DD HH:MM
+## Commitment Health
 
-**Trabalhando em:** [main document/feature/analysis in progress]
-**Decisões pendentes:** [choices awaiting input or follow-up]
-**Próximos passos:** [what to pick up next session]
-**Contexto relevante:** [1-2 lines of context that would otherwise be lost]
+- **Closed today:** X
+- **Pending (on track):** Y
+- **Stale (>3 days):** Z
+  - [ ] [What] -> to [Who] -> since [Date] (^pm-ID) — **X days overdue**
 ```
 
-### Step 9: Career Evidence Check
+5. **Sync task IDs:** When completing a commitment with a `^pm-` ID, also mark the corresponding task complete in `tasks.md` and any meeting note where it originated
 
-Ask briefly (skip if user says "pular" or seems in a hurry):
+### Step 8: Notify User
 
-> Algo hoje vale registrar como **evidência de carreira**? (decisão estratégica, impacto mensurável, liderança, skill diferenciadora)
-
-If yes, append to `@to_do's/learnings/career-evidence.md` using the format defined there.
-
-### Step 10: Notify User
-
-Summarize the review:
-
-> **Review do dia salvo!**
->
-> - X tarefas completadas, Y pendentes
-> - [Key learning if any]
-> - [Stale commitments if any]
-> - [Career evidence captured, if any]
-> - Amanha: [Top open loop]
-> - Session context salvo para continuidade
+Summarize the review concisely.
 
 ## Tone Guidelines
 
 - Be direct and honest but not judgmental
-- If nothing was completed, don't make the user feel bad — focus on "what's the plan for tomorrow?"
+- If nothing was completed, focus on "what's the plan for tomorrow?"
 - Keep the whole process under 5 minutes
-- Celebrate small wins — completing something connected to week priorities deserves a quick note
+- Celebrate small wins connected to week priorities
 
 ## Error Handling
 
 ### No Briefing Today
-If no morning briefing exists for today:
-- Skip the "planned vs actual" comparison
-- Just ask what was done today and capture it
+Skip planned vs actual comparison. Ask what was done today and capture it.
 
 ### No Tasks File
-If `tasks.md` doesn't exist or is empty:
-- Create the review based purely on the user's verbal input
-- Suggest running a morning briefing tomorrow
+Create the review from the user's verbal input. Suggest running a morning briefing tomorrow.

@@ -15,7 +15,7 @@ Automated workflows for product document generation. Follow these protocols when
 ### Protocol
 
 1. **Context Ingestion**
-   - Check if @documents/RESEARCH-INPUT-[topic]*.md exists
+   - Check if `documents/RESEARCH-INPUT-[topic]*.md` exists
    - Identify the relevant domain
    - Read domain vision and roadmap files if available
    - Read any glossary or invariants files
@@ -33,11 +33,11 @@ Automated workflows for product document generation. Follow these protocols when
    - For each: Pros, Cons, T-Shirt Size, Timeline
 
 4. **Document Generation**
-   - Use template @.cursor/rules/one-pager-template.mdc
+   - Use template `.cursor/rules/one-pager-template.mdc`
    - Save in: `documents/ONE-PAGER-[feature-slug]-[YYYY-MM-DD].md`
 
 5. **Update Progress Tracking**
-   - Register in @pm-progress.json
+   - Register in `pm-progress.json`
 
 ---
 
@@ -81,13 +81,15 @@ Automated workflows for product document generation. Follow these protocols when
 
 ---
 
-## Workflow 4: Quick PRD Generation
+## Workflow 4: PRD Generation
 
 **Trigger:** "Create PRD for [feature]"
 
 ### Protocol
 
-1. **Template Selection** — Ask complexity if not specified (Simple/Complex/Full)
+1. **Template Selection** — Ask which version:
+   - **Lean PRD** (default): 6 sections — problem, solution, metrics, requirements, risks, timeline. Use `lean-prd-template.mdc`. Best for standard features with clear scope.
+   - **Full PRD**: 15 sections — includes market analysis, competition, OKRs, press release, team feedback. Use `prd-template.mdc`. Best for complex/strategic features.
 2. **Quick Context** — Read product-context.mdc, identify domain, load vision
 3. **Socratic Questioning (3 essential questions):**
    - "What specific user problem does this solve?"
@@ -132,7 +134,7 @@ Automated workflows for product document generation. Follow these protocols when
 After generating ANY document in `documents/`, automatically execute this checklist:
 
 ### 1. Progress Tracking (required)
-Update @pm-progress.json via @.cursor/rules/progress-tracker.mdc
+Update `pm-progress.json` (see `.cursor/rules/progress-tracker.mdc`)
 
 ### 2. Person Pages (if applicable)
 If the document mentions people by name, check/create person pages in `context/people/`

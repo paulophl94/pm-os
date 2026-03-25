@@ -10,7 +10,7 @@ Complete reference of all available commands.
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| "Create PRD for [feature]" | Full PRD (15 sections) | `PRD-[feature]-[date].md` |
+| "Create PRD for [feature]" | Lean PRD (6 sections, default) or Full PRD (15 sections) | `PRD-[feature]-[date].md` |
 | "Generate One-Pager for [feature]" | Strategic document | `ONE-PAGER-[feature]-[date].md` |
 | "Generate Spec for [feature]" | Detailed requirements | `SPEC-[feature]-[date].md` |
 | "Write user stories for [feature]" | Stories + acceptance criteria | `USER-STORIES-[feature]-[date].md` |
@@ -78,6 +78,8 @@ Complete reference of all available commands.
 | "Start the day" | Alias |
 | "What's on today" | Alias |
 
+**Web Dashboard:** The briefing and other views (tasks, commitments, initiatives, people) are also available at `http://localhost:3000` when running the webapp (run `npm run dev` in both `webapp/backend` and `webapp/frontend`).
+
 ### Daily Review
 
 | Command | Description |
@@ -100,6 +102,16 @@ Complete reference of all available commands.
 |---------|-------------|
 | "Process meeting notes" | Extract insights, update person pages + commitments |
 | "Extract action items" | Action items only |
+
+### Meeting Prep
+
+| Command | Description |
+|---------|-------------|
+| "Prep for [meeting/person]" | Load person context, open items, suggested talking points |
+| "Prepare for 1:1 with [Name]" | Alias |
+| "Meeting prep for [Name]" | Alias |
+| "Brief me for [meeting]" | Alias |
+| "What should I discuss with [Name]" | Alias |
 
 ### Tasks
 
@@ -139,6 +151,20 @@ Complete reference of all available commands.
 | "Help me fill in product context" | Context generator wizard |
 | "Update product context" | Update product-context.mdc |
 | "Show terminology" | Key terms from glossary |
+
+---
+
+## Self-Improvement
+
+| Command | Description |
+|---------|-------------|
+| "Level up" | Discover PM OS features you haven't used yet |
+| "Discover features" | Alias |
+| "What else can I do?" | Alias |
+| "/improve" | Review and rank toolkit improvement ideas |
+| "Improve toolkit" | Alias |
+| "Assumptions" | Read or update strategic assumptions |
+| "What do we believe?" | Alias for assumptions |
 
 ---
 

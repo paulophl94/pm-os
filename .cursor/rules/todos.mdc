@@ -4,19 +4,19 @@ globs: ["to_do's/**"]
 ---
 # Personal To-Do Manager
 
-Gerencia suas tarefas pessoais diárias na pasta @to_do's/.
+Manages your personal daily tasks in the `to_do's/` folder.
 
-**Nota:** Para tracking de **iniciativas de produto** (fases, documentos gerados), use @pm-progress.json via @.cursor/rules/progress-tracker.mdc. Este módulo é para **tarefas pessoais do dia-a-dia**.
+**Note:** For tracking **product initiatives** (phases, generated documents), use `pm-progress.json` (see `.cursor/rules/progress-tracker.mdc`). This module is for **personal day-to-day tasks**.
 
 ---
 
-## Arquivos
+## Files
 
-| Arquivo | Propósito |
-|---------|-----------|
-| `tasks.md` | Tarefas do dia com checkboxes |
-| `backlog.md` | Tarefas futuras / P3 |
-| `progress-log.md` | Histórico dos morning briefings |
+| File | Purpose |
+|------|---------|
+| `tasks.md` | Today's tasks with checkboxes |
+| `backlog.md` | Future tasks / P3 |
+| `progress-log.md` | Cumulative history from morning briefings |
 
 ---
 
@@ -24,204 +24,221 @@ Gerencia suas tarefas pessoais diárias na pasta @to_do's/.
 
 | Command | Description |
 |---------|-------------|
-| "Mostrar meus to-do's" | Mostra conteúdo de tasks.md |
-| "Adicionar to-do: [descrição]" | Adiciona checkbox em tasks.md |
-| "Completar to-do [título]" | Marca como [x] e move para Concluídas |
-| "To-do's de hoje" | Lista P1 e P2 de tasks.md |
-| "Morning briefing" | Atualiza tasks.md E progress-log.md |
-| "Mostrar commitments" | Lista commitments pendentes de commitments.md |
-| "Commitments de [pessoa]" | Filtra commitments por pessoa |
-| "Commitments velhos" | Lista commitments >3 dias sem update |
+| "Show my to-do's" | Display contents of tasks.md |
+| "Add to-do: [description]" | Add checkbox to tasks.md |
+| "Complete to-do [title]" | Mark as [x] and move to Completed |
+| "Today's to-do's" | List P1 and P2 from tasks.md |
+| "Morning briefing" | Update tasks.md AND progress-log.md |
 
 ## Natural Language Triggers
 
-Reconhecer variantes naturais para ações de task (PT/EN, Wispr Flow):
+Recognize natural variants for task actions:
 
 | Intent | Trigger Phrases | Action |
 |--------|----------------|--------|
-| Add task | "lembrar de X", "preciso fazer X", "adicionar task X", "to-do: X" | Adicionar em tasks.md, inferir prioridade |
-| Complete task | "terminei X", "pronto com X", "feito", "done with X", "completar X" | Marcar [x], mover para Concluídas |
-| Show tasks | "o que tenho", "meus to-do's", "pendências", "what's pending" | Listar P1 e P2 de tasks.md |
+| Add task | "remind me to X", "need to do X", "add task X", "to-do: X" | Add to tasks.md, infer priority |
+| Complete task | "finished X", "done with X", "completed X" | Mark [x], move to Completed |
+| Show tasks | "what do I have", "my to-do's", "what's pending" | List P1 and P2 from tasks.md |
 
-Regras:
-- Inferir prioridade pelo contexto: se menciona blocker/urgente → P1; se follow-up → P2
-- Se ambíguo, perguntar: "P1 (urgente) ou P2 (importante)?"
-- Aceitar qualquer formulação natural — não exigir formato exato
+Rules:
+- Infer priority from context: if it mentions blocker/urgent -> P1; if follow-up -> P2
+- If ambiguous, ask: "P1 (urgent) or P2 (important)?"
+- Accept any natural phrasing — don't require exact format
 
 ---
 
 ## Task IDs
 
-Tarefas importantes recebem IDs únicos para rastreabilidade cross-file: `#T-MMDD-N`
+Every task created from meeting notes, commitments, or cross-file workflows **must** receive a stable ID for cross-file sync.
 
-- **Formato:** `#T-` + mês/dia (4 dígitos) + `-` + sequencial (1, 2, 3...)
-- **Quando usar:** Tarefas P1, tarefas que aparecem em múltiplos lugares (tasks + meeting notes + person pages)
-- **Quando não usar:** Tarefas simples/one-off que não precisam de rastreamento
-- **Cross-referência:** Ao criar action item em meeting-notes que vira task, usar o mesmo ID
-- **Completar:** Manter o ID ao completar: `- [x] #T-0321-1 Revisar PRD`
+**Format:** `^pm-YYYYMMDD-NNN` (e.g., `^pm-20260323-001`)
 
-## Ao Adicionar Tarefa
+- `YYYYMMDD` = date the task was created
+- `NNN` = sequential counter for that day (001, 002, ...)
+- The ID is appended at the end of the task text in parentheses
 
-Adicionar na seção correta de `tasks.md`:
+**Example:**
+```markdown
+- [ ] Follow up with Maiki on Q2 roadmap alignment (^pm-20260323-001)
+```
+
+**Cross-file sync rules:**
+- When a task with an ID is **completed**, search for the same ID across `to_do's/`, `documents/`, and `context/people/` and mark it complete everywhere
+- When completing, add timestamp: `- [x] Task text (^pm-20260323-001) ✅2026-03-23`
+- Tasks created from meeting notes get IDs assigned at creation time
+- Tasks created from commitments share the same ID in `commitments.md`
+- Tasks added manually via "add task" do NOT require IDs (only cross-file tasks need them)
+
+**When to assign IDs:**
+- Meeting notes action items (meeting-notes skill)
+- Commitments extracted from meetings
+- Tasks that appear in multiple files (person pages, meeting notes, tasks.md)
+- Do NOT add IDs to quick personal tasks that only live in tasks.md
+
+---
+
+## Adding a Task
+
+Add to the correct section of `tasks.md`:
 
 ```markdown
-## Hoje - P1 (Alta Prioridade)
-- [ ] #T-0321-1 Nova tarefa urgente (rastreável)
-- [ ] Nova tarefa simples (sem ID, one-off)
+## Today - P1 (High Priority)
+- [ ] New urgent task
 
-## Hoje - P2 (Média Prioridade)
-- [ ] #T-0321-2 Nova tarefa importante
+## Today - P2 (Medium Priority)
+- [ ] New important task
 ```
 
 ---
 
-## Ao Completar Tarefa
+## Completing a Task
 
-1. Mudar `- [ ]` para `- [x]`
-2. Mover para seção "Concluídas Hoje"
-3. Manter registro do que foi feito
-
----
-
-## Ao Executar Morning Briefing
-
-O skill `morning-briefing` deve:
-
-1. **Atualizar tasks.md:**
-   - Limpar tarefas do dia anterior
-   - Adicionar novos action items das reuniões
-   - Organizar por prioridade
-
-2. **Atualizar progress-log.md:**
-   - Adicionar nova entrada com data
-   - Registrar highlights, decisões, blockers
-   - Listar action items críticos
-   - Manter histórico para contexto futuro
+1. Change `- [ ]` to `- [x]`
+2. Move to "Completed Today" section
+3. Keep a record of what was done
 
 ---
 
-## Formato do Progress Log
+## Running Morning Briefing
 
-Cada morning briefing adiciona uma entrada:
+The `morning-briefing` skill should:
+
+1. **Update tasks.md:**
+   - Clear previous day's tasks
+   - Add new action items from meetings
+   - Organize by priority
+
+2. **Update progress-log.md:**
+   - Add new entry with date
+   - Record highlights, decisions, blockers
+   - List critical action items
+   - Maintain history for future context
+
+---
+
+## Progress Log Format
+
+Each morning briefing adds an entry:
 
 ```markdown
-## YYYY-MM-DD (Dia da Semana)
+## YYYY-MM-DD (Day of Week)
 
 ### Highlights
-- Pontos principais do dia/semana
+- Key points from the day/week
 
-### Decisões Importantes
-- Decisões tomadas em reuniões
+### Important Decisions
+- Decisions made in meetings
 
-### Blockers Ativos
-- Impedimentos atuais
+### Active Blockers
+- Current impediments
 
-### Reuniões Chave
-| Reunião | Participantes | Tema Principal |
-|---------|---------------|----------------|
+### Key Meetings
+| Meeting | Participants | Main Topic |
+|---------|--------------|------------|
 
-### Action Items Críticos
-- [ ] Item mais importante
+### Critical Action Items
+- [ ] Most important item
 
-### Notas
-- Contexto adicional
+### Notes
+- Additional context
 
 ---
 ```
 
 ---
 
-## Prioridades
+## Priorities
 
-| Priority | Quando usar |
+| Priority | When to Use |
 |----------|-------------|
-| **P1** | Urgente, impacta entregas, bloqueadores |
-| **P2** | Importante mas não urgente, follow-ups |
-| **P3** | Nice to have, vai para backlog.md |
-
-## Commitment IDs
-
-Commitments usam IDs únicos para rastreabilidade cross-file: `^c-YYYYMMDD-NNN`
-
-- O meeting-notes skill gera IDs automaticamente ao extrair commitments
-- Ao referenciar um commitment em tasks.md ou person pages, usar o mesmo ID
-- Ao completar, manter o ID: `- [x] ^c-20260321-001 ...`
-- Ao consultar commitments, filtrar por pessoa, idade, ou status
-
-**Consulta de commitments:**
-- "Mostrar commitments" → lista todos os pendentes com idade
-- "Commitments de [pessoa]" → filtra por stakeholder
-- "Commitments velhos" → mostra >3 dias, ordenados por idade
-- Formato de saída: tabela com ID, descrição, pessoa, idade em dias, contexto
+| **P1** | Urgent, impacts deliveries, blockers |
+| **P2** | Important but not urgent, follow-ups |
+| **P3** | Nice to have, goes to backlog.md |
 
 ---
 
-## Templates de Resposta
+## Response Templates
 
-### Ao mostrar to-do's
-
-```markdown
-## Tarefas de Hoje - [Data]
-
-### P1 - Fazer Primeiro
-- [ ] Tarefa 1
-- [ ] Tarefa 2
-
-### P2 - Fazer Hoje
-- [ ] Tarefa 3
-
-**Total:** X pendentes
-```
-
-### Ao adicionar tarefa
+### Showing to-do's
 
 ```markdown
-✅ Adicionado em tasks.md:
+## Today's Tasks - [Date]
 
-- [ ] [Descrição] (P2)
+### P1 - Do First
+- [ ] Task 1
+- [ ] Task 2
 
-Seção: Hoje - P2
+### P2 - Do Today
+- [ ] Task 3
+
+**Total:** X pending
 ```
+
+### Adding a task
+
+```markdown
+Added to tasks.md:
+
+- [ ] [Description] (P2)
+
+Section: Today - P2
+```
+
+---
+
+## Pillar Alignment
+
+When adding P1 tasks, check alignment against `global-context/shared/pillars.md` (if it exists). Tag tasks that connect to a strategic pillar:
+
+```markdown
+- [ ] Task description [Pillar: B2B Growth]
+```
+
+**Rules:**
+- P1 tasks **should** connect to a pillar — if they don't, briefly note why (e.g., "operational", "ad-hoc request")
+- P2 tasks: pillar tagging is optional but encouraged
+- If a P1 task doesn't connect to any pillar, ask: "Is this really P1, or is it urgent but not important?"
 
 ---
 
 ## Best Practices
 
-1. **Máximo 3 P1 por dia (2 se muitas reuniões)** - Foco é essencial
-2. **Seja específico** - "Revisar PRD de Skip" > "Revisar documento"
-3. **Mova ao completar** - Histórico ajuda a ver progresso
-4. **Revise progress-log** - Contexto acumulado é valioso
-5. **Limpe semanalmente** - Mova concluídas antigas para arquivo
+1. **Maximum 3 P1 per day (2 if many meetings)** — Focus is essential
+2. **Be specific** — "Review checkout PRD" > "Review document"
+3. **Move when completed** — History helps track progress
+4. **Review progress-log** — Accumulated context is valuable
+5. **Clean up weekly** — Archive old completed tasks
+6. **Pillar alignment** — P1 tasks should connect to a strategic pillar
 
 ---
 
 ## Learnings Capture
 
-Arquivo: `to_do's/learnings/YYYY-MM-DD.md`
+File: `to_do's/learnings/YYYY-MM-DD.md`
 
 ### Template
 
-Cada learning segue o formato:
+Each learning follows this format:
 
 ```markdown
-## [HH:MM] - [Título curto]
+## [HH:MM] - [Short title]
 
-- **O que aconteceu:** [situação específica]
-- **Por que importa:** [impacto no workflow/processo]
-- **Ação sugerida:** [melhoria concreta com file paths se aplicável]
+- **What happened:** [specific situation]
+- **Why it matters:** [impact on workflow/process]
+- **Suggested action:** [concrete improvement with file paths if applicable]
 - **Status:** pending | applied | dismissed
 ```
 
-### Quando capturar (automaticamente durante daily review)
+### When to Capture (automatically during daily review)
 
-Escanear a conversa do dia por:
-1. Correções feitas (preferências expressas pelo usuário)
-2. Gaps de documentação descobertos
-3. Ineficiências de workflow identificadas
-4. Decisões que mudaram durante a sessão
+Scan the day's conversation for:
+1. Corrections made (preferences expressed by the user)
+2. Documentation gaps discovered
+3. Workflow inefficiencies identified
+4. Decisions that changed during the session
 
-### Revisão
+### Review Cadence
 
-- Daily review: listar learnings capturados no dia
-- Weekly review: agrupar por tema, identificar patterns recorrentes
-- Quarterly: codificar patterns em novas rules ou skills
+- Daily review: list learnings captured during the day
+- Weekly review: group by theme, identify recurring patterns
+- Quarterly: codify patterns into new rules or skills
