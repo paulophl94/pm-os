@@ -279,10 +279,10 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:rgba(8,8,
   <div class="nav-logo">⬡ Cadence <span>OS</span></div>
   <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
   <ul class="nav-links">
-    <li><a href="#cursor" data-i18n="nav1">1. What is Cursor</a></li>
-    <li><a href="#day" data-i18n="nav2">2. Your Day</a></li>
-    <li><a href="#setup" data-i18n="nav3">3. Setup</a></li>
-    <li><a href="#toolkit" data-i18n="nav4">4. Toolkit</a></li>
+    <li><a href="#day" data-i18n="nav1">Your Day</a></li>
+    <li><a href="#cursor" data-i18n="nav2">The Editor</a></li>
+    <li><a href="#setup" data-i18n="nav3">Setup</a></li>
+    <li><a href="#toolkit" data-i18n="nav4">Toolkit</a></li>
     <li><a href="#commands" data-i18n="nav5">Reference</a></li>
     <li><a href="#checklist" data-i18n="nav6">Checklist</a></li>
   </ul>
@@ -305,15 +305,29 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:rgba(8,8,
     <div class="hero-badge" data-i18n="heroBadge">Open Source</div>
     <h1 class="hero-title">Cadence <em>OS</em></h1>
     <p class="hero-desc" data-i18n="heroDesc">Your AI co-pilot for getting more done. Generate documents, run daily rituals, track commitments, and stress-test decisions — all from a single place. No code required.</p>
-    <a href="#cursor" class="hero-cta" data-i18n="heroCta">Get Started →</a>
+    <a href="#day" class="hero-cta" data-i18n="heroCta">Get Started →</a>
   </div>
   <div class="scroll-hint" data-i18n="scrollHint">Scroll to explore</div>
+</section>
+
+<!-- A DAY WITH Cadence OS -->
+<section id="day" class="section">
+  <div class="section-inner">
+    <div class="section-label" data-i18n="step1">Your Day</div>
+    <h2 class="section-title" data-i18n="dayTitle">A Day With Cadence OS</h2>
+    <p class="section-subtitle" data-i18n="daySubtitle">From the first coffee to end-of-day reflection — a daily rhythm that compounds knowledge over time. Click each stage below to see what happens.</p>
+
+    <div class="timeline">
+      <div class="tl-track" id="tl-track"></div>
+      <div id="tl-details"></div>
+    </div>
+  </div>
 </section>
 
 <!-- WHAT IS CURSOR? -->
 <section id="cursor" class="section">
   <div class="section-inner">
-    <div class="section-label" data-i18n="step1">Step 1</div>
+    <div class="section-label" data-i18n="step2">The Editor</div>
     <h2 class="section-title" data-i18n="cursorTitle">What is Cursor?</h2>
     <p class="section-subtitle" data-i18n="cursorSubtitle">Cursor is an AI-native editor — think of it as a text editor with a built-in AI assistant. It reads, creates, and edits files in your workspace. You don't need to know how to code. Just open the chat panel and describe what you need in plain language.</p>
 
@@ -362,24 +376,10 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:rgba(8,8,
   </div>
 </section>
 
-<!-- A DAY WITH Cadence OS -->
-<section id="day" class="section">
-  <div class="section-inner">
-    <div class="section-label" data-i18n="step2">Step 2</div>
-    <h2 class="section-title" data-i18n="dayTitle">A Day With Cadence OS</h2>
-    <p class="section-subtitle" data-i18n="daySubtitle">From the first coffee to end-of-day reflection — a daily rhythm that compounds knowledge over time. Click each stage below to see what happens.</p>
-
-    <div class="timeline">
-      <div class="tl-track" id="tl-track"></div>
-      <div id="tl-details"></div>
-    </div>
-  </div>
-</section>
-
 <!-- SETUP -->
 <section id="setup" class="section">
   <div class="section-inner">
-    <div class="section-label" data-i18n="step3">Step 3</div>
+    <div class="section-label" data-i18n="step3">Setup</div>
     <h2 class="section-title" data-i18n="setupTitle">Setup</h2>
     <p class="section-subtitle" data-i18n="setupSubtitle">Start light and grow into the full system. You can stop at any tier — each one is useful on its own. Pick the level that fits your needs today.</p>
 
@@ -446,7 +446,7 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:rgba(8,8,
 <!-- THE TOOLKIT -->
 <section id="toolkit" class="section">
   <div class="section-inner">
-    <div class="section-label" data-i18n="step4">Step 4</div>
+    <div class="section-label" data-i18n="step4">Toolkit</div>
     <h2 class="section-title" data-i18n="toolkitTitle">The Toolkit</h2>
     <p class="section-subtitle" data-i18n="toolkitSubtitle">14 document templates, 6 review personas, 8 workflow skills, and 6 strategy frameworks — all context-aware. No commands to memorize — just describe what you need in natural language.</p>
 
@@ -522,6 +522,14 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:rgba(8,8,
   </div>
 </section>
 
+<!-- FOOTER -->
+<footer style="text-align:center;padding:32px 24px 40px;border-top:1px solid var(--border)">
+  <a href="https://github.com/paulophl94/cadence-os" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-size:.95rem;color:var(--text-secondary);text-decoration:none;transition:color .2s">
+    <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+    <span>github.com/paulophl94/cadence-os</span>
+  </a>
+</footer>
+
 <script>
 /* ── THEME ── */
 function toggleTheme(){
@@ -560,12 +568,12 @@ function tx(val){
 
 const i18n={
 en:{
-  nav1:'1. What is Cursor',nav2:'2. Your Day',nav3:'3. Setup',nav4:'4. Toolkit',nav5:'Reference',nav6:'Checklist',
+  nav1:'Your Day',nav2:'The Editor',nav3:'Setup',nav4:'Toolkit',nav5:'Reference',nav6:'Checklist',
   heroBadge:'Open Source',
   heroDesc:'Your AI co-pilot for getting more done. Generate documents, run daily rituals, track commitments, and stress-test decisions — all from a single place. No code required.',
   heroCta:'Get Started →',
   scrollHint:'Scroll to explore',
-  step1:'Step 1',step2:'Step 2',step3:'Step 3',step4:'Step 4',
+  step1:'Your Day',step2:'The Editor',step3:'Setup',step4:'Toolkit',
   cursorTitle:'What is Cursor?',
   cursorSubtitle:'Cursor is an AI-native editor — think of it as a text editor with a built-in AI assistant. It reads, creates, and edits files in your workspace. You don\'t need to know how to code. Just open the chat panel and describe what you need in plain language.',
   panelExplorer:'① File Explorer',panelEditor:'② Editor Area',panelChat:'③ Chat Panel',
@@ -631,12 +639,12 @@ en:{
   tagLabels:{rule:'Rule',skill:'Skill',doc:'Document',config:'Config'},
 },
 pt:{
-  nav1:'1. O que é o Cursor',nav2:'2. Seu Dia',nav3:'3. Configuração',nav4:'4. Ferramentas',nav5:'Referência',nav6:'Checklist',
+  nav1:'Seu Dia',nav2:'O Editor',nav3:'Configuração',nav4:'Ferramentas',nav5:'Referência',nav6:'Checklist',
   heroBadge:'Open Source',
   heroDesc:'Seu co-pilot com IA para otimizar o seu trabalho. Gere documentos, execute rituais diários, acompanhe compromissos e valide decisões — tudo em um só lugar. Sem precisar programar.',
   heroCta:'Começar →',
   scrollHint:'Role para explorar',
-  step1:'Passo 1',step2:'Passo 2',step3:'Passo 3',step4:'Passo 4',
+  step1:'Seu Dia',step2:'O Editor',step3:'Configuração',step4:'Ferramentas',
   cursorTitle:'O que é o Cursor?',
   cursorSubtitle:'O Cursor é um editor nativo de IA — pense nele como um editor de texto com um assistente de IA integrado. Ele lê, cria e edita arquivos no seu workspace. Você não precisa saber programar. Basta abrir o painel de chat e descrever o que você precisa em linguagem natural.',
   panelExplorer:'① Explorador de Arquivos',panelEditor:'② Área do Editor',panelChat:'③ Painel de Chat',
@@ -702,12 +710,12 @@ pt:{
   tagLabels:{rule:'Regra',skill:'Skill',doc:'Documento',config:'Config'},
 },
 es:{
-  nav1:'1. Qué es Cursor',nav2:'2. Tu Día',nav3:'3. Configuración',nav4:'4. Herramientas',nav5:'Referencia',nav6:'Checklist',
+  nav1:'Tu Día',nav2:'El Editor',nav3:'Configuración',nav4:'Herramientas',nav5:'Referencia',nav6:'Checklist',
   heroBadge:'Open Source',
   heroDesc:'Tu co-pilot con IA para optimizar tu trabajo. Genera documentos, ejecuta rituales diarios, rastrea compromisos y valida decisiones — todo desde un solo lugar. Sin necesidad de programar.',
   heroCta:'Empezar →',
   scrollHint:'Desplaza para explorar',
-  step1:'Paso 1',step2:'Paso 2',step3:'Paso 3',step4:'Paso 4',
+  step1:'Tu Día',step2:'El Editor',step3:'Configuración',step4:'Herramientas',
   cursorTitle:'¿Qué es Cursor?',
   cursorSubtitle:'Cursor es un editor nativo de IA — piensa en él como un editor de texto con un asistente de IA integrado. Lee, crea y edita archivos en tu workspace. No necesitas saber programar. Solo abre el panel de chat y describe lo que necesitas en lenguaje natural.',
   panelExplorer:'① Explorador de Archivos',panelEditor:'② Área del Editor',panelChat:'③ Panel de Chat',
@@ -777,7 +785,7 @@ es:{
 /* ── DATA: TOOLKIT (with i18n) ── */
 const toolkitData={
   templates:{label:{en:'Templates',pt:'Modelos',es:'Plantillas'},count:14,items:[
-    {icon:'📋',title:'PRD',cmd:{en:'Create PRD for [feature]',pt:'Criar PRD para [feature]',es:'Crear PRD para [feature]'},desc:{en:'Full PRD with 15 sections — problem, solution, user stories, metrics, and more.',pt:'PRD completo com 15 seções — problema, solução, user stories, métricas e mais.',es:'PRD completo con 15 secciones — problema, solución, user stories, métricas y más.'}},
+    {icon:'📋',title:'PRD',cmd:{en:'Create PRD for [feature]',pt:'Criar PRD para [feature]',es:'Crear PRD para [feature]'},desc:{en:'Lean PRD (6 sections, default) or Full PRD (15 sections) — problem, solution, user stories, metrics, and more.',pt:'PRD Lean (6 seções, padrão) ou PRD Completo (15 seções) — problema, solução, user stories, métricas e mais.',es:'PRD Lean (6 secciones, predeterminado) o PRD Completo (15 secciones) — problema, solución, user stories, métricas y más.'}},
     {icon:'📝',title:'One-Pager',cmd:{en:'Generate One-Pager for [feature]',pt:'Gerar One-Pager para [feature]',es:'Generar One-Pager para [feature]'},desc:{en:'Strategic 1-2 page validation document for stakeholder alignment.',pt:'Documento estratégico de 1-2 páginas para alinhamento com stakeholders.',es:'Documento estratégico de 1-2 páginas para alinear stakeholders.'}},
     {icon:'👤',title:'User Stories',cmd:{en:'Write user stories for [feature]',pt:'Escrever user stories para [feature]',es:'Escribir user stories para [feature]'},desc:{en:'User stories with Gherkin acceptance criteria, ready for dev handoff.',pt:'User stories com critérios de aceitação Gherkin, prontas para handoff.',es:'User stories con criterios de aceptación Gherkin, listas para handoff.'}},
     {icon:'📊',title:{en:'RICE Analysis',pt:'Análise RICE',es:'Análisis RICE'},cmd:{en:'Prioritize using RICE',pt:'Priorizar usando RICE',es:'Priorizar usando RICE'},desc:{en:'Score features by Reach, Impact, Confidence, Effort with recommendations.',pt:'Pontue features por Alcance, Impacto, Confiança, Esforço com recomendações.',es:'Puntúa features por Alcance, Impacto, Confianza, Esfuerzo con recomendaciones.'}},
@@ -830,7 +838,7 @@ const tlData=[
 
 /* ── DATA: COMMANDS (with i18n) ── */
 const commands=[
-  {cat:{en:'Documents',pt:'Documentos',es:'Documentos'},cmd:{en:'Create PRD for [feature]',pt:'Criar PRD para [feature]',es:'Crear PRD para [feature]'},desc:{en:'Full PRD with 15 sections',pt:'PRD completo com 15 seções',es:'PRD completo con 15 secciones'}},
+  {cat:{en:'Documents',pt:'Documentos',es:'Documentos'},cmd:{en:'Create PRD for [feature]',pt:'Criar PRD para [feature]',es:'Crear PRD para [feature]'},desc:{en:'Lean PRD (6 sections, default) or Full PRD (15 sections)',pt:'PRD Lean (6 seções, padrão) ou PRD Completo (15 seções)',es:'PRD Lean (6 secciones, predeterminado) o PRD Completo (15 secciones)'}},
   {cat:{en:'Documents',pt:'Documentos',es:'Documentos'},cmd:{en:'Generate One-Pager for [feature]',pt:'Gerar One-Pager para [feature]',es:'Generar One-Pager para [feature]'},desc:{en:'Strategic validation document',pt:'Documento de validação estratégica',es:'Documento de validación estratégica'}},
   {cat:{en:'Documents',pt:'Documentos',es:'Documentos'},cmd:{en:'Generate Spec for [feature]',pt:'Gerar Spec para [feature]',es:'Generar Spec para [feature]'},desc:{en:'Detailed requirements specification',pt:'Especificação detalhada de requisitos',es:'Especificación detallada de requisitos'}},
   {cat:{en:'Documents',pt:'Documentos',es:'Documentos'},cmd:{en:'Write user stories for [feature]',pt:'Escrever user stories para [feature]',es:'Escribir user stories para [feature]'},desc:{en:'User stories + Gherkin acceptance criteria',pt:'User stories + critérios de aceitação Gherkin',es:'User stories + criterios de aceptación Gherkin'}},
@@ -847,6 +855,7 @@ const commands=[
   {cat:{en:'Analysis',pt:'Análise',es:'Análisis'},cmd:{en:'Analyze risks of [feature]',pt:'Analisar riscos de [feature]',es:'Analizar riesgos de [feature]'},desc:{en:'Risk matrix with mitigations',pt:'Matriz de riscos com mitigações',es:'Matriz de riesgos con mitigaciones'}},
   {cat:{en:'Analysis',pt:'Análise',es:'Análisis'},cmd:{en:'Analyze metrics impact of [feature]',pt:'Analisar impacto de métricas de [feature]',es:'Analizar impacto de métricas de [feature]'},desc:{en:'Metrics impact + experiment design',pt:'Impacto em métricas + design de experimento',es:'Impacto en métricas + diseño de experimento'}},
   {cat:{en:'Analysis',pt:'Análise',es:'Análisis'},cmd:{en:'Analyze competitor [name]',pt:'Analisar concorrente [nome]',es:'Analizar competidor [nombre]'},desc:{en:'Full competitive analysis + battlecard',pt:'Análise competitiva completa + battlecard',es:'Análisis competitivo completo + battlecard'}},
+  {cat:{en:'Analysis',pt:'Análise',es:'Análisis'},cmd:{en:'Create battlecard for [competitor]',pt:'Criar battlecard para [concorrente]',es:'Crear battlecard para [competidor]'},desc:{en:'Sales-ready battlecard',pt:'Battlecard pronto para vendas',es:'Battlecard listo para ventas'}},
   {cat:{en:'Analysis',pt:'Análise',es:'Análisis'},cmd:{en:'Estimate impact of [feature]',pt:'Estimar impacto de [feature]',es:'Estimar impacto de [feature]'},desc:{en:'Quantify expected feature impact',pt:'Quantificar impacto esperado da feature',es:'Cuantificar impacto esperado de la feature'}},
   {cat:{en:'Analysis',pt:'Análise',es:'Análisis'},cmd:{en:'SWOT analysis for [product]',pt:'Análise SWOT para [produto]',es:'Análisis SWOT para [producto]'},desc:{en:'Strengths, weaknesses, opportunities, threats',pt:'Forças, fraquezas, oportunidades, ameaças',es:'Fortalezas, debilidades, oportunidades, amenazas'}},
   {cat:{en:'Reviews',pt:'Revisões',es:'Revisiones'},cmd:{en:'Review as engineer',pt:'Revisar como engenheiro',es:'Revisar como ingeniero'},desc:{en:'Technical feasibility, edge cases, scalability',pt:'Viabilidade técnica, casos extremos, escalabilidade',es:'Viabilidad técnica, casos extremos, escalabilidad'}},
@@ -855,11 +864,13 @@ const commands=[
   {cat:{en:'Reviews',pt:'Revisões',es:'Revisiones'},cmd:{en:'Review as data analyst',pt:'Revisar como analista de dados',es:'Revisar como analista de datos'},desc:{en:'Metrics definition, experiment design',pt:'Definição de métricas, design de experimento',es:'Definición de métricas, diseño de experimento'}},
   {cat:{en:'Reviews',pt:'Revisões',es:'Revisiones'},cmd:{en:'Review as customer',pt:'Revisar como cliente',es:'Revisar como cliente'},desc:{en:'Value clarity from your user personas',pt:'Clareza de valor das personas de usuário',es:'Claridad de valor de las personas de usuario'}},
   {cat:{en:'Reviews',pt:'Revisões',es:'Revisiones'},cmd:{en:'Review as customer success',pt:'Revisar como customer success',es:'Revisar como customer success'},desc:{en:'Support impact, adoption, customer experience',pt:'Impacto no suporte, adoção, experiência do cliente',es:'Impacto en soporte, adopción, experiencia del cliente'}},
+  {cat:{en:'Reviews',pt:'Revisões',es:'Revisiones'},cmd:{en:'Review document',pt:'Revisar documento',es:'Revisar documento'},desc:{en:'All core perspectives sequentially',pt:'Todas as perspectivas principais sequencialmente',es:'Todas las perspectivas principales secuencialmente'}},
   {cat:{en:'Reviews',pt:'Revisões',es:'Revisiones'},cmd:{en:'Full document review',pt:'Revisão completa do documento',es:'Revisión completa del documento'},desc:{en:'All 6 perspectives + consolidated feedback',pt:'Todas as 6 perspectivas + feedback consolidado',es:'Las 6 perspectivas + feedback consolidado'}},
   {cat:'Workflow',cmd:{en:'Morning briefing',pt:'Briefing matinal',es:'Briefing matinal'},desc:{en:'Full daily briefing with Today\'s Three',pt:'Briefing diário completo com as Três do Dia',es:'Briefing diario completo con las Tres del Día'}},
   {cat:'Workflow',cmd:{en:'Daily review',pt:'Revisão diária',es:'Revisión diaria'},desc:{en:'End-of-day reflection + learnings capture',pt:'Reflexão de fim de dia + captura de aprendizados',es:'Reflexión de fin de día + captura de aprendizajes'}},
   {cat:'Workflow',cmd:{en:'Weekly review',pt:'Revisão semanal',es:'Revisión semanal'},desc:{en:'Week synthesis + next week\'s priorities',pt:'Síntese da semana + prioridades da próxima semana',es:'Síntesis de la semana + prioridades de la próxima semana'}},
   {cat:'Workflow',cmd:{en:'Process meeting notes',pt:'Processar notas de reunião',es:'Procesar notas de reunión'},desc:{en:'Extract decisions, action items, update person pages',pt:'Extrair decisões, itens de ação, atualizar páginas de pessoas',es:'Extraer decisiones, ítems de acción, actualizar páginas de personas'}},
+  {cat:'Workflow',cmd:{en:'Extract action items',pt:'Extrair itens de ação',es:'Extraer ítems de acción'},desc:{en:'Action items only',pt:'Apenas itens de ação',es:'Solo ítems de acción'}},
   {cat:'Workflow',cmd:{en:'Prep for meeting with [Name]',pt:'Preparar reunião com [Nome]',es:'Preparar reunión con [Nombre]'},desc:{en:'Load person context, open items, and talking points',pt:'Carregar contexto da pessoa, itens abertos e pontos de discussão',es:'Cargar contexto de la persona, ítems abiertos y puntos de discusión'}},
   {cat:'Workflow',cmd:{en:'Brief me for [meeting]',pt:'Me preparar para [reunião]',es:'Prepararme para [reunión]'},desc:{en:'Full meeting prep with relationship context',pt:'Preparação completa com contexto de relacionamento',es:'Preparación completa con contexto de relación'}},
   {cat:'Workflow',cmd:{en:'Career review',pt:'Revisão de carreira',es:'Revisión de carrera'},desc:{en:'Synthesize career evidence for self-reviews',pt:'Sintetizar evidências de carreira para auto-avaliação',es:'Sintetizar evidencias de carrera para autoevaluación'}},
@@ -867,6 +878,9 @@ const commands=[
   {cat:{en:'Planning',pt:'Planejamento',es:'Planificación'},cmd:{en:'Add task: [description]',pt:'Adicionar tarefa: [descrição]',es:'Agregar tarea: [descripción]'},desc:{en:'Add new task with auto-inferred priority',pt:'Adicionar nova tarefa com prioridade inferida automaticamente',es:'Agregar nueva tarea con prioridad inferida automáticamente'}},
   {cat:{en:'Planning',pt:'Planejamento',es:'Planificación'},cmd:{en:'Complete task [title]',pt:'Concluir tarefa [título]',es:'Completar tarea [título]'},desc:{en:'Mark task done and move to completed',pt:'Marcar tarefa como feita e mover para concluídas',es:'Marcar tarea como hecha y mover a completadas'}},
   {cat:{en:'Planning',pt:'Planejamento',es:'Planificación'},cmd:{en:'Show initiative progress',pt:'Mostrar progresso de iniciativas',es:'Mostrar progreso de iniciativas'},desc:{en:'Current status of all initiatives',pt:'Status atual de todas as iniciativas',es:'Estado actual de todas las iniciativas'}},
+  {cat:{en:'Planning',pt:'Planejamento',es:'Planificación'},cmd:{en:'Status of [initiative]?',pt:'Status de [iniciativa]?',es:'Estado de [iniciativa]?'},desc:{en:'Specific initiative status',pt:'Status de uma iniciativa específica',es:'Estado de una iniciativa específica'}},
+  {cat:{en:'Planning',pt:'Planejamento',es:'Planificación'},cmd:{en:'Create new initiative [name]',pt:'Criar nova iniciativa [nome]',es:'Crear nueva iniciativa [nombre]'},desc:{en:'Start tracking new initiative',pt:'Começar a rastrear nova iniciativa',es:'Empezar a rastrear nueva iniciativa'}},
+  {cat:{en:'Planning',pt:'Planejamento',es:'Planificación'},cmd:{en:'Update progress of [initiative]',pt:'Atualizar progresso de [iniciativa]',es:'Actualizar progreso de [iniciativa]'},desc:{en:'Update initiative progress',pt:'Atualizar progresso da iniciativa',es:'Actualizar progreso de la iniciativa'}},
   {cat:{en:'Planning',pt:'Planejamento',es:'Planificación'},cmd:{en:'Generate status update',pt:'Gerar status update',es:'Generar status update'},desc:{en:'Executive communication for stakeholders',pt:'Comunicação executiva para stakeholders',es:'Comunicación ejecutiva para stakeholders'}},
   {cat:{en:'Planning',pt:'Planejamento',es:'Planificación'},cmd:{en:'Quarter summary',pt:'Resumo do trimestre',es:'Resumen del trimestre'},desc:{en:'Quarter-level progress from quarter-goals.md',pt:'Progresso trimestral de quarter-goals.md',es:'Progreso trimestral de quarter-goals.md'}},
   {cat:{en:'Planning',pt:'Planejamento',es:'Planificación'},cmd:{en:'Assumptions',pt:'Suposições',es:'Suposiciones'},desc:{en:'Read or update strategic assumptions',pt:'Ler ou atualizar suposições estratégicas',es:'Leer o actualizar suposiciones estratégicas'}},
@@ -875,9 +889,11 @@ const commands=[
   {cat:{en:'People',pt:'Pessoas',es:'Personas'},cmd:{en:'What do I owe [name]?',pt:'O que devo para [nome]?',es:'¿Qué le debo a [nombre]?'},desc:{en:'List open commitments for a person',pt:'Listar compromissos abertos para uma pessoa',es:'Listar compromisos abiertos para una persona'}},
   {cat:{en:'People',pt:'Pessoas',es:'Personas'},cmd:{en:'Prep for meeting with [name]',pt:'Preparar reunião com [nome]',es:'Preparar reunión con [nombre]'},desc:{en:'Load full context for a person',pt:'Carregar contexto completo de uma pessoa',es:'Cargar contexto completo de una persona'}},
   {cat:'Setup',cmd:'/start',desc:{en:'Run the onboarding wizard',pt:'Executar o assistente de onboarding',es:'Ejecutar el asistente de onboarding'}},
+  {cat:'Setup',cmd:'/setup',desc:{en:'Resume or redo specific onboarding steps',pt:'Retomar ou refazer etapas específicas do onboarding',es:'Reanudar o rehacer pasos específicos del onboarding'}},
   {cat:'Setup',cmd:'Level up',desc:{en:'Discover features you haven\'t used yet',pt:'Descobrir features que você ainda não usou',es:'Descubrir features que aún no has usado'}},
   {cat:'Setup',cmd:'/improve',desc:{en:'Review and rank toolkit improvement ideas',pt:'Revisar e classificar ideias de melhoria do toolkit',es:'Revisar y clasificar ideas de mejora del toolkit'}},
   {cat:'Setup',cmd:{en:'Help me fill in the product context',pt:'Me ajudar a preencher o contexto do produto',es:'Ayúdame a completar el contexto del producto'},desc:{en:'Context generator wizard',pt:'Assistente gerador de contexto',es:'Asistente generador de contexto'}},
+  {cat:'Setup',cmd:{en:'Update product context',pt:'Atualizar contexto do produto',es:'Actualizar contexto del producto'},desc:{en:'Update product-context.mdc',pt:'Atualizar product-context.mdc',es:'Actualizar product-context.mdc'}},
   {cat:'Setup',cmd:{en:'Show terminology',pt:'Mostrar terminologia',es:'Mostrar terminología'},desc:{en:'Key terms from product glossary',pt:'Termos-chave do glossário do produto',es:'Términos clave del glosario del producto'}},
   {cat:'Setup',cmd:{en:'Export to Confluence',pt:'Exportar para Confluence',es:'Exportar a Confluence'},desc:{en:'Convert document to Confluence wiki markup',pt:'Converter documento para markup wiki do Confluence',es:'Convertir documento a markup wiki de Confluence'}},
   {cat:'Setup',cmd:{en:'Create Jira tickets for [feature]',pt:'Criar tickets no Jira para [feature]',es:'Crear tickets en Jira para [feature]'},desc:{en:'Generate Epic + Stories + Tasks',pt:'Gerar Epic + Stories + Tasks',es:'Generar Epic + Stories + Tasks'}},
